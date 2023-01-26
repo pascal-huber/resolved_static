@@ -87,6 +87,7 @@ for (var i = 0; i < files.length; i++) {
     meta['created'] = new Date(meta.created).toLocaleDateString('de-CH');
     meta['content'] = content;
     meta['author'] = "Pascal Huber";
+    meta['pageTitle'] = "resolved.ch"
     meta['path'] = directories;
     directories.forEach((x) => allDirectories.add(JSON.stringify(x)));
     // TODO: clean this mess up
@@ -140,6 +141,7 @@ for (var i = 0; i < allDirectories.length; i++) {
         subfolders: subfolders,
         files: files,
         title: allDirectories[i].name,
+        pageTitle: "resolved.ch",
         created: new Date(Date.now()).toLocaleDateString('de-CH'),
         author: "Pascal Huber",
     };

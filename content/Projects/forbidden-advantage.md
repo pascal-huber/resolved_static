@@ -1,5 +1,5 @@
 ---
 title: 'Forbidden Advantage'
-path: [{name: "Projects", full: "/projects"}] # TODO: compute this automatically
+created: '2023-01-26 12:59'
 ---
 # Forbidden Advantage

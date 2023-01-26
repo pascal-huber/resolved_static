@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
+    <title>{{title}} | {{pageTitle}}</title>
     <link rel="stylesheet" href="/static/style.css">
     <link rel="stylesheet" href="/static/dark.css">
   </head>
@@ -13,24 +13,29 @@
       <div class="content">
         <div class="header">
           <div>
-            <a href="/">Home</a>
-            {{#path}}
-              &nbsp;&gt;&nbsp;<a href="{{full}}">{{name}}</a>
-            {{/path}}
+            {{#home}}
+              Home
+            {{/home}}
+            {{#path.0}}
+              <a href="/">Home</a>
+            {{/path.0}}
+              {{#path}}
+                &nbsp;&gt;&nbsp;<a href="{{full}}">{{name}}</a>
+              {{/path}}
             {{#title}}
               &nbsp;&gt;&nbsp;{{title}}
             {{/title}}
           </div>
         </div>
         {{{content}}}
-        <div class="footer">
-            <div>
-              {{created}}
-            </div> 
-            <div>
-              {{author}}
-            </div> 
-        </div>
+      </div>
+      <div class="footer">
+          <div>
+            {{created}}
+          </div> 
+          <div>
+            {{author}}
+          </div> 
       </div>
     </div>
   </body>

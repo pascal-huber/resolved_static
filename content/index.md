@@ -1,5 +1,6 @@
 ---
 home: true
+title: 'Home'
 created: '2023-01-26 15:59'
 ---
 # NAME
