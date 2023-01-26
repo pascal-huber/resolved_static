@@ -6,7 +6,7 @@
   "author": "Pascal Huber <pascal.huber@resolved.ch>",
   "license": "MIT",
   "scripts": {
-    "build": "node ./.bin/render.js"
+    "build": "node ./.bin/render.js && cp -r static/* dist/"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",

@@ -1,6 +1,5 @@
 ---
 home: true
-title: 'Home'
 created: '2023-01-26 15:59'
 ---
 # NAME
@@ -24,4 +23,4 @@ export X="asdf"
 ```
 
 
-![a real man](/static/man.jpg)
+![a real man](/public/man.jpg)
