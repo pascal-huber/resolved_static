@@ -5,11 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/dark.css">
   </head>
   <body>
-    <div class="content">
-      {{{content}}}
+    <div class="site">
+      <div class="content">
+        <div class="header">
+          <div>
+            {{#home}}
+              Home
+            {{/home}}
+            {{#path}}
+              <a href="/">Home</a>
+            {{/path}}
+            {{#path}}
+              &nbsp;&gt;&nbsp;<a href="{{full}}">{{name}}</a>
+            {{/path}}
+            {{#title}}
+              &nbsp;&gt;&nbsp;{{title}}
+            {{/title}}
+          </div>
+        </div>
+        {{{content}}}
+        <div class="footer">
+            <div>
+              {{created}}
+            </div> 
+            <div>
+              {{author}}
+            </div> 
+        </div>
+      </div>
     </div>
   </body>
 </html>

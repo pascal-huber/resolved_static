@@ -7,14 +7,23 @@ import matter from 'gray-matter';
 // https://github.com/showdownjs/showdown
 import { readFileSync, mkdirSync, writeFileSync, fstat } from 'fs';
 import { readdir, mkdir } from 'fs/promises';
-import showdown from 'showdown'
+import showdown from 'showdown';
+import showdownHighlight from 'showdown-highlight';
 import { resolve } from 'path';
-const converter = new showdown.Converter();
+const converter = new showdown.Converter({
+    // That's it
+    extensions: [showdownHighlight({
+        // Whether to add the classes to the <pre> tag, default is false
+        pre: true
+        // Whether to use hljs' auto language detection, default is true
+    ,   auto_detection: true
+    })]
+});
 let md2html = async function (file) {
     const markdown = readFileSync(file, { encoding: 'utf8', flag: 'r' });
     let {content, data} = await matter(markdown);
     return {
-        data: data,
+        meta: data,
         content: converter.makeHtml(content)
     };
 }
@@ -48,8 +57,14 @@ for (var i = 0; i < files.length; i++){
     const newPath = newDir + fileName.replace('.md', '.html');
     // TODO: do something with "meta"
     let {meta, content} = await md2html(files[i]);
+    // TODO: this is ugly
     const data = {
+        home: meta?.home,
+        path: meta?.path,
+        title: meta?.title,
+        created: new Date(meta.created).toLocaleDateString('de-CH'),
         content: content,
+        author: "Pascal Huber"
     };
     const template = readFileSync("./.mustache/site.mustache", { encoding: 'utf8', flag: 'r' });
     const htmlSite = await Mustache.render(template, data);
