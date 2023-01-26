@@ -2,23 +2,22 @@
 import Mustache from 'mustache';
 import * as path from 'path';
 import matter from 'gray-matter';
-
-// showdown
-// https://github.com/showdownjs/showdown
 import { readFileSync, readdirSync, mkdirSync, writeFileSync, fstat, existsSync, access } from 'fs';
 import { readdir, mkdir } from 'fs/promises';
 import showdown from 'showdown';
 import showdownHighlight from 'showdown-highlight';
 import { resolve } from 'path';
+
+const distPath = process.cwd() + "/dist";
+const contentPath = process.cwd() + "/content";
+
 const converter = new showdown.Converter({
-    // That's it
     extensions: [showdownHighlight({
-        // Whether to add the classes to the <pre> tag, default is false
         pre: true
-        // Whether to use hljs' auto language detection, default is true
         , auto_detection: true
     })]
 });
+
 let md2html = async function (file) {
     const markdown = readFileSync(file, { encoding: 'utf8', flag: 'r' });
     let { content, data } = await matter(markdown);
@@ -28,7 +27,6 @@ let md2html = async function (file) {
     };
 }
 
-// READ FILES
 async function getFiles(dir) {
     const dirents = await readdir(dir, { withFileTypes: true });
     const files = await Promise.all(dirents.map((dirent) => {
@@ -37,15 +35,10 @@ async function getFiles(dir) {
     }));
     return Array.prototype.concat(...files);
 }
-const files = await getFiles("./content/");
 
-async function getNewDir(p) {
-    const to_remove = process.cwd() + "/content";
-    p = p.slice(to_remove.length + 1, p.length);
-    let dir = "./dist/" + p.substring(0, p.lastIndexOf('/'));
-    let file = p.substring(p.lastIndexOf('/'), p.length);
-    let p2 = await path.join(process.cwd(), dir);
-    return p2;
+async function htmlDirPath(mdFilePath) {
+    mdFilePath = mdFilePath.slice(contentPath.length + 1, mdFilePath.length);
+    return distPath + "/" + mdFilePath.substring(0, mdFilePath.lastIndexOf('/'));
 }
 
 function getDirectoriesBetween(base, dir) {
@@ -73,16 +66,18 @@ function subfoldersOf(dir) {
         .map((item) => { return {path: dir + "/" + item.name, name: item.name}});
 }
 
+// READ PAGES
+const files = await getFiles("./content/");
 // get pages and directories
 var allDirectories = new Set(); // TODO: this should be a Set()
 var pagesOfDir = new Map();
 var pages = [];
 for (var i = 0; i < files.length; i++) {
-    const base = process.cwd() + "/dist";
-    const newDir = await getNewDir(files[i]);
+    const htmlDirAbs = await htmlDirPath(files[i]);
+    console.log("### " + htmlDirAbs);
     const fileName = files[i].substring(files[i].lastIndexOf('/'), files[i].length);
-    const newFile = newDir + fileName.replace('.md', '.html');
-    let directories = getDirectoriesBetween(process.cwd() + "/dist", newDir.substring(0, newDir.length));
+    const newFile = htmlDirAbs + fileName.replace('.md', '.html');
+    let directories = getDirectoriesBetween(process.cwd() + "/dist", htmlDirAbs.substring(0, htmlDirAbs.length));
     let { meta, content } = await md2html(files[i]);
     meta['created'] = new Date(meta.created).toLocaleDateString('de-CH');
     meta['content'] = content;
@@ -93,28 +88,27 @@ for (var i = 0; i < files.length; i++) {
     // TODO: clean this mess up
     let page = {
         originalFile: files[i],
-        newDir: newDir,
-        newDirRelative: newDir.substring(base.length, newDir.length) + fileName.replace('.md', '.html'),
+        htmlDirAbs: htmlDirAbs,
+        htmlDirAbsRelative: htmlDirAbs.substring(distPath.length, htmlDirAbs.length) + fileName.replace('.md', '.html'),
         fileName: fileName,
         newFile: newFile,
         meta: meta,
         content: content,
     };
-    console.log("newDir: " + newDir)
-    if (pagesOfDir.has(newDir)) {
-        let pages = pagesOfDir.get(newDir);
+    if (pagesOfDir.has(htmlDirAbs)) {
+        let pages = pagesOfDir.get(htmlDirAbs);
         pages.push(page)
         console.log("pushing " + pages);
-        pagesOfDir.set(newDir, pages);
+        pagesOfDir.set(htmlDirAbs, pages);
     } else {
-        pagesOfDir.set(newDir, [page]);
+        pagesOfDir.set(htmlDirAbs, [page]);
     }
     pages.push(page)
 }
 
 // create html files
 for (var i = 0; i < pages.length; i++) {
-    await mkdirSync(pages[i].newDir, { recursive: true });
+    await mkdirSync(pages[i].htmlDirAbs, { recursive: true });
     const template = readFileSync("./.mustache/site.mustache", { encoding: 'utf8', flag: 'r' });
     const htmlSite = await Mustache.render(template, pages[i].meta);
     await writeFileSync(pages[i].newFile, htmlSite);
