@@ -22,7 +22,24 @@
             {{/title}}
           </div>
         </div>
-        {{{content}}}
+        {{#subfolders.0}}
+        <h1>{{title}} Folders</h1>
+          <ul>
+              {{#subfolders}}
+                <li><a href="{{name}}">{{name}}</a></li>
+              {{/subfolders}}
+          </ul>
+        {{/subfolders.0}}
+        {{#files.0}}
+        <h1>{{title}} Pages</h1>
+        <p>
+          <ul>
+              {{#files}}
+                <li><a href="{{newDirRelative}}">{{meta.title}}</a></li>
+              {{/files}}
+          </ul>
+        {{/files.0}}
+        </p>
         <div class="footer">
             <div>
               {{created}}
