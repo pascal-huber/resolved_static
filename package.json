@@ -20,6 +20,7 @@
     "remark-math": "^5.1.1",
     "remark-rehype": "^10.1.0",
     "showdown": "^2.1.0",
-    "showdown-highlight": "^3.1.0"
+    "showdown-highlight": "^3.1.0",
+    "sitemap": "^7.1.1"
   }
 }

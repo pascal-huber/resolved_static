@@ -7,14 +7,17 @@ import { readdir, mkdir } from 'fs/promises';
 import showdown from 'showdown';
 import showdownHighlight from 'showdown-highlight';
 import { resolve } from 'path';
+import { SitemapStream, streamToPromise } from 'sitemap';
+import { Readable } from 'stream';
 
 const distPath = process.cwd() + "/dist";
 const contentPath = process.cwd() + "/content";
 const index_template = readFileSync("./.mustache/index.mustache", { encoding: 'utf8', flag: 'r' });
 const page_template = readFileSync("./.mustache/site.mustache", { encoding: 'utf8', flag: 'r' });
+const domain = "resolved.ch"
 const globalMeta = {
     author: "Pascal Huber",
-    pageTitle: "resolved.ch",
+    pageTitle: domain,
 }
 
 const markdownConverter = new showdown.Converter({
@@ -60,7 +63,7 @@ function getDirectoriesToCreate(htmlDirAbs) {
             name: folders[i],
         };
         parents.push(entry);
-        entry = {...entry};
+        entry = { ...entry };
         entry['parents'] = [...parents];
         dirs.set(newPath, entry);
         prevPath = newPath;
@@ -78,6 +81,8 @@ function subfoldersOf(dir) {
         .map((item) => { return { path: dir + "/" + item.name, name: item.name } });
 }
 
+// let siteMapEntries = [{ url: '/page-1/',  changefreq: 'daily', priority: 0.3  }]
+let siteMapEntries = []
 
 // READ PAGES
 var files = await getFiles(contentPath);
@@ -107,6 +112,13 @@ for (var i = 0; i < files.length; i++) {
         htmlDirAbs: htmlDirAbs, // needed to create directory structure
         meta: meta,
     };
+    let siteMapEntry = {
+        url: htmlFileRel,
+        changefreq: 'monthly',
+        priority: meta.siteMapPriority || 0.5,
+    };
+    // TODO: add modified date to sitemap
+    siteMapEntries.push(siteMapEntry);
     if (pagesOfDir.has(htmlDirAbs)) {
         let pages = pagesOfDir.get(htmlDirAbs);
         pages.push(page)
@@ -131,12 +143,13 @@ for (const pages of pages_it) {
 const dir_it = allDirectories[Symbol.iterator]();
 for (const dirJSON of dir_it) {
     const dir = JSON.parse(dirJSON);
-    const indexPathAbs = distPath + dir.full + "/index.html";
+    const indexPathRel = dir.full + "/index.html";
+    const indexPathAbs = distPath + indexPathRel;
     if (!existsSync(indexPathAbs)) {
         let parentDirectoriesRel = dir.parents;
         let dirAbs = indexPathAbs.substring(0, indexPathAbs.lastIndexOf('/'));
         let filesOfDir = pagesOfDir.get(dirAbs);
-        let subfolders = subfoldersOf(dir.full); 
+        let subfolders = subfoldersOf(dir.full);
         const data = {
             parentDirectories: parentDirectoriesRel,
             subfolders: subfolders,
@@ -145,7 +158,21 @@ for (const dirJSON of dir_it) {
             created: new Date(Date.now()).toLocaleDateString('de-CH'),
             ...globalMeta,
         };
+        let siteMapEntry = {
+            url: indexPathRel,
+            changefreq: 'daily',
+            priority: 0.5,
+        };
+        // TODO: add modified date to sitemap
+        siteMapEntries.push(siteMapEntry);
         const htmlSite = await Mustache.render(index_template, data);
         await writeFileSync(indexPathAbs, htmlSite);
     }
 }
+
+// generate sitemap
+const stream = new SitemapStream({ hostname: 'https://' + domain })
+let sitemapContent = await streamToPromise(Readable.from(siteMapEntries).pipe(stream)).then((data) =>
+    data.toString()
+);
+await writeFileSync(distPath + "/sitemap.xml", sitemapContent);
