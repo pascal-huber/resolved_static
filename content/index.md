@@ -1,4 +1,6 @@
 ---
+tags: ['homepage', 'static', 'me']
+title: 'Home'
 home: true
 created: '2023-01-26 15:59'
 updated: '2023-01-27 15:59'

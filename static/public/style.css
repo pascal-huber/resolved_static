@@ -42,7 +42,7 @@ img {
     margin-top: 1.2rem;
 }
 
-.content > p, pre {
+.content > *:not(h1, .header) {
     margin-left: 2rem;
 }
 

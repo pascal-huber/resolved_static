@@ -1,6 +1,5 @@
 // gray-matter if needed
 import Mustache from 'mustache';
-import * as path from 'path';
 import matter from 'gray-matter';
 import { readFileSync, readdirSync, mkdirSync, writeFileSync, fstat, existsSync, access } from 'fs';
 import { readdir, mkdir } from 'fs/promises';
@@ -13,6 +12,9 @@ import { Readable } from 'stream';
 const distPath = process.cwd() + "/dist";
 const contentPath = process.cwd() + "/content";
 const index_template = readFileSync("./.mustache/index.mustache", { encoding: 'utf8', flag: 'r' });
+const tag_index_template = readFileSync("./.mustache/tag_index.mustache", { encoding: 'utf8', flag: 'r' });
+const tag_site_template = readFileSync("./.mustache/tag_site.mustache", { encoding: 'utf8', flag: 'r' });
+const tag_list_template = readFileSync("./.mustache/tag_list.mustache", { encoding: 'utf8', flag: 'r' });
 const page_template = readFileSync("./.mustache/site.mustache", { encoding: 'utf8', flag: 'r' });
 const domain = "resolved.ch"
 const globalMeta = {
@@ -21,6 +23,7 @@ const globalMeta = {
 }
 
 const markdownConverter = new showdown.Converter({
+    // backslashEscapesHTMLTags: true,
     extensions: [showdownHighlight({
         pre: true
         , auto_detection: true
@@ -47,7 +50,12 @@ async function getFiles(dir) {
 
 async function htmlDirPath(mdFilePath) {
     mdFilePath = mdFilePath.slice(1, mdFilePath.length);
-    return distPath + "/" + mdFilePath.substring(0, mdFilePath.lastIndexOf('/'));
+    let path = distPath + "/" + mdFilePath.substring(0, mdFilePath.lastIndexOf('/'));
+    // TODO: this is nasty
+    if(path[path.length - 1] == "/"){
+        path = path.substring(0, path.length - 1);
+    }
+    return path;
 }
 
 function getDirectoriesToCreate(htmlDirAbs) {
@@ -81,14 +89,14 @@ function subfoldersOf(dir) {
         .map((item) => { return { path: dir + "/" + item.name, name: item.name } });
 }
 
-// let siteMapEntries = [{ url: '/page-1/',  changefreq: 'daily', priority: 0.3  }]
-let siteMapEntries = []
 
 // READ PAGES
+let siteMapEntries = []
 var files = await getFiles(contentPath);
 files = files.map((file) => file.substring(contentPath.length, file.length));
 var allDirectories = new Set();
 var pagesOfDir = new Map();
+var tags = new Map();
 for (var i = 0; i < files.length; i++) {
     const mdFileName = files[i].substring(files[i].lastIndexOf('/'), files[i].length);
     const htmlDirAbs = await htmlDirPath(files[i]);
@@ -117,8 +125,19 @@ for (var i = 0; i < files.length; i++) {
         changefreq: 'monthly',
         priority: meta.siteMapPriority || 0.5,
     };
-    // TODO: add modified date to sitemap
     siteMapEntries.push(siteMapEntry);
+    // TODO: this is a bit redundant with pagesOrDir
+    if (meta.tags) {
+        for (var ii = 0; ii < meta.tags.length; ii++) {
+            if (tags.has(meta.tags[ii])) {
+                let pages = tags.get(meta.tags[ii]);
+                pages.push(page);
+                tags.set(meta.tags[ii], pages);
+            } else {
+                tags.set(meta.tags[ii], [page]);
+            }
+        }
+    }
     if (pagesOfDir.has(htmlDirAbs)) {
         let pages = pagesOfDir.get(htmlDirAbs);
         pages.push(page)
@@ -128,13 +147,37 @@ for (var i = 0; i < files.length; i++) {
     }
 }
 
+// prepare tag_list
+const tag_it = tags[Symbol.iterator]();
+let tagsCollection = [];
+for (const tag of tag_it) {
+    tagsCollection.push({
+        name: tag[0],
+        pages: tag[1],
+    });
+}
+tagsCollection[tagsCollection.length - 1].last = true;
+tagsCollection.sort((a, b) => a.name < b.name ? -1 : 1);
+
 // create html files
 const pages_it = pagesOfDir[Symbol.iterator]();
 for (const pages of pages_it) {
     for (var i = 0; i < pages[1].length; i++) {
         await mkdirSync(pages[1][i].htmlDirAbs, { recursive: true });
-        const htmlSite = await Mustache.render(page_template, pages[1][i].meta);
-        await writeFileSync(pages[1][i].htmlFileAbs, htmlSite);
+        let rendered = await Mustache.render(page_template, pages[1][i].meta);
+        let tag_list_all = await Mustache.render(tag_list_template, {
+            tags: tagsCollection,
+        })
+        let tags = pages[1][i].meta.tags?.map((x) => {return {name: x}})
+        if(tags){
+            tags[tags.length - 1].last = true;
+        }
+        let tag_list = await Mustache.render(tag_list_template, {
+            tags: tags,
+        })
+        rendered = rendered.replace("<!--##tag_list_all##-->", tag_list_all);
+        rendered = rendered.replace("<!--##tag_list##-->", tag_list);
+        await writeFileSync(pages[1][i].htmlFileAbs, rendered);
     }
 }
 
@@ -168,6 +211,34 @@ for (const dirJSON of dir_it) {
         const htmlSite = await Mustache.render(index_template, data);
         await writeFileSync(indexPathAbs, htmlSite);
     }
+}
+
+// add tag index page
+const data = {
+    title: "Tags",
+    created: new Date(Date.now()).toLocaleDateString('de-CH'),
+    tags: tagsCollection,
+    ...globalMeta,
+};
+await mkdirSync(distPath + "/_tags");
+let htmlSite = await Mustache.render(tag_index_template, data);
+await writeFileSync(distPath + "/_tags/index.html", htmlSite);
+
+
+// add a page per tag
+for (var tag of tagsCollection) {
+    await mkdirSync(distPath + "/_tags/" + tag.name);
+    const data = {
+        title: "#" + tag.name,
+        created: new Date(Date.now()).toLocaleDateString('de-CH'),
+        parentDirectories: [
+            {name: "Tags", full: "/_tags/"},
+        ],
+        pages: tag.pages,
+        ...globalMeta,
+    };
+    let htmlSite = await Mustache.render(tag_site_template, data);
+    await writeFileSync(distPath + "/_tags/" + tag.name + "/index.html", htmlSite);
 }
 
 // generate sitemap

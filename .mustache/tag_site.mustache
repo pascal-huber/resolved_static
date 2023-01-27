@@ -24,22 +24,12 @@
           {{/title}}
         </div>
       </div>
-      {{#subfolders.0}}
-      <h1>{{title}} Folders</h1>
+      <h1>{{title}}</h1>
       <ul>
-        {{#subfolders}}
-        <li><a href="{{name}}">{{name}}</a></li>
-        {{/subfolders}}
-      </ul>
-      {{/subfolders.0}}
-      {{#filesOfDir.0}}
-      <h1>{{title}} Pages</h1>
-      <ul>
-        {{#filesOfDir}}
+        {{#pages}}
         <li><a href="{{htmlFileRel}}">{{meta.title}}</a></li>
-        {{/filesOfDir}}
+        {{/pages}}
       </ul>
-      {{/filesOfDir.0}}
     </div>
     <div class="footer">
       <div>
