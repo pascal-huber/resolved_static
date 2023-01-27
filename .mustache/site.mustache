@@ -16,12 +16,12 @@
             {{#home}}
               Home
             {{/home}}
-            {{#path.0}}
+            {{^home}}
               <a href="/">Home</a>
-            {{/path.0}}
-              {{#path}}
-                &nbsp;&gt;&nbsp;<a href="{{full}}">{{name}}</a>
-              {{/path}}
+            {{/home}}
+            {{#parentDirectories}}
+              &nbsp;&gt;&nbsp;<a href="{{full}}">{{name}}</a>
+            {{/parentDirectories}}
             {{#title}}
               &nbsp;&gt;&nbsp;{{title}}
             {{/title}}
