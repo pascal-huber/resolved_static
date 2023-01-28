@@ -14,13 +14,13 @@
         <div class="header">
           <div>
             {{#home}}
-              Home
+              {{pageTitle}} 
             {{/home}}
             {{^home}}
               <a href="/">Home</a>
             {{/home}}
             {{#parentDirectories}}
-              &nbsp;&gt;&nbsp;<a href="{{full}}">{{name}}</a>
+              &nbsp;&gt;&nbsp;<a href="/{{full}}">{{name}}</a>
             {{/parentDirectories}}
             {{^home}}
             {{#title}}

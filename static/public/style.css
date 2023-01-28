@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'Iosevka Term Slab';
     src: url("/public/iosevka-term-slab-regular.subset.woff2") format('woff2');
@@ -22,48 +23,27 @@
     src: url("/public/iosevka-term-slab-bolditalic.subset.woff2") format('woff2');
 }
 
+
+/* SITE LAYOUT */
+
 * {
     font-family: 'Iosevka Term Slab', monospace;
     font-size: 16px;
 }
 
-img {
-    max-width: 566px;
+p {
+    margin: 0;
 }
 
-/* h1 {
-    margin: 0;
-    display: inline;
-    font-weight: normal;
-} */
-
-.content > h1 {
+h1 {
     font-weight: bold;
     margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
-.content > *:not(h1, .header) {
-    margin-left: 2rem;
+.content>*:not(h1, .header) {
+    margin-left: 1rem;
 }
-
-/* LISTINGS */
-
-ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-ul>li {
-    text-indent: 0px;
-}
-
-ul>li:before {
-    content: "- ";
-}
-
-
-/* SITE LAYOUT */
 
 body,
 html {
@@ -78,9 +58,13 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
 }
 
-.header, 
+/* HEADER and FOOTER */
+
+.header,
 .footer {
     padding: 1rem 0;
 }
@@ -108,54 +92,47 @@ html {
     padding-bottom: .5rem;
 }
 
+/* MISC */
 
-/* MOBILE */
+img {
+    max-width: 100%;
+}
 
-@media screen and (max-width: 500px) {
-    .footer>div:nth-child(2) {
-        justify-content: flex-end;
-    }
+/* LISTINGS */
 
-    .footer>div:nth-child(3) {
-        display: none !important;
-    }
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+ul>li {
+    text-indent: 0px;
+}
+
+ul>li:before {
+    content: "- ";
 }
 
 /* COLORS */
+body {
+    background: #333;
+    color: #ddd;
+}
 
-/* TODO: enable light mode */
+.site {
+    background: #333;
+    box-shadow: 0 0 100px #666;
+}
 
-/* @media (prefers-color-scheme: dark) { */
-    body {
-        background: #333;
-        color: #ddd;
-    }
+.content>h1 {
+    color: #5cad5c;
+}
 
-    .content > h1 {
-        color: #5cad5c;
-    }
+a {
+    color: #ddd;
+}
 
-    a {
-        color: #ddd;
-    }
-
-    a:hover {
-        color: #cdcd00;
-    }
-
-/* } */
-
-/* @media (prefers-color-scheme: light) {
-    * {
-        background: #ddd;
-        color: #333;
-    }
-
-    .section-title {
-        color: #4a4;
-    }
-
-    a:hover {
-        color: #bd8344;
-    }
-} */
+a:hover {
+    color: #cdcd00;
+}

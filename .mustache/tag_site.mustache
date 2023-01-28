@@ -17,7 +17,7 @@
         <div>
           <a href="/">Home</a>
           {{#parentDirectories}}
-          &nbsp;&gt;&nbsp;<a href="{{full}}">{{name}}</a>
+          &nbsp;&gt;&nbsp;<a href="/{{full}}">{{name}}</a>
           {{/parentDirectories}}
           {{#title}}
           &nbsp;&gt;&nbsp;{{title}}
@@ -27,7 +27,7 @@
       <h1>{{title}}</h1>
       <ul>
         {{#pages}}
-        <li><a href="{{htmlFileRel}}">{{meta.title}}</a></li>
+        <li><a href="/{{paths.htmlFileRel}}">{{meta.title}}</a></li>
         {{/pages}}
       </ul>
     </div>
