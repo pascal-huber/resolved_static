@@ -13,13 +13,15 @@ Pascal Huber - owner of this domain
 
 # DESCRIPTION
 
-Computer scientist based in Zürich.
+I like computer science, open source and mandarins.
 
 # PROJECTS
 
- - [Yet another Static Site Generator](./projects/resolved.html)
+ - VoteLog - to keep track on my votes on referendums and initiatives
+ - [svlog](https://github.com/pascal-huber/svlog) to query log files on Void Linux
+ - [Yet another Static Site Generator ](./projects/resolved.html)
 
-There is more to come once the site is ready
+There is more to be written once the site is ready.
 
 # TAGS ON THIS SITE
 
