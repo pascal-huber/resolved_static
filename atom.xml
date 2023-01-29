@@ -14,11 +14,11 @@
     <subtitle>This is my personal feed!</subtitle>
     <icon>https://resolved.ch/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Home]]></title>
+        <title type="html"><![CDATA[Pascal Huber]]></title>
         <id>https://resolved.ch/index.html</id>
         <link href="https://resolved.ch/index.html"/>
         <updated>2023-01-28T12:30:35.000Z</updated>
-        <summary type="html"><![CDATA[Pascal Huber's Homepage]]></summary>
+        <summary type="html"><![CDATA[I like computer science, open source and mandarins.]]></summary>
         <author>
             <name>Pascal Huber</name>
             <email>pascal.huber@resolved.ch</email>
@@ -26,11 +26,11 @@
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[resolved.ch]]></title>
+        <title type="html"><![CDATA[Yet another SSG]]></title>
         <id>https://resolved.ch/projects/resolved.html</id>
         <link href="https://resolved.ch/projects/resolved.html"/>
         <updated>2023-01-28T11:00:00.000Z</updated>
-        <summary type="html"><![CDATA[A simple yet powerful static site generator]]></summary>
+        <summary type="html"><![CDATA[My simple yet powerful static site generator using markdown.]]></summary>
         <author>
             <name>Pascal Huber</name>
             <email>pascal.huber@resolved.ch</email>
