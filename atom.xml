@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://resolved.ch/</id>
+    <title>resolved.ch</title>
+    <updated>2023-01-29T14:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>Pascal Huber</name>
+        <email>pascal.huber@resolved.ch</email>
+        <uri>https://resolved.ch/</uri>
+    </author>
+    <link rel="alternate" href="https://resolved.ch/"/>
+    <link rel="self" href="https://resolved.ch/atom.xml"/>
+    <subtitle>This is my personal feed!</subtitle>
+    <icon>https://resolved.ch/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Home]]></title>
+        <id>43f4645e-1a2a-409e-978b-653ca588930c</id>
+        <link href="https://resolved.ch//index.html"/>
+        <updated>2023-01-28T12:30:35.000Z</updated>
+        <summary type="html"><![CDATA[Pascal Huber's Homepage]]></summary>
+        <author>
+            <name>Pascal Huber</name>
+            <email>pascal.huber@resolved.ch</email>
+            <uri>https://resolved.ch/</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[resolved.ch]]></title>
+        <id>8f0d2036-5eaf-46cc-9732-b3d84cc3311d</id>
+        <link href="https://resolved.ch//projects/resolved.html"/>
+        <updated>2023-01-28T14:24:35.000Z</updated>
+        <author>
+            <name>Pascal Huber</name>
+            <email>pascal.huber@resolved.ch</email>
+            <uri>https://resolved.ch/</uri>
+        </author>
+    </entry>
+</feed>

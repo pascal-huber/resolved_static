@@ -1,0 +1,217 @@
+/*!
+  Theme: Gruvbox dark, medium
+  Author: Dawid Kurek (dawikur@gmail.com), morhetz (https://github.com/morhetz/gruvbox)
+  License: ~ MIT (or more permissive) [via base16-schemes-source]
+  Maintainer: @highlightjs/core-team
+  Version: 2021.09.0
+*/
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em; }
+
+code.hljs {
+  padding: 3px 5px; }
+
+.hljs {
+  color: #d5c4a1;
+  background: #282828; }
+
+.hljs ::selection, .hljs::selection {
+  background-color: #504945;
+  color: #d5c4a1; }
+
+.hljs-comment {
+  color: #665c54; }
+
+.hljs-tag {
+  color: #bdae93; }
+
+.hljs-operator, .hljs-punctuation, .hljs-subst {
+  color: #d5c4a1; }
+
+.hljs-operator {
+  opacity: .7; }
+
+.hljs-bullet, .hljs-deletion, .hljs-name, .hljs-selector-tag, .hljs-template-variable, .hljs-variable {
+  color: #fb4934; }
+
+.hljs-attr, .hljs-link, .hljs-literal, .hljs-number, .hljs-symbol, .hljs-variable.constant_ {
+  color: #fe8019; }
+
+.hljs-class .hljs-title, .hljs-title, .hljs-title.class_ {
+  color: #fabd2f; }
+
+.hljs-strong {
+  font-weight: 700;
+  color: #fabd2f; }
+
+.hljs-addition, .hljs-code, .hljs-string, .hljs-title.class_.inherited__ {
+  color: #b8bb26; }
+
+.hljs-built_in, .hljs-doctag, .hljs-keyword.hljs-atrule, .hljs-quote, .hljs-regexp {
+  color: #8ec07c; }
+
+.hljs-attribute, .hljs-function .hljs-title, .hljs-section, .hljs-title.function_, .ruby .hljs-property {
+  color: #83a598; }
+
+.diff .hljs-meta, .hljs-keyword, .hljs-template-tag, .hljs-type {
+  color: #d3869b; }
+
+.hljs-emphasis {
+  color: #d3869b;
+  font-style: italic; }
+
+.hljs-meta, .hljs-meta .hljs-keyword, .hljs-meta .hljs-string {
+  color: #d65d0e; }
+
+.hljs-meta .hljs-keyword, .hljs-meta-keyword {
+  font-weight: 700; }
+
+body {
+  background: #333;
+  color: #ddd; }
+
+.site {
+  background: #333;
+  box-shadow: 0 0 100px #666; }
+
+.content > h1 {
+  color: #81b622; }
+
+a {
+  color: #ddd; }
+
+a:hover {
+  color: #d2f87f; }
+
+.header *, .footer * {
+  color: #dba40e; }
+
+@font-face {
+  font-family: 'Iosevka Term Slab';
+  src: url("/public/iosevka-term-slab-regular.subset.woff2") format("woff2"); }
+
+@font-face {
+  font-family: 'Iosevka Term Slab';
+  font-weight: bold;
+  src: url("/public/iosevka-term-slab-bold.subset.woff2") format("woff2"); }
+
+@font-face {
+  font-family: 'Iosevka Term Slab';
+  font-style: italic;
+  src: url("/public/iosevka-term-slab-italic.subset.woff2") format("woff2"); }
+
+@font-face {
+  font-family: 'Iosevka Term Slab';
+  font-weight: bold;
+  font-style: italic;
+  src: url("/public/iosevka-term-slab-bolditalic.subset.woff2") format("woff2"); }
+
+* {
+  font-family: 'Iosevka Term Slab', monospace;
+  font-size: 16px; }
+
+code {
+  font-size: 14px;
+  border: 1px solid #999;
+  border-radius: 0.3em;
+  padding: 0px 2px;
+  background: #555; }
+
+/* SITE LAYOUT */
+p {
+  margin: 0; }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  margin-bottom: 0.2rem; }
+
+h1 {
+  font-weight: bold;
+  margin-top: 1.2rem;
+  margin-bottom: 0.5rem; }
+
+.content > *:not(h1, .header, blockquote) {
+  margin-left: 1rem; }
+
+.content blockquote {
+  margin-left: 2rem;
+  padding-left: 4px;
+  border-left: 4px solid #888; }
+
+.content blockquote blockquote {
+  margin-left: 1rem; }
+
+.content .task-list-item {
+  margin-left: 1rem; }
+
+body,
+html {
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box; }
+  @media only screen and (min-width: 600px) {
+    body,
+    html {
+      padding: 1rem; } }
+
+.site {
+  margin: 0rem auto;
+  min-height: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem; }
+
+.content {
+  margin: 0.5rem;
+  flex: 1; }
+
+.footer {
+  margin: 0.5rem; }
+
+/* HEADER and FOOTER */
+.header > div {
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  height: 1.5rem;
+  margin-bottom: 1rem; }
+
+.header,
+.footer {
+  padding: 0 0; }
+
+.footer {
+  display: flex; }
+
+.footer > div {
+  flex: 1;
+  display: flex; }
+
+.footer > div:nth-child(1) {
+  justify-content: flex-start; }
+
+.footer > div:nth-child(2) {
+  justify-content: flex-end; }
+
+.footer {
+  padding-top: 1rem;
+  padding-bottom: 0rem; }
+
+/* MISC */
+img {
+  max-width: 100%; }
+
+/* LISTS */
+.content > ul {
+  padding-left: 1rem;
+  list-style-type: "- "; }

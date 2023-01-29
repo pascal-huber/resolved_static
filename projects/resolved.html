@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="alternate" type="application/atom+xml" title="resolved.ch Feed" href="/atom.xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <title>resolved.ch | resolved.ch</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <link rel="stylesheet" href="/public/dark.css">
+</head>
+
+<body>
+
+  <div class="site">
+    <div class="content">
+      <div class="header">
+        <div>
+          <a href="/">home</a>
+          &nbsp;❱&nbsp;<a href="/projects">projects</a>
+          &nbsp;❱&nbsp;<span class="anchor">resolved.ch</span>
+        </div>
+      </div>
+      <h1 id="name">NAME</h1>
+<p>resolved.ch - the domain and its website you are looking at right now.</p>
+<h1 id="tags">TAGS</h1>
+<p>
+<a href="/_tags/dev">#dev</a>
+</p>
+<h1 id="description">DESCRIPTION</h1>
+<p>Creating a new and less minimalistic webpage has been on my mind for a long time. This is my attempt of writing a small yet powerful static site generator.</p>
+<h1 id="features">FEATURES</h1>
+<ul>
+<li>Generate a static page for all markdown files in <code>./content/</code></li>
+<li>Generate <code>index.html</code> files for directories which don't have a <code>index.md</code></li>
+<li>Add tags to pages and provide overview</li>
+<li>Generate sitemap.xml</li>
+<li>Generate atom.xml</li>
+</ul>
+<h1 id="example">EXAMPLE</h1>
+<p>The markdown file of this page (<code>./content/projects/resolved.md</code>) looks as
+follows. The <code>uuid</code> is genereted with <code>uuidgen</code> from <code>util-linux</code> [<a href="https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/">1</a>].</p>
+<pre class="yaml language-yaml"><code class="hljs yaml language-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;resolved.ch&#x27;</span>
+<span class="hljs-attr">uuid:</span> <span class="hljs-string">&#x27;8f0d2036-5eaf-46cc-9732-b3d84cc3311d&#x27;</span>
+<span class="hljs-attr">created:</span> <span class="hljs-string">&#x27;2023-01-24T13:04:00+01:00&#x27;</span>
+<span class="hljs-attr">updated:</span> <span class="hljs-string">&#x27;2023-01-28T15:24:35+01:00&#x27;</span>
+<span class="hljs-attr">tags:</span> [<span class="hljs-string">&#x27;dev&#x27;</span>]
+<span class="hljs-meta">---</span>
+<span class="hljs-comment"># NAME</span>
+
+<span class="hljs-string">resolved.ch</span> <span class="hljs-bullet">-</span> <span class="hljs-string">the</span> <span class="hljs-string">domain</span> <span class="hljs-string">...</span>
+</code></pre>
+<h1 id="todos">TODOS</h1>
+<ul>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> improve favicon/icon, see https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> handle 404</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> css/html: check mobile-friendlyness</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> css: fix indenation for lists</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> css: decide if I need a light theme</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> markdown: target=_blank for external links?</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> markdown: check out other markdown variants</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> check SEO options</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> fonts: generate fonts with all required glyphs</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> feed: decide if I want rss2.0 and/or json feeds</li>
+</ul>
+    </div>
+    <div class="footer">
+      <div>
+        28.1.2023
+      </div>
+      <div>
+        Pascal Huber
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
