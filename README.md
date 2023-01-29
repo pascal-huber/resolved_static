@@ -20,7 +20,7 @@ date --iso-8601=seconds
 ❯ cd static/public/
 ❯ cat ../../content/**/* >  glyphs.txt
 ❯ pyftsubset \
-        iosevka-term-slab-{regular,bold,italic,bolditalic}.woff2 \
+        iosevka-term-slab-regular.woff2 \
         --name-IDs+=0,4,6 \
         --text-file=./glyphs.txt \
         --flavor=woff2
