@@ -121,7 +121,6 @@ for (const pages of pages_it) {
 
 // Create index files
 const dir_it = allDirectories[Symbol.iterator]();
-console.log(allDirectories);
 for (const dirJSON of dir_it) {
     const dir = JSON.parse(dirJSON);
     const indexFileRel = join(dir.full, "/index.html");
