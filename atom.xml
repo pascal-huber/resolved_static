@@ -15,8 +15,8 @@
     <icon>https://resolved.ch/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Home]]></title>
-        <id>43f4645e-1a2a-409e-978b-653ca588930c</id>
-        <link href="https://resolved.ch//index.html"/>
+        <id>https://resolved.ch/index.html</id>
+        <link href="https://resolved.ch/index.html"/>
         <updated>2023-01-28T12:30:35.000Z</updated>
         <summary type="html"><![CDATA[Pascal Huber's Homepage]]></summary>
         <author>
@@ -27,9 +27,10 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[resolved.ch]]></title>
-        <id>8f0d2036-5eaf-46cc-9732-b3d84cc3311d</id>
-        <link href="https://resolved.ch//projects/resolved.html"/>
-        <updated>2023-01-28T14:24:35.000Z</updated>
+        <id>https://resolved.ch/projects/resolved.html</id>
+        <link href="https://resolved.ch/projects/resolved.html"/>
+        <updated>2023-01-28T11:00:00.000Z</updated>
+        <summary type="html"><![CDATA[A simple yet powerful static site generator]]></summary>
         <author>
             <name>Pascal Huber</name>
             <email>pascal.huber@resolved.ch</email>
