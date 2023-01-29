@@ -135,6 +135,7 @@ for (const dirJSON of dir_it) {
     //       automatically created index page
     if (!existsSync(indexFileAbs)) {
         let parentDirectoriesRel = dir.parents;
+        parentDirectoriesRel[parentDirectoriesRel.length - 1].last = true;
         let filesOfDir = pagesOfDir.get(dirname(indexFileAbs));
         let subfolders = subfoldersOf(dir.full);
         const data = {
@@ -161,7 +162,7 @@ for (const dirJSON of dir_it) {
 
 // Create a tag overview page
 const tagIndexData = {
-    title: "Tags",
+    title: "tags",
     created: globalMeta.generationDate,
     tags: tagsCollection,
     ...globalMeta,
@@ -186,7 +187,7 @@ for (var tag of tagsCollection) {
         title: "#" + tag.name,
         created: new Date(Date.now()).toLocaleDateString('de-CH'),
         parentDirectories: [
-            { name: "Tags", full: "_tags/" },
+            { name: "tags", full: "_tags/" },
         ],
         pages: tag.pages,
         ...globalMeta,

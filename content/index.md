@@ -7,12 +7,6 @@ title: 'Pascal Huber'
 description: "I like computer science, open source and mandarins."
 ---
 
-# NAME
-
-Pascal Huber - owner of this domain
-
-# DESCRIPTION
-
 I like computer science, open source and mandarins.
 
 # PROJECTS

@@ -6,13 +6,15 @@
         {{#parentDirectories}}
         &nbsp;❱&nbsp;<a href="/{{full}}">{{name}}</a>
         {{/parentDirectories}}
+      </div>
+      <div>
         {{#title}}
-        &nbsp;❱&nbsp;{{title}}
+        <h1>{{title}}</h1>
         {{/title}}
       </div>
     </div>
     {{#subfolders.0}}
-    <h1>Folders</h1>
+    <h2>Folders</h2>
     <ul>
       {{#subfolders}}
       <li><a href="/{{path}}">{{name}}</a></li>
@@ -20,7 +22,7 @@
     </ul>
     {{/subfolders.0}}
     {{#filesOfDir.0}}
-    <h1>Pages</h1>
+    <h2>Pages</h2>
     <ul>
       {{#filesOfDir}}
       <li><a href="/{{paths.htmlFileRel}}">{{meta.title}}</a></li>

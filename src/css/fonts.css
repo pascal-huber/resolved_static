@@ -34,3 +34,7 @@ code {
     padding: 0px 2px;
     background: #555;
 }
+
+.header {
+    font-style: italic;
+}

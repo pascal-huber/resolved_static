@@ -2,16 +2,17 @@
   <div class="content">
     <div class="header">
       <div>
-        <a href="/">Home</a>
+        <a href="/">home</a>
         {{#parentDirectories}}
         &nbsp;❱&nbsp;<a href="/{{full}}">{{name}}</a>
         {{/parentDirectories}}
+      </div>
+      <div>
         {{#title}}
-        &nbsp;❱&nbsp;{{title}}
+        <h1>{{title}}</h1>
         {{/title}}
       </div>
     </div>
-    <h1>{{title}}</h1>
     <ul>
       {{#pages}}
       <li><a href="/{{paths.htmlFileRel}}">{{meta.title}}</a></li>

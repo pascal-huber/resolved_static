@@ -9,10 +9,13 @@ const markdownConverter = new showdown.Converter({
     strikethrough: true,
     tables: true,
     tasklists: true,
-    extensions: [showdownHighlight({
-        pre: true
-        , auto_detection: true
-    })]
+    headerLevelStart: 2,
+    extensions: [
+        showdownHighlight({
+            pre: true
+            , auto_detection: true
+        }),
+    ]
 });
 
 function filename(path) {

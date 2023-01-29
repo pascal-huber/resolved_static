@@ -17,8 +17,12 @@ body {
     box-shadow: 0 0 100px #666;
 }
 
-.content>h1 {
+h1 {
     color: $highlight1-color;
+}
+
+h2 {
+    color: $highlight2-color;
 }
 
 a {
@@ -30,12 +34,12 @@ a:hover {
 }
 
 .header, .footer {
-    * {
+    *:not(h1) {
         color: $header-footer-color;
     }
 }
 
-code {
-    // color: $highlight3-color;
-    // font-family: 'DejaVu Sans Mono';
-}
+// code {
+//     // color: $highlight3-color;
+//     // font-family: 'DejaVu Sans Mono';
+// }

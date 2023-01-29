@@ -1,17 +1,17 @@
 ---
-title: 'Yet another SSG'
+title: 'Yet another Static Site Generator'
 description: 'My simple yet powerful static site generator using markdown.'
 created: '2023-01-28T12:00:00+01:00'
-updated: '2023-01-28T12:00:00+01:00'
+updated: '2023-01-29T23:00:00+01:00'
 tags: ['dev']
 ---
-# NAME
 
-resolved.ch - built with a simple yet powerful static site generator.
-
-# TAGS
-
-<!--##tag_list##-->
+Creating a homepage which contains more than just my name and e-mail address has
+been on my todo list for years. There are many neat frameworks out there to
+build static websites and I have tried out some of them but always felt either
+limited or totally knocked out by the complexity of the frameworks. I therefore
+decided to build a static site generator from scratch to read markdown files and
+create a static website from them.
 
 # DESCRIPTION
 
@@ -26,21 +26,21 @@ looks as follows.
 
 ```yaml
 ---
-title: 'Yet another SSG'
+title: 'Yet another Static Site Generator'
 description: 'My simple yet powerful static site generator using markdown.'
 created: '2023-01-28T12:00:00+01:00'
 updated: '2023-01-28T12:00:00+01:00'
 tags: ['dev']
 ---
-# NAME
 
-resolved.ch - the domain ...
+Creating a homepage...
+
+...
 
 # TAGS
 
 <!--##tag_list##-->
 
-...
 ```
 
 # TODOS
@@ -56,5 +56,9 @@ resolved.ch - the domain ...
 # SEE ALSO
 
 [github.com/pascal-huber/resolved_static](https://github.com/pascal-huber/resolved_static)
+
+# TAGS
+
+<!--##tag_list##-->
 
 [1]: https://nodejs.org/en/

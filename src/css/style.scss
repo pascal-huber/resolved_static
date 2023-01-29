@@ -10,7 +10,12 @@ p {
     margin-bottom: 0.0rem;
 }
 
-h1,
+h1 {
+    display: inline;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 h2,
 h3,
 h4,
@@ -18,16 +23,18 @@ h5,
 h6 {
     margin: 0;
     margin-bottom: 0.2rem;
+    display:block;
 }
 
-h1 {
+.content > *:not(h2, .header) {
+    margin-left: 1rem;
+}
+
+h2 {
     font-weight: bold;
+    // left: -2rem;
     margin-top: 1.2rem;
     margin-bottom: 0.5rem;
-}
-
-.content>*:not(h1, .header, blockquote) {
-    margin-left: 1rem;
 }
 
 .content {
@@ -84,14 +91,9 @@ html {
     overflow-x: auto;
     white-space: nowrap;
     display: flex;
-    height: 1.5rem;
-    margin-bottom: 1rem;
+    // height: 1.5rem;
+    // margin-bottom: 1rem;
 }
-
-
-// .header>div>div {
-//     height: 2rem;
-// }
 
 .header,
 .footer {
@@ -128,7 +130,8 @@ img {
 
 /* LISTS */
 
-.content>ul {
+.content > ul {
+    margin-top: 0.5rem;
     padding-left: 1rem;
     list-style-type: "- ";
 }
