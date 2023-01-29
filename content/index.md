@@ -21,6 +21,10 @@ There is more to be written once the site is ready.
 
 <!--##tag_list_all##-->
 
+# CONTACT
+
+<pascal.huber@resolved.ch>
+
 # SEE ALSO
 
  - [github.com/pascal-huber](https://github.com/pascal-huber)
