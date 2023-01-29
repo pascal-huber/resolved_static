@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://resolved.ch/</id>
     <title>resolved.ch</title>
-    <updated>2023-01-29T14:00:00.000Z</updated>
+    <updated>2023-01-29T22:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Pascal Huber</name>
@@ -26,10 +26,10 @@
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[Yet another SSG]]></title>
+        <title type="html"><![CDATA[Yet another Static Site Generator]]></title>
         <id>https://resolved.ch/projects/resolved.html</id>
         <link href="https://resolved.ch/projects/resolved.html"/>
-        <updated>2023-01-28T11:00:00.000Z</updated>
+        <updated>2023-01-29T22:00:00.000Z</updated>
         <summary type="html"><![CDATA[My simple yet powerful static site generator using markdown.]]></summary>
         <author>
             <name>Pascal Huber</name>

@@ -76,8 +76,11 @@ body {
   background: #323027;
   box-shadow: 0 0 100px #666; }
 
-.content > h1 {
+h1 {
   color: #d65d0e; }
+
+h2 {
+  color: #b8bb26; }
 
 a {
   color: #fbf1c7; }
@@ -85,7 +88,7 @@ a {
 a:hover {
   color: #b8bb26; }
 
-.header *, .footer * {
+.header *:not(h1), .footer *:not(h1) {
   color: #83a598; }
 
 @font-face {
@@ -119,27 +122,35 @@ code {
   padding: 0px 2px;
   background: #555; }
 
+.header {
+  font-style: italic; }
+
 /* SITE LAYOUT */
 p {
   margin-top: 0.5rem;
   margin-bottom: 0.0rem; }
 
-h1,
+h1 {
+  display: inline;
+  font-weight: bold;
+  font-size: 18px; }
+
 h2,
 h3,
 h4,
 h5,
 h6 {
   margin: 0;
-  margin-bottom: 0.2rem; }
+  margin-bottom: 0.2rem;
+  display: block; }
 
-h1 {
+.content > *:not(h2, .header) {
+  margin-left: 1rem; }
+
+h2 {
   font-weight: bold;
   margin-top: 1.2rem;
   margin-bottom: 0.5rem; }
-
-.content > *:not(h1, .header, blockquote) {
-  margin-left: 1rem; }
 
 .content blockquote {
   margin-left: 2rem;
@@ -183,9 +194,7 @@ html {
 .header > div {
   overflow-x: auto;
   white-space: nowrap;
-  display: flex;
-  height: 1.5rem;
-  margin-bottom: 1rem; }
+  display: flex; }
 
 .header,
 .footer {
@@ -214,5 +223,6 @@ img {
 
 /* LISTS */
 .content > ul {
+  margin-top: 0.5rem;
   padding-left: 1rem;
   list-style-type: "- "; }

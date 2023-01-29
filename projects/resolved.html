@@ -12,7 +12,7 @@
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="/public/style.css">
-  <title>Yet another SSG - resolved.ch</title>
+  <title>Yet another Static Site Generator - resolved.ch</title>
     <meta name="description" content="My simple yet powerful static site generator using markdown.">
 </head>
 
@@ -24,16 +24,18 @@
       <div>
         <a href="/">home</a>
         &nbsp;❱&nbsp;<a href="/projects">projects</a>
-        &nbsp;❱&nbsp;<span class="anchor">Yet another SSG</span>
+      </div>
+      <div>
+        <h1>Yet another Static Site Generator</h1>
       </div>
     </div>
-    <h1 id="name">NAME</h1>
-<p>resolved.ch - built with a simple yet powerful static site generator.</p>
-<h1 id="tags">TAGS</h1>
-<p>
-<a href="/_tags/dev">#dev</a>
-</p>
-<h1 id="description">DESCRIPTION</h1>
+    <p>Creating a homepage which contains more than just my name and e-mail address has
+been on my todo list for years. There are many neat frameworks out there to
+build static websites and I have tried out some of them but always felt either
+limited or totally knocked out by the complexity of the frameworks. I therefore
+decided to build a static site generator from scratch to read markdown files and
+create a static website from them.</p>
+<h2 id="description">DESCRIPTION</h2>
 <p>Built with Node.js[<a href="https://nodejs.org/en/">1</a>] it creates pages for all markdown files in the
 <code>./content/</code> folder before it generates index pages for all directories. It lets
 you add tags to pages and automatically creates tag lists and index pages for
@@ -42,23 +44,22 @@ them. Furthermore, it creates sitemap.xml and atom.xml.</p>
 rendering. For example, the one for this page (<code>./content/projects/resolved.md</code>)
 looks as follows.</p>
 <pre class="yaml language-yaml"><code class="hljs yaml language-yaml"><span class="hljs-meta">---</span>
-<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;Yet another SSG&#x27;</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;Yet another Static Site Generator&#x27;</span>
 <span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;My simple yet powerful static site generator using markdown.&#x27;</span>
 <span class="hljs-attr">created:</span> <span class="hljs-string">&#x27;2023-01-28T12:00:00+01:00&#x27;</span>
 <span class="hljs-attr">updated:</span> <span class="hljs-string">&#x27;2023-01-28T12:00:00+01:00&#x27;</span>
 <span class="hljs-attr">tags:</span> [<span class="hljs-string">&#x27;dev&#x27;</span>]
-<span class="hljs-meta">---</span>
-<span class="hljs-comment"># NAME</span>
+<span class="hljs-meta">---
+</span>
+<span class="hljs-string">Creating</span> <span class="hljs-string">a</span> <span class="hljs-string">homepage...</span>
 
-<span class="hljs-string">resolved.ch</span> <span class="hljs-bullet">-</span> <span class="hljs-string">the</span> <span class="hljs-string">domain</span> <span class="hljs-string">...</span>
+<span class="hljs-string">...</span>
 
 <span class="hljs-comment"># TAGS</span>
 
 <span class="hljs-string">&lt;!--##tag_list##--&gt;</span>
-
-<span class="hljs-string">...</span>
 </code></pre>
-<h1 id="todos">TODOS</h1>
+<h2 id="todos">TODOS</h2>
 <ul>
 <li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> handle 404</li>
 <li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> css/html: check mobile-friendlyness</li>
@@ -68,12 +69,16 @@ looks as follows.</p>
 <li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> fonts: generate fonts with all required glyphs</li>
 <li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> feed: decide if I want rss2.0 and/or json feeds</li>
 </ul>
-<h1 id="seealso">SEE ALSO</h1>
+<h2 id="seealso">SEE ALSO</h2>
 <p><a href="https://github.com/pascal-huber/resolved_static">github.com/pascal-huber/resolved_static</a></p>
+<h2 id="tags">TAGS</h2>
+<p>
+<a href="/_tags/dev">#dev</a>
+</p>
   </div>
   <div class="footer">
     <div>
-      28.1.2023
+      29.1.2023
     </div>
     <div>
       Pascal Huber
