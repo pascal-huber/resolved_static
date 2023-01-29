@@ -1,5 +1,4 @@
 ---
-uuid: '335b7fad-d5c2-4668-bd53-55ab5f4fa232'
 title: 'Markdown Sample'
 nofeed: true
 created: '2023-01-29T15:00:00+01:00'

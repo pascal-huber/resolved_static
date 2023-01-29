@@ -1,8 +1,8 @@
 ---
 title: 'resolved.ch'
-uuid: '8f0d2036-5eaf-46cc-9732-b3d84cc3311d'
-created: '2023-01-24T13:04:00+01:00'
-updated: '2023-01-28T15:24:35+01:00'
+description: 'A simple yet powerful static site generator'
+created: '2023-01-28T12:00:00+01:00'
+updated: '2023-01-28T12:00:00+01:00'
 tags: ['dev']
 ---
 # NAME
@@ -28,14 +28,14 @@ Creating a new and less minimalistic webpage has been on my mind for a long time
 # EXAMPLE
 
 The markdown file of this page (`./content/projects/resolved.md`) looks as
-follows. The `uuid` is genereted with `uuidgen` from `util-linux` [[1]].
+follows. 
 
 ```yaml
 ---
 title: 'resolved.ch'
-uuid: '8f0d2036-5eaf-46cc-9732-b3d84cc3311d'
-created: '2023-01-24T13:04:00+01:00'
-updated: '2023-01-28T15:24:35+01:00'
+description: 'A simple yet powerful static site generator'
+created: '2023-01-28T12:00:00+01:00'
+updated: '2023-01-28T12:00:00+01:00'
 tags: ['dev']
 ---
 # NAME

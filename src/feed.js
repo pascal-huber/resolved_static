@@ -16,7 +16,7 @@ export class FeedCreator {
     addPostToFeed(page) {
         this.items.push({
             title: page.meta.title,
-            id: page.meta.uuid,
+            id: page.meta.url,
             link: page.meta.url,
             date: page.meta.updated, // NOTE: <updated> in atom
             description: page.meta.description, // NOTE: summary in atom

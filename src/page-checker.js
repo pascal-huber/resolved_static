@@ -23,20 +23,8 @@ export class PageChecker {
         }
     }
 
-    #checkUUID(page) {
-        if (!page.meta.uuid) {
-            throw Error("Page has no uuid");
-        }
-        if (this.uuids.has(page.meta.uuid)) {
-            throw Error("UUID is not unique");
-        } else {
-            this.uuids.add(page.meta.uuid);
-        }
-    }
-
     check(page) {
         try {
-            this.#checkUUID(page);
             this.#checkTimestamp(this.uniqueTimestampsCreated, page.meta.created);
             this.#checkTimestamp(this.uniqueTimestampsUpdated, page.meta.updated);
             this.#checkIsOlder(page.meta.created, page.meta.updated);

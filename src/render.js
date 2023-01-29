@@ -60,7 +60,7 @@ for (var i = 0; i < files.length; i++) {
         createdStr: new Date(meta.created).toLocaleDateString(globalMeta.locale),
         updated: new Date(meta.updated),
         updatedStr: new Date(meta.updated).toLocaleDateString(globalMeta.locale),
-        url: globalMeta.url + "/" + paths.htmlFileRel,
+        url: globalMeta.url + paths.htmlFileRel,
         content: content,
         parentDirectories: parents,
     }
