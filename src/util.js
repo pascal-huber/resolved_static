@@ -6,7 +6,9 @@ import { readdir } from 'fs/promises';
 import { resolve, join, dirname, relative } from 'path';
 
 const markdownConverter = new showdown.Converter({
-    // backslashEscapesHTMLTags: true,
+    strikethrough: true,
+    tables: true,
+    tasklists: true,
     extensions: [showdownHighlight({
         pre: true
         , auto_detection: true
@@ -14,8 +16,7 @@ const markdownConverter = new showdown.Converter({
 });
 
 function filename(path) {
-    // TODO: refactor this
-    return path.substring(path.lastIndexOf('/'), path.length);
+    return path.replace(/^.*[\\\/]/, '');
 }
 
 export async function md2html(mdFileAbs) {
@@ -37,7 +38,6 @@ export async function getFiles(dir) {
 }
 
 export function getDirectoriesToCreate(htmlDirRel) {
-    // TODO: refactor this
     let folders = htmlDirRel.split('/').filter((x) => x)
     let dirs = new Map();
     let prevPath = "";
@@ -64,29 +64,19 @@ export function subfoldersOf(dir) {
         .map((item) => { return { path: join(dir, item.name), name: item.name } });
 }
 
-// TODO: is there a nicer way for this
 export function getAllPaths(contentPath, distPath, mdFileAbs) {
-    const mdFileRel = relative(contentPath, mdFileAbs);
-    const mdFileName = filename(mdFileAbs);
-    const htmlFileName = mdFileName.replace('.md', '.html');
-    const mdDirAbs = dirname(mdFileAbs);
-    const mdDirRel = relative(contentPath, mdDirAbs);
-    const htmlDirRel = mdDirRel;
-    const htmlDirAbs = join(distPath, htmlDirRel);
-    const htmlFileAbs = join(htmlDirAbs, htmlFileName);
-    const htmlFileRel = join(htmlDirRel, htmlFileName);
-    return {
-        mdFileAbs: mdFileAbs,
-        mdFileRel: mdFileRel,
-        mdFileName: mdFileName,
-        htmlFileName: htmlFileName,
-        mdDirAbs: mdDirAbs,
-        mdDirRel: mdDirRel,
-        htmlDirRel: htmlDirRel,
-        htmlDirAbs: htmlDirAbs,
-        htmlFileAbs: htmlFileAbs,
-        htmlFileRel: htmlFileRel,
-    }
+    let paths = {};
+    paths['mdFileAbs'] = mdFileAbs;
+    paths['mdFileRel'] = relative(contentPath, mdFileAbs);
+    paths['mdFileName'] = filename(mdFileAbs);
+    paths['htmlFileName'] = paths['mdFileName'].replace('.md', '.html');
+    paths['mdDirAbs'] = dirname(mdFileAbs);
+    paths['mdDirRel'] = relative(contentPath, paths['mdDirAbs']);
+    paths['htmlDirRel'] = paths['mdDirRel'];
+    paths['htmlDirAbs'] = join(distPath, paths['htmlDirRel']);
+    paths['htmlFileAbs'] = join(paths['htmlDirAbs'], paths['htmlFileName']);
+    paths['htmlFileRel'] = join(paths['htmlDirRel'], paths['htmlFileName']);
+    return paths;
 }
 
 export function addToMapCollection(map, value, keys) {

@@ -1,0 +1,133 @@
+// TODO: configure load_path
+@import "../../node_modules/highlight.js/scss/base16/gruvbox-dark-medium.scss";
+@import "colors.scss";
+@import "fonts";
+
+/* SITE LAYOUT */
+
+p {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    margin-bottom: 0.2rem;
+}
+
+h1 {
+    font-weight: bold;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.content>*:not(h1, .header, blockquote) {
+    margin-left: 1rem;
+}
+
+.content {
+    blockquote {
+        margin-left: 2rem;
+        padding-left: 4px;
+        border-left: 4px solid #888;
+    }
+
+    blockquote blockquote {
+        margin-left: 1rem;
+    }
+
+    .task-list-item {
+        margin-left: 1rem;
+    }
+}
+
+body,
+html {
+
+    @media only screen and (min-width: 600px) {
+        padding: 1rem;
+    }
+
+    margin: 0;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.site {
+    margin: 0rem auto;
+    min-height: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+}
+
+.content {
+    margin: 0.5rem;
+    flex: 1;
+}
+
+.footer {
+    margin: 0.5rem;
+}
+
+/* HEADER and FOOTER */
+
+.header>div {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    height: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+
+// .header>div>div {
+//     height: 2rem;
+// }
+
+.header,
+.footer {
+    padding: 0 0;
+}
+
+.footer {
+    display: flex;
+}
+
+.footer>div {
+    flex: 1;
+    display: flex;
+}
+
+.footer>div:nth-child(1) {
+    justify-content: flex-start;
+}
+
+.footer>div:nth-child(2) {
+    justify-content: flex-end;
+}
+
+.footer {
+    padding-top: 1rem;
+    padding-bottom: 0rem;
+}
+
+/* MISC */
+
+img {
+    max-width: 100%;
+}
+
+/* LISTS */
+
+.content>ul {
+    padding-left: 1rem;
+    list-style-type: "- ";
+}

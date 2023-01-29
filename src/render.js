@@ -1,13 +1,13 @@
-// gray-matter if needed
 import Mustache from 'mustache';
-import { readFileSync, mkdirSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, mkdirSync, writeFileSync, existsSync, fstat } from 'fs';
 import { join, dirname } from 'path';
-
+import sass from 'node-sass'
 import { FeedCreator } from './feed.js'
 import { SitemapCreator } from './sitemap.js'
-import { 
-    md2html, 
-    getFiles, 
+import { PageChecker } from './page-checker.js';
+import {
+    md2html,
+    getFiles,
     getDirectoriesToCreate,
     getAllPaths,
     addToMapCollection,
@@ -16,27 +16,35 @@ import {
 
 const distPath = join(process.cwd(), "dist");
 const contentPath = join(process.cwd(), "/content");
-const index_template = readFileSync("./.mustache/index.mustache", { encoding: 'utf8', flag: 'r' });
-const tag_index_template = readFileSync("./.mustache/tag_index.mustache", { encoding: 'utf8', flag: 'r' });
-const tag_site_template = readFileSync("./.mustache/tag_site.mustache", { encoding: 'utf8', flag: 'r' });
-const tag_list_template = readFileSync("./.mustache/tag_list.mustache", { encoding: 'utf8', flag: 'r' });
-const page_template = readFileSync("./.mustache/site.mustache", { encoding: 'utf8', flag: 'r' });
+const index_template = readFileSync("./src/templates/index.mustache", { encoding: 'utf8', flag: 'r' });
+const tag_index_template = readFileSync("./src/templates/tag_index.mustache", { encoding: 'utf8', flag: 'r' });
+const tag_site_template = readFileSync("./src/templates/tag_site.mustache", { encoding: 'utf8', flag: 'r' });
+const tag_list_template = readFileSync("./src/templates/tag_list.mustache", { encoding: 'utf8', flag: 'r' });
+const page_template = readFileSync("./src/templates/site.mustache", { encoding: 'utf8', flag: 'r' });
 const domain = "resolved.ch"
 const globalMeta = {
     author: "Pascal Huber",
     authorEmail: "pascal.huber@resolved.ch",
     pageTitle: domain,
-    url: "https://" + domain,
+    url: "https://" + domain + "/",
+    locale: 'de-CH',
     pageDescription: "This is my personal feed!",
     generationDate: new Date(Date.now()).toLocaleDateString('de-CH'),
+    lastUpdated: new Date(0),
 };
 
 const feedCreator = new FeedCreator(globalMeta);
 const sitemapCreator = new SitemapCreator(globalMeta.url);
+const pageChecker = new PageChecker();
 
 // Read markdown files and store info
 var files = await getFiles(contentPath);
 var allDirectories = new Set();
+allDirectories.add(JSON.stringify({
+    full: "",
+    name: "",
+    parents: [],
+}));
 var pagesOfDir = new Map();
 var pagesOfTag = new Map();
 for (var i = 0; i < files.length; i++) {
@@ -46,21 +54,32 @@ for (var i = 0; i < files.length; i++) {
     directories.forEach((x) => allDirectories.add(JSON.stringify(x)));
     let { meta, content } = await md2html(paths.mdFileAbs);
     meta = {
-        ...meta,
-        ...globalMeta,
-        created: new Date(meta.created).toLocaleDateString('de-CH'),
+        ...globalMeta, // NOTE: may be overwritten
+        ...meta, // NOTE: is  overwritten
+        created: new Date(meta.created),
+        createdStr: new Date(meta.created).toLocaleDateString(globalMeta.locale),
+        updated: new Date(meta.updated),
+        updatedStr: new Date(meta.updated).toLocaleDateString(globalMeta.locale),
+        url: globalMeta.url + "/" + paths.htmlFileRel,
         content: content,
         parentDirectories: parents,
+    }
+    if(meta.updated > globalMeta.lastUpdated){
+        globalMeta.lastUpdated = meta.updated;
     }
     let page = {
         paths: paths,
         meta: meta,
     };
+    pageChecker.check(page);
     sitemapCreator.addEntry(
         paths.htmlFileRel,
         'monthly',
         meta.siteMapPriority || 0.5,
     )
+    if (!meta.nofeed) {
+        feedCreator.addPostToFeed(page);
+    }
     addToMapCollection(pagesOfTag, page, meta.tags);
     addToMapCollection(pagesOfDir, page, [paths.htmlDirAbs]);
 }
@@ -96,15 +115,13 @@ for (const pages of pages_it) {
         })
         rendered = rendered.replace("<!--##tag_list_all##-->", tag_list_all);
         rendered = rendered.replace("<!--##tag_list##-->", tag_list);
-        if (!pages[1][i].meta.nofeed) {
-            feedCreator.addPostToFeed(pages[1][i]);
-        }
         await writeFileSync(pages[1][i].paths.htmlFileAbs, rendered);
     }
 }
 
 // Create index files
 const dir_it = allDirectories[Symbol.iterator]();
+console.log(allDirectories);
 for (const dirJSON of dir_it) {
     const dir = JSON.parse(dirJSON);
     const indexFileRel = join(dir.full, "/index.html");
@@ -169,4 +186,19 @@ for (var tag of tagsCollection) {
 await sitemapCreator.writeSitemap(join(distPath, "sitemap.xml"))
 
 // generate feed
-feedCreator.writeFeed(distPath + "/atom.xml");
+feedCreator.writeFeed(globalMeta, join(distPath, "atom.xml"));
+
+// // create stylesheet
+let cssResult = sass.render({
+    file: "./src/css/style.scss",
+    includePaths: ["node_modules"],
+}, (err, result) => {
+    if (err) {
+        console.error(err);
+        throw Error();
+    }
+    const cssDirAbs = join(distPath, "public");
+    const cssFileAbs = join(cssDirAbs, "style.css");
+    mkdirSync(cssDirAbs);
+    writeFileSync(cssFileAbs, result.css);
+});
