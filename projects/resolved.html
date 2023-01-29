@@ -35,19 +35,16 @@
 <a href="/_tags/dev">#dev</a>
 </p>
 <h1 id="description">DESCRIPTION</h1>
-<ul>
-<li>Creates pages for all markdown files in the <code>./content/</code> folder</li>
-<li>Creates index files for all directories </li>
-<li>Lets you add tags to pages and creates tag lists and index pages for them</li>
-<li>Generates sitemap.xml</li>
-<li>Generates atom.xml</li>
-</ul>
-<h1 id="example">EXAMPLE</h1>
-<p>The markdown file of this page (<code>./content/projects/resolved.md</code>) looks as
-follows. </p>
+<p>Built with Node.js[<a href="https://nodejs.org/en/">1</a>] it creates pages for all markdown files in the
+<code>./content/</code> folder before it generates index pages for all directories. It lets
+you add tags to pages and automatically creates tag lists and index pages for
+them. Furthermore, it creates sitemap.xml and atom.xml.</p>
+<p>The markdown files contain a yaml header with the information necessary for
+rendering. For example, the one for this page (<code>./content/projects/resolved.md</code>)
+looks as follows.</p>
 <pre class="yaml language-yaml"><code class="hljs yaml language-yaml"><span class="hljs-meta">---</span>
-<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;SSG of resolved.ch&#x27;</span>
-<span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;A simple yet powerful static site generator.&#x27;</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;Yet another SSG&#x27;</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;My simple yet powerful static site generator using markdown.&#x27;</span>
 <span class="hljs-attr">created:</span> <span class="hljs-string">&#x27;2023-01-28T12:00:00+01:00&#x27;</span>
 <span class="hljs-attr">updated:</span> <span class="hljs-string">&#x27;2023-01-28T12:00:00+01:00&#x27;</span>
 <span class="hljs-attr">tags:</span> [<span class="hljs-string">&#x27;dev&#x27;</span>]
@@ -55,6 +52,12 @@ follows. </p>
 <span class="hljs-comment"># NAME</span>
 
 <span class="hljs-string">resolved.ch</span> <span class="hljs-bullet">-</span> <span class="hljs-string">the</span> <span class="hljs-string">domain</span> <span class="hljs-string">...</span>
+
+<span class="hljs-comment"># TAGS</span>
+
+<span class="hljs-string">&lt;!--##tag_list##--&gt;</span>
+
+<span class="hljs-string">...</span>
 </code></pre>
 <h1 id="todos">TODOS</h1>
 <ul>
