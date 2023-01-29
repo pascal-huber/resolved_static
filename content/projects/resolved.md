@@ -1,13 +1,13 @@
 ---
-title: 'resolved.ch'
-description: 'A simple yet powerful static site generator'
+title: 'Yet another SSG'
+description: 'My simple yet powerful static site generator using markdown.'
 created: '2023-01-28T12:00:00+01:00'
 updated: '2023-01-28T12:00:00+01:00'
 tags: ['dev']
 ---
 # NAME
 
-resolved.ch - the domain and its website you are looking at right now.
+resolved.ch - built with a simple yet powerful static site generator.
 
 # TAGS
 
@@ -15,15 +15,11 @@ resolved.ch - the domain and its website you are looking at right now.
 
 # DESCRIPTION
 
-Creating a new and less minimalistic webpage has been on my mind for a long time. This is my attempt of writing a small yet powerful static site generator.
-
-# FEATURES
-
- - Generate a static page for all markdown files in `./content/`
- - Generate `index.html` files for directories which don't have a `index.md`
- - Add tags to pages and provide overview
- - Generate sitemap.xml
- - Generate atom.xml
+ - Creates pages for all markdown files in the `./content/` folder
+ - Creates index files for all directories 
+ - Lets you add tags to pages and creates tag lists and index pages for them
+ - Generates sitemap.xml
+ - Generates atom.xml
 
 # EXAMPLE
 
@@ -32,8 +28,8 @@ follows.
 
 ```yaml
 ---
-title: 'resolved.ch'
-description: 'A simple yet powerful static site generator'
+title: 'SSG of resolved.ch'
+description: 'A simple yet powerful static site generator.'
 created: '2023-01-28T12:00:00+01:00'
 updated: '2023-01-28T12:00:00+01:00'
 tags: ['dev']

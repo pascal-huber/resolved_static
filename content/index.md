@@ -3,8 +3,8 @@ created: '2023-01-28T13:30:35+01:00'
 updated: '2023-01-28T13:30:35+01:00'
 home: true
 siteMapPriority: 1.0
-title: 'Home'
-description: "Pascal Huber's Homepage"
+title: 'Pascal Huber'
+description: "I like computer science, open source and mandarins."
 ---
 
 # NAME
@@ -17,7 +17,7 @@ Computer scientist based in Zürich.
 
 # PROJECTS
 
- - [resolved.ch](./projects/resolved.html)
+ - [Yet another Static Site Generator](./projects/resolved.html)
 
 There is more to come once the site is ready
 

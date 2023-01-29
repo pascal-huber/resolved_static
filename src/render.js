@@ -16,6 +16,8 @@ import {
 
 const distPath = join(process.cwd(), "dist");
 const contentPath = join(process.cwd(), "/content");
+
+const base_template = readFileSync("./src/templates/base.mustache", { encoding: 'utf8', flag: 'r' });
 const index_template = readFileSync("./src/templates/index.mustache", { encoding: 'utf8', flag: 'r' });
 const tag_index_template = readFileSync("./src/templates/tag_index.mustache", { encoding: 'utf8', flag: 'r' });
 const tag_site_template = readFileSync("./src/templates/tag_site.mustache", { encoding: 'utf8', flag: 'r' });
@@ -101,7 +103,7 @@ const pages_it = pagesOfDir[Symbol.iterator]();
 for (const pages of pages_it) {
     for (var i = 0; i < pages[1].length; i++) {
         await mkdirSync(pages[1][i].paths.htmlDirAbs, { recursive: true });
-        let rendered = await Mustache.render(page_template, pages[1][i].meta);
+        let body = await Mustache.render(page_template, pages[1][i].meta);
         let tag_list_all = await Mustache.render(tag_list_template, {
             tags: tagsCollection,
         })
@@ -112,10 +114,14 @@ for (const pages of pages_it) {
         }
         let tag_list = await Mustache.render(tag_list_template, {
             tags: tags,
+        });
+        body = body.replace("<!--##tag_list_all##-->", tag_list_all);
+        body = body.replace("<!--##tag_list##-->", tag_list);
+        let html = await Mustache.render(base_template, {
+            ...pages[1][i].meta,
+            body: body,
         })
-        rendered = rendered.replace("<!--##tag_list_all##-->", tag_list_all);
-        rendered = rendered.replace("<!--##tag_list##-->", tag_list);
-        await writeFileSync(pages[1][i].paths.htmlFileAbs, rendered);
+        await writeFileSync(pages[1][i].paths.htmlFileAbs, html);
     }
 }
 
@@ -143,8 +149,12 @@ for (const dirJSON of dir_it) {
             indexFileRel,
             'daily',
         )
-        const htmlSite = await Mustache.render(index_template, data);
-        await writeFileSync(indexFileAbs, htmlSite);
+        const body = await Mustache.render(index_template, data);
+        const html = await Mustache.render(base_template, {
+            ...data,
+            body: body,
+        });
+        await writeFileSync(indexFileAbs, html);
     }
 }
 
@@ -159,7 +169,11 @@ const tagIndexData = {
 const tagIndexDirAbs = join(distPath, "_tags");
 const tagIndexFileAbs = join(tagIndexDirAbs, "index.html");
 await mkdirSync(tagIndexDirAbs);
-const tagIndexContent = await Mustache.render(tag_index_template, tagIndexData);
+const tagIndexBody = await Mustache.render(tag_index_template, tagIndexData);
+const tagIndexContent = await Mustache.render(base_template, {
+    ...tagIndexData,
+    body: tagIndexBody,
+});
 await writeFileSync(tagIndexFileAbs, tagIndexContent);
 
 
@@ -177,8 +191,12 @@ for (var tag of tagsCollection) {
         pages: tag.pages,
         ...globalMeta,
     };
-    let htmlSite = await Mustache.render(tag_site_template, data);
-    await writeFileSync(fileAbs, htmlSite);
+    const body = await Mustache.render(tag_site_template, data);
+    const html = await Mustache.render(base_template, {
+        ...data,
+        body: body,
+    });
+    await writeFileSync(fileAbs, html);
 }
 
 // generate sitemap
