@@ -54,7 +54,8 @@ resolved.ch - the domain ...
  - [ ] fonts: generate fonts with all required glyphs
  - [ ] feed: decide if I want rss2.0 and/or json feeds
 
+# SEE ALSO
 
-
+[github.com/pascal-huber/resolved_static](https://github.com/pascal-huber/resolved_static)
 
 [1]: https://mirrors.edge.kernel.org/pub/linux/utils/util-linux/ 
