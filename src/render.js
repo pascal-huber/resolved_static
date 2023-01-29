@@ -64,7 +64,7 @@ for (var i = 0; i < files.length; i++) {
         content: content,
         parentDirectories: parents,
     }
-    if(meta.updated > globalMeta.lastUpdated){
+    if (meta.updated > globalMeta.lastUpdated) {
         globalMeta.lastUpdated = meta.updated;
     }
     let page = {
@@ -72,13 +72,13 @@ for (var i = 0; i < files.length; i++) {
         meta: meta,
     };
     pageChecker.check(page);
-    sitemapCreator.addEntry(
-        paths.htmlFileRel,
-        'monthly',
-        meta.siteMapPriority || 0.5,
-    )
-    if (!meta.nofeed) {
+    if (!meta.noindex) {
         feedCreator.addPostToFeed(page);
+        sitemapCreator.addEntry(
+            paths.htmlFileRel,
+            'monthly',
+            meta.siteMapPriority || 0.5,
+        )
     }
     addToMapCollection(pagesOfTag, page, meta.tags);
     addToMapCollection(pagesOfDir, page, [paths.htmlDirAbs]);
