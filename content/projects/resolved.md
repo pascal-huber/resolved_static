@@ -46,14 +46,11 @@ resolved.ch - the domain ...
 
 # TODOS
 
- - [ ] improve favicon/icon, see https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs
  - [ ] handle 404
  - [ ] css/html: check mobile-friendlyness
- - [ ] css: fix indenation for lists
  - [ ] css: decide if I need a light theme
  - [ ] markdown: target=_blank for external links?
  - [ ] markdown: check out other markdown variants
- - [ ] check SEO options
  - [ ] fonts: generate fonts with all required glyphs
  - [ ] feed: decide if I want rss2.0 and/or json feeds
 
