@@ -32,9 +32,10 @@
         <h1>Markdown Sample</h1>
       </div>
     </div>
-    <p><a href="https://gist.github.com/allysonsilva/85fff14a22bbdf55485be947566cc09e">source</a></p>
+    <p>this is a modified version of
+<a href="https://gist.github.com/allysonsilva/85fff14a22bbdf55485be947566cc09e">this</a>.</p>
 <h2 id="headers">Headers</h2>
-<pre><code class="hljs"># h1 Heading <span class="hljs-number">8</span>-)
+<pre><code class="hljs"># h1 Heading
 ## h2 Heading
 ### h3 Heading
 #### h4 Heading
@@ -51,7 +52,7 @@ Alt-H2
 </code></pre>
 <pre><code class="hljs">
 </code></pre>
-<h2 id="h1heading8">h1 Heading 8-)</h2>
+<h2 id="h1heading">h1 Heading</h2>
 <h3 id="h2heading">h2 Heading</h3>
 <h4 id="h3heading">h3 Heading</h4>
 <h5 id="h4heading">h4 Heading</h5>
@@ -190,70 +191,68 @@ Strikethrough uses two tildes. ~~Scratch this.~~
 <p>Let's rename *our-new-project* to *our-old-project*.</p>
 <hr />
 <h2 id="links">Links</h2>
-<pre><code class="hljs"><span class="hljs-string">[I&#x27;m an inline-style link]</span>(https:<span class="hljs-comment">//www.google.com)</span>
+<pre><code class="hljs"><span class="hljs-string">[I&#x27;m an inline-style link]</span>(https:<span class="hljs-comment">//www.kernel.org)</span>
 <span class="hljs-string">
-[I&#x27;m an inline-style link with title]</span>(https:<span class="hljs-comment">//www.google.com &quot;Google&#x27;s Homepage&quot;)</span>
+[I&#x27;m an inline-style link with title]</span>(https:<span class="hljs-comment">//www.kernel.org &quot;Linux&quot;)</span>
 <span class="hljs-string">
 [I&#x27;m a reference-style link]</span>[Arbitrary <span class="hljs-keyword">case</span>-insensitive <span class="hljs-built_in">ref</span>erence text]
 <span class="hljs-string">
-[I&#x27;m a relative reference to a repository file]</span>(../blob/master/LICENSE)
+[I&#x27;m a relative reference to a file]</span>(../<span class="hljs-keyword">public</span>/man.jpg)
 <span class="hljs-string">
 [You can use numbers for reference-style link definitions]</span>[<span class="hljs-number">1</span>]
 
 Or leave it empty <span class="hljs-keyword">and</span> use the [link text itself].
 
 URLs <span class="hljs-keyword">and</span> URLs <span class="hljs-keyword">in</span> angle brackets will <span class="hljs-built_in">auto</span>matically <span class="hljs-keyword">get</span> turned <span class="hljs-built_in">int</span>o links.
-http:<span class="hljs-comment">//www.example.com or &lt;http://www.example.com&gt; and sometimes</span>
+http:<span class="hljs-comment">//www.kernel.org or &lt;http://kernel.org&gt; and sometimes</span>
 example.com (but <span class="hljs-keyword">not</span> on Github, <span class="hljs-keyword">for</span> example).
 
 Some text to show that the <span class="hljs-built_in">ref</span>erence links can follow later.
 <span class="hljs-string">
-[arbitrary case-insensitive reference text]</span>: https:<span class="hljs-comment">//www.mozilla.org</span>
-<span class="hljs-string">[1]</span>: http:<span class="hljs-comment">//slashdot.org</span>
-<span class="hljs-string">[link text itself]</span>: http:<span class="hljs-comment">//www.reddit.com</span>
+[arbitrary case-insensitive reference text]</span>: https:<span class="hljs-comment">//www.kernel.org</span>
+<span class="hljs-string">[1]</span>: http:<span class="hljs-comment">//kernel.org</span>
+<span class="hljs-string">[link text itself]</span>: http:<span class="hljs-comment">//www.kernel.org.</span>
 </code></pre>
-<p><a href="https://www.google.com">I'm an inline-style link</a></p>
-<p><a href="https://www.google.com" title="Google's Homepage">I'm an inline-style link with title</a></p>
-<p><a href="https://www.mozilla.org">I'm a reference-style link</a></p>
-<p><a href="../blob/master/LICENSE">I'm a relative reference to a repository file</a></p>
-<p><a href="http://slashdot.org">You can use numbers for reference-style link definitions</a></p>
-<p>Or leave it empty and use the <a href="http://www.reddit.com">link text itself</a>.</p>
+<p><a href="https://www.kernel.org">I'm an inline-style link</a></p>
+<p><a href="https://www.kernel.org" title="Linux">I'm an inline-style link with title</a></p>
+<p><a href="https://www.kernel.org">I'm a reference-style link</a></p>
+<p><a href="../public/man.jpg">I'm a relative reference to a file</a></p>
+<p><a href="http://kernel.org">You can use numbers for reference-style link definitions</a></p>
+<p>Or leave it empty and use the <a href="http://www.kernel.org.">link text itself</a>.</p>
 <p>URLs and URLs in angle brackets will automatically get turned into links.
-http://www.example.com or <a href="http://www.example.com">http://www.example.com</a> and sometimes
+http://www.kernel.org or <a href="http://kernel.org">http://kernel.org</a> and sometimes
 example.com (but not on Github, for example).</p>
 <p>Some text to show that the reference links can follow later.</p>
 <hr />
 <h2 id="images">Images</h2>
-<pre><code class="hljs">Here&#x27;s our logo (hover to see the title text):
+<pre><code class="hljs">Here<span class="hljs-comment">&#x27;s our logo (hover to see the title text):</span>
 
 Inline-style:
-![<span class="hljs-string">alt text</span>](<span class="hljs-link">https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png &quot;Logo Title Text 1&quot;</span>)
+![alt <span class="hljs-keyword">text</span>](/<span class="hljs-keyword">public</span>/man.jpg <span class="hljs-string">&quot;A man 1&quot;</span>)
 
 Reference-style:
-![<span class="hljs-string">alt text</span>][<span class="hljs-symbol">logo</span>]
+![alt <span class="hljs-keyword">text</span>][logo]
 
-[<span class="hljs-symbol">logo</span>]: <span class="hljs-link">https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png &quot;Logo Title Text 2&quot;</span>
+[logo]: /<span class="hljs-keyword">public</span>/man.jpg <span class="hljs-string">&quot;A man 2&quot;</span>
 
-![<span class="hljs-string">Minion</span>](<span class="hljs-link">https://octodex.github.com/images/minion.png</span>)
-![<span class="hljs-string">Stormtroopocat</span>](<span class="hljs-link">https://octodex.github.com/images/stormtroopocat.jpg &quot;The Stormtroopocat&quot;</span>)
+![Minion](/<span class="hljs-keyword">public</span>/man.jpg <span class="hljs-string">&quot;A man 3&quot;</span>)
 
-Like links, Images also have a footnote style syntax
+<span class="hljs-built_in">Like</span> links, Images also have a footnote style syntax
 
-![<span class="hljs-string">Alt text</span>][<span class="hljs-symbol">id</span>]
+![Alt <span class="hljs-keyword">text</span>][id]
 
-With a reference later in the document defining the URL location:
+<span class="hljs-keyword">With</span> a reference later <span class="hljs-keyword">in</span> the document defining the URL location:
 
-[<span class="hljs-symbol">id</span>]: <span class="hljs-link">https://octodex.github.com/images/dojocat.jpg  &quot;The Dojocat&quot;</span>
+[id]: /<span class="hljs-keyword">public</span>/man.jpg  <span class="hljs-string">&quot;A man 4&quot;</span>
 </code></pre>
 <p>Here's our logo (hover to see the title text):</p>
 <p>Inline-style:
-<img src="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" alt="alt text" title="Logo Title Text 1" /></p>
+<img src="/public/man.jpg" alt="alt text" title="A man 1" /></p>
 <p>Reference-style:
-<img src="https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png" alt="alt text" title="Logo Title Text 2" /></p>
-<p><img src="https://octodex.github.com/images/minion.png" alt="Minion" />
-<img src="https://octodex.github.com/images/stormtroopocat.jpg" alt="Stormtroopocat" title="The Stormtroopocat" /></p>
+<img src="/public/man.jpg" alt="alt text" title="A man 2" /></p>
+<p><img src="/public/man.jpg" alt="Minion" title="A man 3" /></p>
 <p>Like links, Images also have a footnote style syntax</p>
-<p><img src="https://octodex.github.com/images/dojocat.jpg" alt="Alt text" title="The Dojocat" /></p>
+<p><img src="/public/man.jpg" alt="Alt text" title="A man 4" /></p>
 <p>With a reference later in the document defining the URL location:</p>
 <hr />
 <h2 id="footnoteshttpsgithubcommarkdownitmarkdownitfootnote"><a href="https://github.com/markdown-it/markdown-it-footnote">Footnotes</a></h2>
@@ -643,17 +642,6 @@ Quote break.
 <hr />
 <p>Underscores</p>
 <hr />
-<h2 id="youtubevideos">YouTube Videos</h2>
-<pre><code class="hljs">&lt;a href<span class="hljs-operator">=</span><span class="hljs-string">&quot;http://www.youtube.com/watch?feature=player_embedded&amp;v=YOUTUBE_VIDEO_ID_HERE&quot;</span> target<span class="hljs-operator">=</span><span class="hljs-string">&quot;_blank&quot;</span>&gt;
-&lt;img src<span class="hljs-operator">=</span><span class="hljs-string">&quot;http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg&quot;</span> alt<span class="hljs-operator">=</span><span class="hljs-string">&quot;IMAGE ALT TEXT HERE&quot;</span> width<span class="hljs-operator">=</span><span class="hljs-string">&quot;240&quot;</span> height<span class="hljs-operator">=</span><span class="hljs-string">&quot;180&quot;</span> border<span class="hljs-operator">=</span><span class="hljs-string">&quot;10&quot;</span>&gt;
-&lt;/a&gt;
-</code></pre>
-<p><a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE" target="_blank">
-<img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10">
-</a></p>
-<pre><code class="hljs">[![IMAGE ALT TEXT HERE](http:<span class="hljs-regexp">//img</span>.youtube.com<span class="hljs-regexp">/vi/</span>YOUTUBE_VIDEO_ID_HERE<span class="hljs-regexp">/0.jpg)](http:/</span><span class="hljs-regexp">/www.youtube.com/</span>watch?v=YOUTUBE_VIDEO_ID_HERE)
-</code></pre>
-<p><a href="https://www.youtube.com/watch?v=ciawICBvQoE"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/YouTube_logo_2015.svg/1200px-YouTube_logo_2015.svg.png" alt="IMAGE ALT TEXT HERE" /></a></p>
   </div>
   <div class="footer">
     <div>
