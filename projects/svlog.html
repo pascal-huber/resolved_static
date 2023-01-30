@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="alternate" type="application/atom+xml" title="resolved.ch Feed" href="/atom.xml">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel='mask-icon' href='/mask-icon.svg' color='#88AA00'>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-regular.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-bold.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-italic.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-bolditalic.subset.woff2">
+  <link rel="stylesheet" href="/public/style.css">
+  <title>svlog - Query Socklog Log Files - resolved.ch</title>
+  <meta name="description" content="A tool to query, filter and watch socklog log files on Void Linux">
+  <meta name="author" content="Pascal Huber">
+  <meta name="keywords" content="syslog,socklog,Linux,Void Linux">
+</head>
+
+<body>
+  <div class="site">
+  <div class="content">
+    <div class="header">
+      <div>
+        <a href="/">home</a>
+        &nbsp;❱&nbsp;<a href="/projects">projects</a>
+      </div>
+      <div>
+        <h1>svlog - Query Socklog Log Files</h1>
+      </div>
+    </div>
+    <p><code>svlog</code> can query, filter and follow socklog log files on Void Linux.</p>
+<h2 id="description">DESCRIPTION</h2>
+<p>Efficiently displaying and filtering log files can help identify problems
+quickly. Most logging daemons provide mechanisms to dispatch and store the logs
+in a user-defined way. However, attempting to create dedicated files for all
+kinds of queries seems like the wrong approach, especially as we do not know
+what information we need to look up in future. Systemd provides journalctl to
+tackle this issue; on non-systemd systems, we are left with <code>grep</code>, <code>sed</code>,
+<code>awk</code>, <code>sort</code> etc., which can be cumbersome and slow, especially when writing
+more complex queries. I wrote <code>svlog</code>, a tool to conveniently query and follow
+changes of socklog log files on Void providing various display options and
+allowing filtering by service, priority, time and content. </p>
+<h2 id="examples">EXAMPLES</h2>
+<p>Show all logs which match the regular expression <code>[A-Za-z]lue.ooth</code> (case
+insensitive) since the last boot and display timestamps in UTC.</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -m <span class="hljs-string">&quot;[A-Za-z]lue.ooth&quot;</span> -i -b --utc
+</code></pre>
+<p>Show all kernel logs from the previous boot with priority error or lower (<code>-o</code>
+is currently only support on systems using the <em>GNU C Library</em> [<a href="https://www.gnu.org/software/libc/">1</a>] as <em>musl
+libc</em> [<a href="https://musl.libc.org/">2</a>] does not support <em>wtmp</em>).</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -o 1 -p ..err kernel
+</code></pre>
+<p>Show all kernel and daemon logs as of a certain timestamp until yesterday.</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -s <span class="hljs-string">&quot;2022-08-14 13:45&quot;</span> -u yesterday kernel daemon
+</code></pre>
+<p>Show the last 10 lines and all upcoming kernel logs (like <code>svlogtail</code>).</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -f kernel
+</code></pre>
+<h2 id="sourcecode">SOURCE CODE</h2>
+<p><a href="https://github.com/pascal-huber/svlog">github.com/pascal-huber/svlog</a></p>
+<h2 id="tags">TAGS</h2>
+<p>
+<a href="/_tags/dev">#dev</a>,
+<a href="/_tags/linux">#linux</a>
+</p>
+  </div>
+  <div class="footer">
+    <div>
+      30.1.2023
+    </div>
+    <div>
+      Pascal Huber
+    </div>
+  </div>
+</div>
+</body>
+</html>
