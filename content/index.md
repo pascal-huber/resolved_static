@@ -5,6 +5,7 @@ home: true
 siteMapPriority: 1.0
 title: 'Pascal Huber'
 description: "I like computer science, open source and mandarins."
+keywords: ["Computer Science", "Linux", "Open Source", "VoteLog", "svlog"]
 ---
 
 I like computer science, open source and mandarins.

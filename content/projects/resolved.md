@@ -4,6 +4,7 @@ description: 'My simple yet powerful static site generator using markdown.'
 created: '2023-01-28T12:00:00+01:00'
 updated: '2023-01-29T23:00:00+01:00'
 tags: ['dev']
+keywords: ['static site generator', 'SSG', 'resolved.ch', 'Node.js', 'markdown']
 ---
 
 Creating a homepage which contains more than just my name and e-mail address has

@@ -20,9 +20,13 @@
   {{#description}}
     <meta name="description" content="{{description}}">
   {{/description}}
+  <meta name="author" content="{{author}}">
+  {{#keywords.length}}
+  <meta name="keywords" content="{{keywords}}">
+  {{/keywords.length}}
 </head>
 
 <body>
-</body>
   {{{body}}}
+</body>
 </html>
