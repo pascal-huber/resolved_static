@@ -20,6 +20,7 @@ export class FeedCreator {
             link: page.meta.url,
             date: page.meta.updated, // NOTE: <updated> in atom
             description: page.meta.description, // NOTE: summary in atom
+            content: page.meta.content,
             author: [this.author],
         });
     }
