@@ -1,6 +1,7 @@
 ---
 title: 'Markdown Sample'
 noindex: true
+nofeed: true
 created: '2023-01-29T15:00:00+01:00'
 updated: '2023-01-29T15:00:00+01:00'
 tags: ['hidden']

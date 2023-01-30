@@ -74,8 +74,10 @@ for (var i = 0; i < files.length; i++) {
         meta: meta,
     };
     pageChecker.check(page);
-    if (!meta.noindex) {
+    if (!meta.nofeed) {
         feedCreator.addPostToFeed(page);
+    }
+    if (!meta.noindex) {
         sitemapCreator.addEntry(
             paths.htmlFileRel,
             meta.changefreq || 'monthly',

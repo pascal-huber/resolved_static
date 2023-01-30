@@ -7,6 +7,7 @@ title: 'Pascal Huber'
 description: "I like computer science, open source and mandarins."
 keywords: ["Computer Science", "Linux", "Open Source", "VoteLog", "svlog"]
 changefreq: 'daily'
+nofeed: true
 ---
 
 I like computer science, open source and mandarins.
