@@ -19,6 +19,23 @@
         <link href="https://resolved.ch/index.html"/>
         <updated>2023-01-28T12:30:35.000Z</updated>
         <summary type="html"><![CDATA[I like computer science, open source and mandarins.]]></summary>
+        <content type="html"><![CDATA[<p>I like computer science, open source and mandarins.</p>
+<h2 id="projects">PROJECTS</h2>
+<ul>
+<li><a href="./projects/svlog.html">svlog</a> to query socklog log files on Void Linux</li>
+<li>VoteLog - to keep track on my votes on referendums and initiatives</li>
+<li><a href="./projects/resolved.html">Yet another Static Site Generator </a></li>
+</ul>
+<p>There is more to come here :)</p>
+<h2 id="tagsonthissite">TAGS ON THIS SITE</h2>
+<!--##tag_list_all##-->
+<h2 id="contact">CONTACT</h2>
+<p><a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x70;&#97;&#x73;&#x63;&#97;l.&#x68;&#x75;&#x62;&#101;&#114;&#x40;&#114;&#x65;&#x73;&#111;&#108;&#118;&#x65;&#x64;&#46;ch">p&#97;&#115;&#99;&#x61;&#108;&#x2e;&#104;&#117;&#98;&#x65;&#114;&#x40;&#x72;&#101;&#115;&#111;&#x6c;v&#x65;&#x64;&#x2e;&#99;&#x68;</a></p>
+<h2 id="seealso">SEE ALSO</h2>
+<ul>
+<li><a href="https://github.com/pascal-huber">github.com/pascal-huber</a></li>
+<li><a href="https://linkedin.com/in/pascal-huber-0x0">linkedin.com/in/pascal-huber-0x0</a></li>
+</ul>]]></content>
         <author>
             <name>Pascal Huber</name>
             <email>pascal.huber@resolved.ch</email>
@@ -31,6 +48,50 @@
         <link href="https://resolved.ch/projects/resolved.html"/>
         <updated>2023-01-29T22:00:00.000Z</updated>
         <summary type="html"><![CDATA[My simple yet powerful static site generator using markdown.]]></summary>
+        <content type="html"><![CDATA[<p>Creating a homepage which contains more than just my name and e-mail address has
+been on my todo list for years. There are many neat frameworks out there to
+build static websites and I have tried out some of them but always felt either
+limited or totally knocked out by the complexity of the frameworks. I therefore
+decided to build a static site generator from scratch to read markdown files and
+create a static website from them.</p>
+<h2 id="description">DESCRIPTION</h2>
+<p>Built with Node.js[<a href="https://nodejs.org/en/">1</a>] it creates pages for all markdown files in the
+<code>./content/</code> folder before it generates index pages for all directories. It lets
+you add tags to pages and automatically creates tag lists and index pages for
+them. Furthermore, it creates sitemap.xml and atom.xml.</p>
+<p>The markdown files contain a yaml header with the information necessary for
+rendering. For example, the one for this page (<code>./content/projects/resolved.md</code>)
+looks as follows.</p>
+<pre class="yaml language-yaml"><code class="hljs yaml language-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">title:</span> <span class="hljs-string">&#x27;Yet another Static Site Generator&#x27;</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">&#x27;My simple yet powerful static site generator using markdown.&#x27;</span>
+<span class="hljs-attr">created:</span> <span class="hljs-string">&#x27;2023-01-28T12:00:00+01:00&#x27;</span>
+<span class="hljs-attr">updated:</span> <span class="hljs-string">&#x27;2023-01-28T12:00:00+01:00&#x27;</span>
+<span class="hljs-attr">tags:</span> [<span class="hljs-string">&#x27;dev&#x27;</span>]
+<span class="hljs-meta">---
+</span>
+<span class="hljs-string">Creating</span> <span class="hljs-string">a</span> <span class="hljs-string">homepage...</span>
+
+<span class="hljs-string">...</span>
+
+<span class="hljs-comment"># TAGS</span>
+
+<span class="hljs-string">&lt;!--##tag_list##--&gt;</span>
+</code></pre>
+<h2 id="todos">TODOS</h2>
+<ul>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> handle 404</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> css/html: check mobile-friendlyness</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> css: decide if I need a light theme</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> markdown: target=_blank for external links?</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> markdown: check out other markdown variants</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> fonts: generate fonts with all required glyphs</li>
+<li class="task-list-item" style="list-style-type: none;"><input type="checkbox" disabled style="margin: 0px 0.35em 0.25em -1.6em; vertical-align: middle;"> feed: decide if I want rss2.0 and/or json feeds</li>
+</ul>
+<h2 id="sourcecode">SOURCE CODE</h2>
+<p><a href="https://github.com/pascal-huber/resolved_static">github.com/pascal-huber/resolved_static</a></p>
+<h2 id="tags">TAGS</h2>
+<!--##tag_list##-->]]></content>
         <author>
             <name>Pascal Huber</name>
             <email>pascal.huber@resolved.ch</email>
@@ -43,6 +104,38 @@
         <link href="https://resolved.ch/projects/svlog.html"/>
         <updated>2023-01-30T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[A tool to query, filter and watch socklog log files on Void Linux]]></summary>
+        <content type="html"><![CDATA[<p><code>svlog</code> can query, filter and follow socklog log files on Void Linux.</p>
+<h2 id="description">DESCRIPTION</h2>
+<p>Efficiently displaying and filtering log files can help identify problems
+quickly. Most logging daemons provide mechanisms to dispatch and store the logs
+in a user-defined way. However, attempting to create dedicated files for all
+kinds of queries seems like the wrong approach, especially as we do not know
+what information we need to look up in future. Systemd provides journalctl to
+tackle this issue; on non-systemd systems, we are left with <code>grep</code>, <code>sed</code>,
+<code>awk</code>, <code>sort</code> etc., which can be cumbersome and slow, especially when writing
+more complex queries. I wrote <code>svlog</code>, a tool to conveniently query and follow
+changes of socklog log files on Void providing various display options and
+allowing filtering by service, priority, time and content. </p>
+<h2 id="examples">EXAMPLES</h2>
+<p>Show all logs which match the regular expression <code>[A-Za-z]lue.ooth</code> (case
+insensitive) since the last boot and display timestamps in UTC.</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -m <span class="hljs-string">&quot;[A-Za-z]lue.ooth&quot;</span> -i -b --utc
+</code></pre>
+<p>Show all kernel logs from the previous boot with priority error or lower (<code>-o</code>
+is currently only support on systems using the <em>GNU C Library</em> [<a href="https://www.gnu.org/software/libc/">1</a>] as <em>musl
+libc</em> [<a href="https://musl.libc.org/">2</a>] does not support <em>wtmp</em>).</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -o 1 -p ..err kernel
+</code></pre>
+<p>Show all kernel and daemon logs as of a certain timestamp until yesterday.</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -s <span class="hljs-string">&quot;2022-08-14 13:45&quot;</span> -u yesterday kernel daemon
+</code></pre>
+<p>Show the last 10 lines and all upcoming kernel logs (like <code>svlogtail</code>).</p>
+<pre class="sh language-sh"><code class="hljs sh language-sh">svlog -f kernel
+</code></pre>
+<h2 id="sourcecode">SOURCE CODE</h2>
+<p><a href="https://github.com/pascal-huber/svlog">github.com/pascal-huber/svlog</a></p>
+<h2 id="tags">TAGS</h2>
+<!--##tag_list##-->]]></content>
         <author>
             <name>Pascal Huber</name>
             <email>pascal.huber@resolved.ch</email>
