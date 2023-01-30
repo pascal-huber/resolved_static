@@ -6,12 +6,13 @@ updated: '2023-01-29T15:00:00+01:00'
 tags: ['hidden']
 ---
 
-[source](https://gist.github.com/allysonsilva/85fff14a22bbdf55485be947566cc09e)
+this is a modified version of
+[this](https://gist.github.com/allysonsilva/85fff14a22bbdf55485be947566cc09e).
 
 # Headers
 
 ```
-# h1 Heading 8-)
+# h1 Heading
 ## h2 Heading
 ### h3 Heading
 #### h4 Heading
@@ -27,7 +28,7 @@ Alt-H2
 ------
 ```	
 
-# h1 Heading 8-)
+# h1 Heading
 ## h2 Heading
 ### h3 Heading
 #### h4 Heading
@@ -199,50 +200,50 @@ Let's rename \*our-new-project\* to \*our-old-project\*.
 # Links
 
 ```
-[I'm an inline-style link](https://www.google.com)
+[I'm an inline-style link](https://www.kernel.org)
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+[I'm an inline-style link with title](https://www.kernel.org "Linux")
 
 [I'm a reference-style link][Arbitrary case-insensitive reference text]
 
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
+[I'm a relative reference to a file](../public/man.jpg)
 
 [You can use numbers for reference-style link definitions][1]
 
 Or leave it empty and use the [link text itself].
 
 URLs and URLs in angle brackets will automatically get turned into links.
-http://www.example.com or <http://www.example.com> and sometimes
+http://www.kernel.org or <http://kernel.org> and sometimes
 example.com (but not on Github, for example).
 
 Some text to show that the reference links can follow later.
 
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
+[arbitrary case-insensitive reference text]: https://www.kernel.org
+[1]: http://kernel.org
+[link text itself]: http://www.kernel.org.
 ```
 
-[I'm an inline-style link](https://www.google.com)
+[I'm an inline-style link](https://www.kernel.org)
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+[I'm an inline-style link with title](https://www.kernel.org "Linux")
 
 [I'm a reference-style link][Arbitrary case-insensitive reference text]
 
-[I'm a relative reference to a repository file](../blob/master/LICENSE)
+[I'm a relative reference to a file](../public/man.jpg)
 
 [You can use numbers for reference-style link definitions][1]
 
 Or leave it empty and use the [link text itself].
 
 URLs and URLs in angle brackets will automatically get turned into links.
-http://www.example.com or <http://www.example.com> and sometimes
+http://www.kernel.org or <http://kernel.org> and sometimes
 example.com (but not on Github, for example).
 
 Some text to show that the reference links can follow later.
 
-[arbitrary case-insensitive reference text]: https://www.mozilla.org
-[1]: http://slashdot.org
-[link text itself]: http://www.reddit.com
+[arbitrary case-insensitive reference text]: https://www.kernel.org
+[1]: http://kernel.org
+[link text itself]: http://www.kernel.org.
 
 ------
 
@@ -252,15 +253,14 @@ Some text to show that the reference links can follow later.
 Here's our logo (hover to see the title text):
 
 Inline-style:
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](/public/man.jpg "A man 1")
 
 Reference-style:
 ![alt text][logo]
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+[logo]: /public/man.jpg "A man 2"
 
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+![Minion](/public/man.jpg "A man 3")
 
 Like links, Images also have a footnote style syntax
 
@@ -268,21 +268,20 @@ Like links, Images also have a footnote style syntax
 
 With a reference later in the document defining the URL location:
 
-[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+[id]: /public/man.jpg  "A man 4"
 ```
 
 Here's our logo (hover to see the title text):
 
 Inline-style:
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](/public/man.jpg "A man 1")
 
 Reference-style:
 ![alt text][logo]
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
+[logo]: /public/man.jpg "A man 2"
 
-![Minion](https://octodex.github.com/images/minion.png)
-![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg "The Stormtroopocat")
+![Minion](/public/man.jpg "A man 3")
 
 Like links, Images also have a footnote style syntax
 
@@ -290,7 +289,8 @@ Like links, Images also have a footnote style syntax
 
 With a reference later in the document defining the URL location:
 
-[id]: https://octodex.github.com/images/dojocat.jpg  "The Dojocat"
+[id]: /public/man.jpg  "A man 4"
+
 
 ------
 
@@ -621,21 +621,3 @@ ___
 Underscores
 
 ------
-
-# YouTube Videos
-
-```
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE" target="_blank">
-<img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10">
-</a>
-```
-
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE" target="_blank">
-<img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10">
-</a>
-
-```
-[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID_HERE)
-```
-
-[![IMAGE ALT TEXT HERE](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/YouTube_logo_2015.svg/1200px-YouTube_logo_2015.svg.png)](https://www.youtube.com/watch?v=ciawICBvQoE)
