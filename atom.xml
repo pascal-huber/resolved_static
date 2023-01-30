@@ -14,35 +14,6 @@
     <subtitle>This is my personal feed!</subtitle>
     <icon>https://resolved.ch/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[Pascal Huber]]></title>
-        <id>https://resolved.ch/index.html</id>
-        <link href="https://resolved.ch/index.html"/>
-        <updated>2023-01-28T12:30:35.000Z</updated>
-        <summary type="html"><![CDATA[I like computer science, open source and mandarins.]]></summary>
-        <content type="html"><![CDATA[<p>I like computer science, open source and mandarins.</p>
-<h2 id="projects">PROJECTS</h2>
-<ul>
-<li><a href="./projects/svlog.html">svlog</a> to query socklog log files on Void Linux</li>
-<li>VoteLog - to keep track on my votes on referendums and initiatives</li>
-<li><a href="./projects/resolved.html">Yet another Static Site Generator </a></li>
-</ul>
-<p>There is more to come here :)</p>
-<h2 id="tagsonthissite">TAGS ON THIS SITE</h2>
-<!--##tag_list_all##-->
-<h2 id="contact">CONTACT</h2>
-<p><a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x70;&#97;&#x73;&#x63;&#97;l.&#x68;&#x75;&#x62;&#101;&#114;&#x40;&#114;&#x65;&#x73;&#111;&#108;&#118;&#x65;&#x64;&#46;ch">p&#97;&#115;&#99;&#x61;&#108;&#x2e;&#104;&#117;&#98;&#x65;&#114;&#x40;&#x72;&#101;&#115;&#111;&#x6c;v&#x65;&#x64;&#x2e;&#99;&#x68;</a></p>
-<h2 id="seealso">SEE ALSO</h2>
-<ul>
-<li><a href="https://github.com/pascal-huber">github.com/pascal-huber</a></li>
-<li><a href="https://linkedin.com/in/pascal-huber-0x0">linkedin.com/in/pascal-huber-0x0</a></li>
-</ul>]]></content>
-        <author>
-            <name>Pascal Huber</name>
-            <email>pascal.huber@resolved.ch</email>
-            <uri>https://resolved.ch/</uri>
-        </author>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Yet another Static Site Generator]]></title>
         <id>https://resolved.ch/projects/resolved.html</id>
         <link href="https://resolved.ch/projects/resolved.html"/>
