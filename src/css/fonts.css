@@ -1,25 +1,31 @@
 @font-face {
     font-family: 'Iosevka Term Slab';
-    src: local('Iosevka Term Slab'), url("/public/iosevka-term-slab-regular.subset.woff2") format('woff2');
+    font-display: swap;
+    font-weight: normal;
+    src: url("/public/iosevka-term-slab-regular.subset.woff2") format('woff2');
 }
 
 @font-face {
     font-family: 'Iosevka Term Slab';
+    font-display: swap;
     font-weight: bold;
-    src: local('Iosevka Term Slab'), url("/public/iosevka-term-slab-bold.subset.woff2") format('woff2');
+    src: url("/public/iosevka-term-slab-bold.subset.woff2") format('woff2');
 }
 
 @font-face {
     font-family: 'Iosevka Term Slab';
+    font-display: swap;
     font-style: italic;
-    src: local('Iosevka Term Slab'), url("/public/iosevka-term-slab-italic.subset.woff2") format('woff2');
+    font-weight: normal;
+    src: url("/public/iosevka-term-slab-italic.subset.woff2") format('woff2');
 }
 
 @font-face {
     font-family: 'Iosevka Term Slab';
+    font-display: swap;
     font-weight: bold;
     font-style: italic;
-    src: local('Iosevka Term Slab'), url("/public/iosevka-term-slab-bolditalic.subset.woff2") format('woff2');
+    src: url("/public/iosevka-term-slab-bolditalic.subset.woff2") format('woff2');
 }
 
 * {
@@ -37,4 +43,11 @@ code {
 
 .header {
     font-style: italic;
+}
+
+h1 {
+    display: inline;
+    font-weight: bold;
+    font-style: normal;
+    font-size: 18px;
 }
