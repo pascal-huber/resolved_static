@@ -6,17 +6,18 @@ siteMapPriority: 1.0
 title: 'Pascal Huber'
 description: "I like computer science, open source and mandarins."
 keywords: ["Computer Science", "Linux", "Open Source", "VoteLog", "svlog"]
+changefreq: 'daily'
 ---
 
 I like computer science, open source and mandarins.
 
 # PROJECTS
 
+ - [svlog](./projects/svlog.html) to query socklog log files on Void Linux
  - VoteLog - to keep track on my votes on referendums and initiatives
- - [svlog](https://github.com/pascal-huber/svlog) to query log files on Void Linux
  - [Yet another Static Site Generator ](./projects/resolved.html)
 
-There is more to be written once the site is ready.
+There is more to come here :)
 
 # TAGS ON THIS SITE
 

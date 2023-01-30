@@ -54,7 +54,7 @@ Creating a homepage...
  - [ ] fonts: generate fonts with all required glyphs
  - [ ] feed: decide if I want rss2.0 and/or json feeds
 
-# SEE ALSO
+# SOURCE CODE
 
 [github.com/pascal-huber/resolved_static](https://github.com/pascal-huber/resolved_static)
 

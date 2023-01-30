@@ -78,7 +78,7 @@ for (var i = 0; i < files.length; i++) {
         feedCreator.addPostToFeed(page);
         sitemapCreator.addEntry(
             paths.htmlFileRel,
-            'monthly',
+            meta.changefreq || 'monthly',
             meta.siteMapPriority || 0.5,
         )
     }
