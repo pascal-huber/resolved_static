@@ -4,9 +4,9 @@ import { writeFileSync } from 'fs';
 
 export class SitemapCreator {
 
-    constructor(hostname) {
+    constructor(url) {
         this.entries = [];
-        this.hostname = hostname;
+        this.hostname = url.href;
     }
 
     addEntry(
@@ -15,7 +15,7 @@ export class SitemapCreator {
         priority = 0.5,
     ) {
         this.entries.push({
-            url: url,
+            url: url.href,
             priority: priority,
             changefreq: changefreq,
         });

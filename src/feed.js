@@ -10,14 +10,14 @@ export class FeedCreator {
         this.author = {
             name: globalMeta.author,
             email: globalMeta.authorEmail,
-            link: globalMeta.url,
+            link: globalMeta.url.href,
         }
     }
     addPostToFeed(page) {
         this.items.push({
             title: page.meta.title,
-            id: page.meta.url,
-            link: page.meta.url,
+            id: page.meta.url.href,
+            link: page.meta.url.href,
             date: page.meta.updated, // NOTE: <updated> in atom
             description: page.meta.description, // NOTE: summary in atom
             content: page.meta.content,
@@ -26,14 +26,14 @@ export class FeedCreator {
     }
     async writeFeed(globalMeta, file) {
         this.feed = new Feed({
-            id: globalMeta.url,
+            id: globalMeta.url.href,
             title: globalMeta.pageTitle,
             description: globalMeta.pageDescription,
-            link: globalMeta.url,
-            favicon: globalMeta.url + "favicon.ico",
-            updated: globalMeta.lastUpdated,  // NOTE: will be overwritten
+            link: globalMeta.url.href,
+            favicon: globalMeta.faviconURL.href,
+            updated: globalMeta.lastUpdated, 
             feedLinks: {
-                atom: globalMeta.url + "atom.xml",
+                atom: globalMeta.atomURL.href,
             },
             author: this.author,
         });

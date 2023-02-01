@@ -67,6 +67,14 @@ export function subfoldersOf(dir) {
         .map((item) => { return { path: join(dir, item.name), name: item.name } });
 }
 
+export function getCannonicalURL(baseURL, htmlDirRel, htmlFileName) {
+    if (htmlFileName == "index.html") {
+        return new URL(join(htmlDirRel) + "/", baseURL);
+    } else {
+        return new URL(join(htmlDirRel, htmlFileName), baseURL);
+    }
+}
+
 export function getAllPaths(contentPath, distPath, mdFileAbs) {
     let paths = {};
     paths['mdFileAbs'] = mdFileAbs;

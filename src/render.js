@@ -7,6 +7,7 @@ import { SitemapCreator } from './sitemap.js'
 import { PageChecker } from './page-checker.js';
 import {
     md2html,
+    getCannonicalURL,
     getFiles,
     getDirectoriesToCreate,
     getAllPaths,
@@ -27,12 +28,14 @@ const globalMeta = {
     author: "Pascal Huber",
     authorEmail: "pascal.huber@resolved.ch",
     pageTitle: domain,
-    url: "https://" + domain + "/",
+    url: new URL("https://" + domain),
     locale: 'de-CH',
     pageDescription: "This is my personal feed!",
     generationDate: new Date(Date.now()).toLocaleDateString('de-CH'),
     lastUpdated: new Date(0),
 };
+globalMeta['faviconURL'] = getCannonicalURL(globalMeta.url, "", "favicon.ico");
+globalMeta['atomURL'] = getCannonicalURL(globalMeta.url, "", "atom.xml");
 
 const feedCreator = new FeedCreator(globalMeta);
 const sitemapCreator = new SitemapCreator(globalMeta.url);
@@ -61,9 +64,9 @@ for (var i = 0; i < files.length; i++) {
         createdStr: new Date(meta.created).toLocaleDateString(globalMeta.locale),
         updated: new Date(meta.updated),
         updatedStr: new Date(meta.updated).toLocaleDateString(globalMeta.locale),
-        url: globalMeta.url + paths.htmlFileRel,
         content: content,
         parentDirectories: parents,
+        url: getCannonicalURL(globalMeta.url, paths.htmlDirRel, paths.htmlFileName),
     }
     if (meta.updated > globalMeta.lastUpdated) {
         globalMeta.lastUpdated = meta.updated;
@@ -78,7 +81,7 @@ for (var i = 0; i < files.length; i++) {
     }
     if (!meta.noindex) {
         sitemapCreator.addEntry(
-            paths.htmlFileRel,
+            meta.url,
             meta.changefreq || 'monthly',
             meta.siteMapPriority || 0.5,
         )
@@ -136,15 +139,16 @@ for (const dirJSON of dir_it) {
         let filesOfDir = pagesOfDir.get(dirname(indexFileAbs));
         let subfolders = subfoldersOf(dir.full);
         const data = {
+            ...globalMeta,
             parentDirectories: parentDirectoriesRel,
             subfolders: subfolders,
             filesOfDir: filesOfDir,
             title: 'index',
             created: globalMeta.generationDate,
-            ...globalMeta,
+            url: getCannonicalURL(globalMeta.url, dir.full, "index.html"),
         };
         sitemapCreator.addEntry(
-            indexFileRel,
+            data.url,
             'daily',
         )
         const body = await Mustache.render(index_template, data);
@@ -171,6 +175,7 @@ const tagIndexBody = await Mustache.render(tag_index_template, tagIndexData);
 const tagIndexContent = await Mustache.render(base_template, {
     ...tagIndexData,
     content: tagIndexBody,
+    url: getCannonicalURL(globalMeta.url, "_tags", "index.html"),
 });
 await writeFileSync(tagIndexFileAbs, tagIndexContent);
 
@@ -190,9 +195,11 @@ for (var tag of tagsCollection) {
         ...globalMeta,
     };
     const body = await Mustache.render(tag_site_template, data);
+    let url = getCannonicalURL(globalMeta.url, "_tags/" + tag.name, "index.html");
     const html = await Mustache.render(base_template, {
         ...data,
         content: body,
+        url: url,
     });
     await writeFileSync(fileAbs, html);
 }
