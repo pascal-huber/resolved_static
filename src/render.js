@@ -20,9 +20,8 @@ const contentPath = join(process.cwd(), "/content");
 const base_template = readFileSync("./src/templates/base.mustache", { encoding: 'utf8', flag: 'r' });
 const index_template = readFileSync("./src/templates/index.mustache", { encoding: 'utf8', flag: 'r' });
 const tag_index_template = readFileSync("./src/templates/tag_index.mustache", { encoding: 'utf8', flag: 'r' });
-const tag_site_template = readFileSync("./src/templates/tag_site.mustache", { encoding: 'utf8', flag: 'r' });
+const tag_site_template = readFileSync("./src/templates/tag_page.mustache", { encoding: 'utf8', flag: 'r' });
 const tag_list_template = readFileSync("./src/templates/tag_list.mustache", { encoding: 'utf8', flag: 'r' });
-const page_template = readFileSync("./src/templates/site.mustache", { encoding: 'utf8', flag: 'r' });
 const domain = "resolved.ch"
 const globalMeta = {
     author: "Pascal Huber",
@@ -105,10 +104,11 @@ const pages_it = pagesOfDir[Symbol.iterator]();
 for (const pages of pages_it) {
     for (var i = 0; i < pages[1].length; i++) {
         await mkdirSync(pages[1][i].paths.htmlDirAbs, { recursive: true });
-        let body = await Mustache.render(page_template, pages[1][i].meta);
+        let html = await Mustache.render(base_template, pages[1][i].meta);
         let tag_list_all = await Mustache.render(tag_list_template, {
             tags: tagsCollection,
         })
+        html = html.replace("<!--##tag_list_all##-->", tag_list_all);
         let tags = pages[1][i].meta.tags?.map((x) => { return { name: x } })
         tags?.sort((a, b) => a.name < b.name ? -1 : 1);
         if (tags) {
@@ -117,12 +117,7 @@ for (const pages of pages_it) {
         let tag_list = await Mustache.render(tag_list_template, {
             tags: tags,
         });
-        body = body.replace("<!--##tag_list_all##-->", tag_list_all);
-        body = body.replace("<!--##tag_list##-->", tag_list);
-        let html = await Mustache.render(base_template, {
-            ...pages[1][i].meta,
-            body: body,
-        })
+        html = html.replace("<!--##tag_list##-->", tag_list);
         await writeFileSync(pages[1][i].paths.htmlFileAbs, html);
     }
 }
@@ -155,7 +150,7 @@ for (const dirJSON of dir_it) {
         const body = await Mustache.render(index_template, data);
         const html = await Mustache.render(base_template, {
             ...data,
-            body: body,
+            content: body,
         });
         await writeFileSync(indexFileAbs, html);
     }
@@ -175,7 +170,7 @@ await mkdirSync(tagIndexDirAbs);
 const tagIndexBody = await Mustache.render(tag_index_template, tagIndexData);
 const tagIndexContent = await Mustache.render(base_template, {
     ...tagIndexData,
-    body: tagIndexBody,
+    content: tagIndexBody,
 });
 await writeFileSync(tagIndexFileAbs, tagIndexContent);
 
@@ -197,7 +192,7 @@ for (var tag of tagsCollection) {
     const body = await Mustache.render(tag_site_template, data);
     const html = await Mustache.render(base_template, {
         ...data,
-        body: body,
+        content: body,
     });
     await writeFileSync(fileAbs, html);
 }

@@ -11,10 +11,14 @@
   <link rel='mask-icon' href='/mask-icon.svg' color='#88AA00'>
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-regular.subset.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-bold.subset.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-italic.subset.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous" href="/public/iosevka-term-slab-bolditalic.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-regular.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-bold.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-italic.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-bolditalic.subset.woff2">
   <link rel="stylesheet" href="/public/style.css">
   <title>{{title}} - {{pageTitle}}</title>
   {{#description}}
@@ -27,6 +31,37 @@
 </head>
 
 <body>
-  {{{body}}}
+  <div class="site">
+    <div class="content">
+      <div class="header">
+        <div>
+          {{#home}}
+          home
+          {{/home}}
+          {{^home}}
+          <a href="/">home</a>
+          {{/home}}
+          {{#parentDirectories}}
+          &nbsp;❱&nbsp;<a href="/{{full}}">{{name}}</a>
+          {{/parentDirectories}}
+        </div>
+        <div>
+          {{#title}}
+          <h1>{{title}}</h1>
+          {{/title}}
+        </div>
+      </div>
+      {{{content}}}
+    </div>
+    <div class="footer">
+      <div>
+        {{updatedStr}}
+      </div>
+      <div>
+        {{author}}
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
