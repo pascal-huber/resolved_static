@@ -143,7 +143,7 @@ for (const dirJSON of dir_it) {
             parentDirectories: parentDirectoriesRel,
             subfolders: subfolders,
             filesOfDir: filesOfDir,
-            title: 'index',
+            title: dir.full + ' index',
             created: globalMeta.generationDate,
             url: getCannonicalURL(globalMeta.url, dir.full, "index.html"),
         };
