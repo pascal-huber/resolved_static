@@ -47,9 +47,7 @@ Creating a homepage...
 # TODOS
 
  - [ ] handle 404
- - [ ] css/html: check mobile-friendlyness
- - [ ] css: decide if I need a light theme
- - [ ] markdown: target=_blank for external links?
+ - [ ] markdown: target=_blank for external links
  - [ ] markdown: check out other markdown variants
  - [ ] fonts: generate fonts with all required glyphs
  - [ ] feed: decide if I want rss2.0 and/or json feeds
