@@ -5,20 +5,21 @@ home: true
 siteMapPriority: 1.0
 title: 'Pascal Huber'
 description: "I like computer science, open source and mandarins."
-keywords: ["Computer Science", "Linux", "Open Source", "VoteLog", "svlog"]
+keywords: ["Computer Science", "IT", "Linux", "Open Source", "VoteLog", "svlog", "Zurich"]
 changefreq: 'daily'
 nofeed: true
 ---
 
-I like computer science, open source and mandarins.
+I like computer science, open source and mandarins. I recently finished my
+master's degree in CS at the ETH Zürich and am now looking for a new challenge.
 
 # PROJECTS
+
+Some private projects of mine which may (or may not) be of use to someone else.
 
  - [svlog](./projects/svlog.html) to query socklog log files on Void Linux
  - VoteLog - to keep track on my votes on referendums and initiatives
  - [Yet another Static Site Generator ](./projects/resolved.html)
-
-There is more to come here :)
 
 # TAGS ON THIS SITE
 
@@ -26,7 +27,7 @@ There is more to come here :)
 
 # CONTACT
 
-<pascal.huber@resolved.ch>
+Feel free to contact me by email: <pascal.huber@resolved.ch>
 
 # SEE ALSO
 
