@@ -1,23 +1,22 @@
 export class PageChecker {
     constructor() {
-        this.uuids = new Set();
         this.uniqueTimestampsCreated = new Set();
         this.uniqueTimestampsUpdated = new Set();
     }
 
     #checkTimestamp(set, date) {
-        if (!(date instanceof Date) | isNaN(date)) { 
-            throw Error("invalid date"); 
+        if (!(date instanceof Date) || isNaN(date)) {
+            throw Error("invalid date");
         }
         let dateStr = date.toISOString();
         if (set.has(dateStr)) {
-            throw Error("Timestamps must be unique")
+            throw Error("Timestamps must be unique");
         } else {
             set.add(dateStr);
         }
     }
 
-    #checkIsOlder(created, updated){
+    #checkIsOlder(created, updated) {
         if (created > updated) {
             throw Error("created date can't be greater than updated date");
         }

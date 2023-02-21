@@ -210,8 +210,8 @@ await sitemapCreator.writeSitemap(join(distPath, "sitemap.xml"))
 // generate feed
 feedCreator.writeFeed(globalMeta, join(distPath, "atom.xml"));
 
-// // create stylesheet
-let cssResult = sass.render({
+// create stylesheet
+sass.render({
     file: "./src/css/style.scss",
     includePaths: ["node_modules"],
 }, (err, result) => {
