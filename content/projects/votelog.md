@@ -2,12 +2,14 @@
 title: 'VoteLog'
 description: 'VoteLog - a webapp to keep track of my decisions and compare them with parties.'
 created: '2023-03-01T15:00:00+01:00'
-updated: '2023-03-01T15:10:00+01:00'
+updated: '2023-03-01T16:30:00+01:00'
 tags: ['swiss', 'politics', 'dev']
 keywords: ['votelog', 'swiss', 'politics']
 ---
 
 A webapp to keep track of my decisions and compare them with parties.
+
+![VoteLog Screenshot](/public/votelog.png "VoteLog Categories")
 
 # DESCRIPTION
 
