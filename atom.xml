@@ -117,7 +117,7 @@ libc</em> [<a href="https://musl.libc.org/">2</a>] does not support <em>wtmp</em
         <link href="https://resolved.ch/projects/votelog.html"/>
         <updated>2023-03-01T14:10:00.000Z</updated>
         <summary type="html"><![CDATA[VoteLog - a webapp to keep track of my decisions and compare them with parties.]]></summary>
-        <content type="html"><![CDATA[<p>VoteLog - a webapp to keep track of my decisions and compare them with parties.</p>
+        <content type="html"><![CDATA[<p>A webapp to keep track of my decisions and compare them with parties.</p>
 <h2 id="description">DESCRIPTION</h2>
 <p>At the end of a legislative term, I want to see which parties let me down and
 which didn't. There are more sophisticated ways to measure and compare ones
