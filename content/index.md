@@ -18,8 +18,10 @@ master's degree in CS at the ETH Zürich and am now looking for a new challenge.
 Some private projects of mine which may (or may not) be of use to someone else.
 
  - [svlog](./projects/svlog.html) to query socklog log files on Void Linux
- - VoteLog - to keep track on my votes on referendums and initiatives
+ - [VoteLog](./projects/votelog.html) - to keep track on my votes on referendums and initiatives
  - [Yet another Static Site Generator ](./projects/resolved.html)
+ - [My personal dotfiles](https://github.com/pascal-huber/dotfiles)
+ - [Rubik's Cube Cheatsheet](https://github.com/pascal-huber/rubiks)
 
 # TAGS ON THIS SITE
 
