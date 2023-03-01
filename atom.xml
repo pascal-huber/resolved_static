@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://resolved.ch/</id>
     <title>resolved.ch</title>
-    <updated>2023-01-30T16:00:00.000Z</updated>
+    <updated>2023-03-01T14:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Pascal Huber</name>
@@ -103,6 +103,37 @@ libc</em> [<a href="https://musl.libc.org/">2</a>] does not support <em>wtmp</em
 </code></pre>
 <h2 id="sourcecode">SOURCE CODE</h2>
 <p><a href="https://github.com/pascal-huber/svlog">github.com/pascal-huber/svlog</a></p>
+<h2 id="tags">TAGS</h2>
+<!--##tag_list##-->]]></content>
+        <author>
+            <name>Pascal Huber</name>
+            <email>pascal.huber@resolved.ch</email>
+            <uri>https://resolved.ch/</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[VoteLog]]></title>
+        <id>https://resolved.ch/projects/votelog.html</id>
+        <link href="https://resolved.ch/projects/votelog.html"/>
+        <updated>2023-03-01T14:00:00.000Z</updated>
+        <summary type="html"><![CDATA[VoteLog - a webapp to keep track of my decisions and compare them with parties.]]></summary>
+        <content type="html"><![CDATA[<h2 id="name">NAME</h2>
+<p>VoteLog - a webapp to keep track of my decisions and compare them with parties.</p>
+<h2 id="description">DESCRIPTION</h2>
+<p>At the end of a legislative term, I want to see which parties let me down and
+which didn't. There are more sophisticated ways to measure and compare ones
+political orientation such as <em>Smart Spiders</em> [<a href="https://www.smartvote.ch/de/group/2/election/19_ch_nr/matching/results/my-smartspider?rid=ace38364-7ee2-441d-9f3d-552560b62851">1</a>]. VoteLog, however, is
+simpler as you only have to enter your answers on national initiatives and
+referendums. It also helps me remember what I voted on issues long ago.</p>
+<h2 id="technical">TECHNICAL</h2>
+<p>VoteLog is written with Vue.js. It comes without a backend but rather lets you
+   load and store your data on the WebDAV server of your choice (given that it
+   sets permissive CORS [<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">2</a>] headers).</p>
+<h2 id="seealso">SEE ALSO</h2>
+<ul>
+<li><a href="https://votelog.resolved.ch">https://votelog.resolved.ch</a></li>
+<li><a href="https://github.com/pascal-huber/votelog">github.com/pascal-huber/votelog</a></li>
+</ul>
 <h2 id="tags">TAGS</h2>
 <!--##tag_list##-->]]></content>
         <author>
