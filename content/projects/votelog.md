@@ -7,7 +7,7 @@ tags: ['swiss', 'politics', 'dev']
 keywords: ['votelog', 'swiss', 'politics']
 ---
 
-VoteLog - a webapp to keep track of my decisions and compare them with parties.
+A webapp to keep track of my decisions and compare them with parties.
 
 # DESCRIPTION
 
