@@ -1,29 +1,30 @@
 ---
 title: 'VoteLog'
-description: 'VoteLog - a webapp to keep track of my decisions and compare them with parties.'
+description: 'A web application to analyze your decisions on national votes.'
 created: '2023-03-01T15:00:00+01:00'
 updated: '2023-03-01T16:30:00+01:00'
 tags: ['swiss', 'politics', 'dev']
 keywords: ['votelog', 'swiss', 'politics']
 ---
 
-A webapp to keep track of my decisions and compare them with parties.
+VoteLog is a web application to keep track of my decisions on national
+referendums and initiatives and compare the results with the major parties.
 
 ![VoteLog Screenshot](/public/votelog.png "VoteLog Categories")
 
 # DESCRIPTION
 
 At the end of a legislative term, I want to see which parties let me down and
-which didn't. There are more sophisticated ways to measure and compare ones
-political orientation such as *Smart Spiders* [[1]]. VoteLog, however, is
-simpler as you only have to enter your answers on national initiatives and
-referendums. It also helps me remember what I voted on issues long ago.
+which didn't. It also helps me remember what I voted on issues long ago. While
+there are more sophisticated ways to measure and compare ones political
+orientation such as *Smart Spiders* [[1]], VoteLog is simpler as you only have
+to enter your answers on national initiatives and referendums.
 
 # TECHNICAL
 
 VoteLog is written with Vue.js. It comes without a backend but rather lets you
-   load and store your data on the WebDAV server of your choice (given that it
-   sets permissive CORS [[2]] headers).
+load and store your data on the WebDAV server of your choice (given that it sets
+permissive CORS [[2]] headers).
 
 # SEE ALSO
 
