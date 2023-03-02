@@ -2,7 +2,7 @@
 title: 'VoteLog'
 description: 'A web application to analyze your decisions on national votes.'
 created: '2023-03-01T15:00:00+01:00'
-updated: '2023-03-01T16:30:00+01:00'
+updated: '2023-03-02T12:30:00+01:00'
 tags: ['swiss', 'politics', 'dev']
 keywords: ['votelog', 'swiss', 'politics']
 ---
