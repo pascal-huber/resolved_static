@@ -116,19 +116,20 @@ libc</em> [<a href="https://musl.libc.org/">2</a>] does not support <em>wtmp</em
         <id>https://resolved.ch/projects/votelog.html</id>
         <link href="https://resolved.ch/projects/votelog.html"/>
         <updated>2023-03-01T15:30:00.000Z</updated>
-        <summary type="html"><![CDATA[VoteLog - a webapp to keep track of my decisions and compare them with parties.]]></summary>
-        <content type="html"><![CDATA[<p>A webapp to keep track of my decisions and compare them with parties.</p>
+        <summary type="html"><![CDATA[A web application to analyze your decisions on national votes.]]></summary>
+        <content type="html"><![CDATA[<p>VoteLog is a web application to keep track of my decisions on national
+referendums and initiatives and compare the results with the major parties.</p>
 <p><img src="/public/votelog.png" alt="VoteLog Screenshot" title="VoteLog Categories" /></p>
 <h2 id="description">DESCRIPTION</h2>
 <p>At the end of a legislative term, I want to see which parties let me down and
-which didn't. There are more sophisticated ways to measure and compare ones
-political orientation such as <em>Smart Spiders</em> [<a href="https://www.smartvote.ch/de/group/2/election/19_ch_nr/matching/results/my-smartspider?rid=ace38364-7ee2-441d-9f3d-552560b62851">1</a>]. VoteLog, however, is
-simpler as you only have to enter your answers on national initiatives and
-referendums. It also helps me remember what I voted on issues long ago.</p>
+which didn't. It also helps me remember what I voted on issues long ago. While
+there are more sophisticated ways to measure and compare ones political
+orientation such as <em>Smart Spiders</em> [<a href="https://www.smartvote.ch/de/group/2/election/19_ch_nr/matching/results/my-smartspider?rid=ace38364-7ee2-441d-9f3d-552560b62851">1</a>], VoteLog is simpler as you only have
+to enter your answers on national initiatives and referendums.</p>
 <h2 id="technical">TECHNICAL</h2>
 <p>VoteLog is written with Vue.js. It comes without a backend but rather lets you
-   load and store your data on the WebDAV server of your choice (given that it
-   sets permissive CORS [<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">2</a>] headers).</p>
+load and store your data on the WebDAV server of your choice (given that it sets
+permissive CORS [<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">2</a>] headers).</p>
 <h2 id="seealso">SEE ALSO</h2>
 <ul>
 <li><a href="https://votelog.resolved.ch">https://votelog.resolved.ch</a></li>
