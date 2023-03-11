@@ -1,0 +1,268 @@
+<svg width="636" height="404" viewBox="0 0 636 404" xmlns="http://www.w3.org/2000/svg">
+<style>
+    svg {
+        font-family: Iosevka Nerd Font Mono,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+        font-size: 16px;
+        font-kerning: normal;
+        text-rendering: optimizeLegibility;
+        fill: #24292e;
+    }
+
+
+    rect {
+        fill: #f6f8fa;
+        stroke: #333;
+    }
+
+    .key {
+        stroke: #333;
+    }
+
+    .pressed {
+        fill: #555;
+    }
+    .pressed-text {
+        fill: #faa;
+    }
+
+    .combo {
+        // fill: #ffc;
+    }
+
+    .unoccupied {
+        fill: #888;
+        stroke: #f0009;
+    }
+
+    .deactivated {
+        fill: #f000;
+        stroke: #f000;
+    }
+
+    .sticky {
+        fill: #ccc;
+    }
+
+</style>
+<rect rx="2" ry="2" x="4" y="4" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="86.0" y="30.36363636363636" class="-text">
+0/1
+</text>
+<rect rx="2" ry="2" x="120" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="30.36363636363636" class="-text">
+0/2
+</text>
+<rect rx="2" ry="2" x="178" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="30.36363636363636" class="-text">
+0/3
+</text>
+<rect rx="2" ry="2" x="236" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="30.36363636363636" class="-text">
+0/4
+</text>
+<rect rx="2" ry="2" x="294" y="4" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="30.36363636363636" class="-text">
+0/7
+</text>
+<rect rx="2" ry="2" x="410" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="30.36363636363636" class="-text">
+0/8
+</text>
+<rect rx="2" ry="2" x="468" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="30.36363636363636" class="-text">
+0/9
+</text>
+<rect rx="2" ry="2" x="526" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="550.0" y="30.36363636363636" class="-text">
+0/10
+</text>
+<rect rx="2" ry="2" x="584" y="4" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="4" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="28.0" y="88.36363636363636" class="-text">
+1/0
+</text>
+<rect rx="2" ry="2" x="62" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="86.0" y="88.36363636363636" class="-text">
+1/1
+</text>
+<rect rx="2" ry="2" x="120" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="88.36363636363636" class="-text">
+1/2
+</text>
+<rect rx="2" ry="2" x="178" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="88.36363636363636" class="-text">
+1/3
+</text>
+<rect rx="2" ry="2" x="236" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="88.36363636363636" class="-text">
+1/4
+</text>
+<rect rx="2" ry="2" x="294" y="62" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="88.36363636363636" class="-text">
+1/7
+</text>
+<rect rx="2" ry="2" x="410" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="88.36363636363636" class="-text">
+1/8
+</text>
+<rect rx="2" ry="2" x="468" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="88.36363636363636" class="-text">
+1/9
+</text>
+<rect rx="2" ry="2" x="526" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="550.0" y="88.36363636363636" class="-text">
+1/10
+</text>
+<rect rx="2" ry="2" x="584" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="608.0" y="88.36363636363636" class="-text">
+1/11
+</text>
+<rect rx="2" ry="2" x="4" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="28.0" y="146.36363636363637" class="-text">
+2/0
+</text>
+<rect rx="2" ry="2" x="62" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="86.0" y="146.36363636363637" class="-text">
+2/1
+</text>
+<rect rx="2" ry="2" x="120" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="146.36363636363637" class="-text">
+2/2
+</text>
+<rect rx="2" ry="2" x="178" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="146.36363636363637" class="-text">
+2/3
+</text>
+<rect rx="2" ry="2" x="236" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="146.36363636363637" class="-text">
+2/4
+</text>
+<rect rx="2" ry="2" x="294" y="120" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="146.36363636363637" class="-text">
+2/7
+</text>
+<rect rx="2" ry="2" x="410" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="146.36363636363637" class="-text">
+2/8
+</text>
+<rect rx="2" ry="2" x="468" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="146.36363636363637" class="-text">
+2/9
+</text>
+<rect rx="2" ry="2" x="526" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="550.0" y="146.36363636363637" class="-text">
+2/10
+</text>
+<rect rx="2" ry="2" x="584" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="608.0" y="146.36363636363637" class="-text">
+2/11
+</text>
+<rect rx="2" ry="2" x="4" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="28.0" y="204.36363636363637" class="unoccupied-text">
+3/0
+</text>
+<rect rx="2" ry="2" x="62" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="86.0" y="204.36363636363637" class="unoccupied-text">
+3/1
+</text>
+<rect rx="2" ry="2" x="120" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="204.36363636363637" class="unoccupied-text">
+3/2
+</text>
+<rect rx="2" ry="2" x="178" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="204.36363636363637" class="unoccupied-text">
+3/3
+</text>
+<rect rx="2" ry="2" x="236" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="294" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="410" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="204.36363636363637" class="unoccupied-text">
+3/8
+</text>
+<rect rx="2" ry="2" x="468" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="204.36363636363637" class="unoccupied-text">
+3/9
+</text>
+<rect rx="2" ry="2" x="526" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="550.0" y="204.36363636363637" class="unoccupied-text">
+3/10
+</text>
+<rect rx="2" ry="2" x="584" y="178" width="48" height="48" class="unoccupied key" />
+<text text-anchor="middle" dominant-baseline="middle" x="608.0" y="204.36363636363637" class="unoccupied-text">
+3/11
+</text>
+<rect rx="2" ry="2" x="4" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="120" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="178" y="236" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="262.3636363636364" class="-text">
+4/2
+</text>
+<rect rx="2" ry="2" x="236" y="236" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="262.3636363636364" class="-text">
+4/3
+</text>
+<rect rx="2" ry="2" x="294" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="236" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="262.3636363636364" class="-text">
+4/8
+</text>
+<rect rx="2" ry="2" x="410" y="236" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="262.3636363636364" class="-text">
+4/9
+</text>
+<rect rx="2" ry="2" x="468" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="526" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="584" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="4" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="120" y="294" width="48" height="106" class="key key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="346.72727272727275" class="key-text">
+4/4
+</text>
+<rect rx="2" ry="2" x="178" y="294" width="48" height="106" class="key key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="346.72727272727275" class="key-text">
+4/5
+</text>
+<rect rx="2" ry="2" x="236" y="294" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="320.3636363636364" class="-text">
+4/1
+</text>
+<rect rx="2" ry="2" x="294" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="294" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="320.3636363636364" class="-text">
+4/10
+</text>
+<rect rx="2" ry="2" x="410" y="294" width="48" height="106" class="key key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="346.72727272727275" class="key-text">
+4/6
+</text>
+<rect rx="2" ry="2" x="468" y="294" width="48" height="106" class="key key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="346.72727272727275" class="key-text">
+4/7
+</text>
+<rect rx="2" ry="2" x="526" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="584" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="4" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="120" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="178" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="236" y="352" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="378.3636363636364" class="-text">
+4/0
+</text>
+<rect rx="2" ry="2" x="294" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="352" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="378.3636363636364" class="-text">
+4/11
+</text>
+<rect rx="2" ry="2" x="410" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="468" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="526" y="352" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="584" y="352" width="48" height="48" class="deactivated key" />
+</svg>

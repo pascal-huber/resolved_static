@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="alternate" type="application/atom+xml" title="resolved.ch Feed" href="/atom.xml">
+  <link rel="canonical" href="https:&#x2F;&#x2F;resolved.ch&#x2F;projects&#x2F;forbidden_advantage.html" />
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel='mask-icon' href='/mask-icon.svg' color='#88AA00'>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-regular.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-bold.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-italic.subset.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
+    href="/public/iosevka-term-slab-bolditalic.subset.woff2">
+  <link rel="stylesheet" href="/public/style.css">
+  <title>Forbidden Advantage - resolved.ch</title>
+  <meta name="description" content="My hand-wired Kinesis Advantage 2 powered by ZMK on a RP2040">
+  <meta name="author" content="Pascal Huber">
+  <meta name="keywords" content="keyboards,kinesis,zmk,Kinesis Advantage 2">
+</head>
+
+<body>
+  <div class="site">
+    <div class="content">
+      <div class="header">
+        <div>
+          <a href="/">home</a>
+          &nbsp;❱&nbsp;<a href="/projects">projects</a>
+        </div>
+        <div>
+          <h1>Forbidden Advantage</h1>
+        </div>
+      </div>
+      <p>This is a description of my hand-wired Kinesis Advantage 2 [<a href="https://kinesis-ergo.com/shop/advantage2/">1</a>] running with
+ZMK [<a href="https://zmk.dev/">2</a>] and powered by an Elite-Pi board [<a href="https://splitkb.com/products/elite-pi">3</a>] (with a RP2040 ARM
+microprocessor [<a href="https://www.raspberrypi.com/products/rp2040/">4</a>]). I call the result the "Forbidden Advantage".</p>
+<p><img src="/public/forbidden-advantage/forbidden-advantage.jpg" alt="Forbidden Advantage" title="Forbidden Advantage" />
+<center>Forbidden Advantage</center></p>
+<h2 id="butwhy">BUT WHY‽</h2>
+<p>A couple of years ago, I bought the Kinesis Advantage 2 keyboard. However, I
+never really got used to it and it landed in a box. What a waste of money! The
+following are the major problems I was facing with my Kinesis Advantage 2.</p>
+<ul>
+<li>The spring-ping of the Cherry MX Brown switches was unbearable. The big,
+hollow plastic case makes this even worse as it resonates.</li>
+<li>Although the keys are positioned better than on a traditional keyboard, I
+still had to move my hands to reach some of them.</li>
+<li>The proprietary firmware is rather limiting and (to my knowledge) doesn't
+support more than 2 layers.</li>
+</ul>
+<p><img src="/public/forbidden-advantage/kinesis-advantage.jpg" alt="Kinesis Advantage 2" title="Kinesis Advantage 2" />
+<center>Kinesis Advantage 2 [<a href="https://kinesis-ergo.com/shop/advantage2/">1</a>]</center></p>
+<h2 id="solution">SOLUTION</h2>
+<p>Keep the case and some of the circuit boards and replace everything
+else ¯\<em>(ツ)</em>/¯.</p>
+<p>There are two major open source firmwares intended for keyboards: QMK [<a href="https://qmk.fm/">5</a>] and
+ZMK [<a href="https://zmk.dev/">2</a>]. Both of them provide all the features I require. I decided to go with
+ZMK because the configuration looks much cleaner and I like the way you can
+build the firmware in a github action (using docker).</p>
+<p>I acquired the following bits and pieces:</p>
+<ul>
+<li>The <em>Elite-Pi</em> is a tiny board featuring the new RP2040 ARM microcontroller
+(ZMK does not yet officially support it but there es a pull-request from the
+ZMK author [<a href="https://github.com/zmkfirmware/zmk/pull/1499">6</a>] - Good enough)</li>
+<li><em>Gazzew Bobagum</em> silent linear switches</li>
+<li><em>Kailh Hot-Swap sockets</em> (such that I can easily swap the switches if I don't
+like them)</li>
+<li><em>1N4148 THT Diodes</em>.</li>
+<li>Wires (I sacrificed an old ethernet cable).</li>
+<li>A USB cable.</li>
+</ul>
+<h2 id="prototype">PROTOTYPE</h2>
+<p>Before I started soldering the real keyboard with 40 keys, I wanted to create a
+prototype to ensure everything works as expected. So I soldered together four
+hot-swap sockets, put switches on them and configured the firmware [<a href="https://github.com/pascal-huber/ohje">7</a>]. Ohje,
+what have I signed myself up for‽</p>
+<p><img src="/public/forbidden-advantage/ohje.jpg" alt="ohje" title="ohje" />
+<center>Ohje (Prototype)</center></p>
+<h2 id="letsgo">LET'S GO</h2>
+<p>I will not lie. Soldering all the hot-swap sockets and diodes took way longer
+than I expcected. As you can see in the following image of the left-hand side of
+the keyboard, I added some additional sockets at places where there are no
+switches just in case I later decide I need more keys. I didn't bother
+reverse-engineering the PCBs for the thumbclusters and just destroyed the lanes
+and rewired them. And yes, I totally forgot to buy Mill-Max sockets to make them
+hot-swappable. I removed the PCBs for the keys in the concave keywells as it was
+thin and flexible and I don't think putting the Kailh hot-swap sockets on them
+would have been wise.</p>
+<p><img src="/public/forbidden-advantage/forbidden-advantage-soldering.jpg" alt="Wiring" title="Wiring" />
+<center>Wiring of the left-hand side</center></p>
+<p>The switches are organized in a grid with 5 rows and 12 columns which are
+connected to the microcontroller. The following image shows which key is in
+which row and column. The grey keys are the ones without a switch.</p>
+<p><img src="/public/forbidden-advantage/soldering.svg" alt="Wiring Diagram" title="Wiring Diagrm" /></p>
+<h2 id="keymap">KEYMAP</h2>
+<p>This is a very difficult decision. There are tons of different layouts to choose
+from. I decided to go with a colemak-dh [<a href="https://colemakmods.github.io/mod-dh/">8</a>] variant and took much inspiration
+from Callum Oakley's layout [<a href="https://github.com/callum-oakley/keymap">9</a>].</p>
+<p>The default layer contains most letters. By pressing "w" and "f" at the same
+time produces a "q". I also have some keys for debugging on the thumb cluster.
+This allows me to debug with one hand and scratch my head with the other.</p>
+<p><img src="/public/forbidden-advantage/layer1.svg" alt="Base Layer" title="Base Layer" /></p>
+<p>The symbols layer is active when the "SYM" key is held down. The grey keys on
+the right home row are "sticky", meaning they can be released to type
+combinations such as "Ctrl-C".</p>
+<p><img src="/public/forbidden-advantage/layer2.svg" alt="SYM Layer" title="SYM Layer" /></p>
+<p>The navigation layer is active when the "NAV" key is held down.</p>
+<p><img src="/public/forbidden-advantage/layer3.svg" alt="NAV Layer" title="NAV Layer" /></p>
+<p>The numbers layer is active when both the "SYM" and "NAV" keys are held down.
+<img src="/public/forbidden-advantage/layer4.svg" alt="SYM_NAV Layer" title="SYM_NAV Layer" /></p>
+<h2 id="regrets">REGRETS</h2>
+<ul>
+<li>I forgot to buy Mill-Max sockets for the thumbclusters. The switches are
+soldered directly onto the PCB and are therefore not hot-swappable.</li>
+<li>Using the prototype board instead of ditectly soldering the cables onto the
+controller was a mistake. It cost me a lot of nerves and I didn't really gain
+anything. A board with lanes would probably have easier too.</li>
+</ul>
+<h2 id="resources">RESOURCES</h2>
+<ul>
+<li><a href="https://github.com/pascal-huber/forbidden-advantage">Forbidden Advantage ZMK config</a></li>
+<li><a href="https://github.com/callum-oakley/keymap">Callum's layout</a></li>
+<li><a href="https://github.com/AlaaSaadAbdo/zmk-config">AlaaSaadAbdo's config</a></li>
+<li><a href="https://github.com/rafaelromao/keyboards">rafaelromao keymap</a></li>
+</ul>
+<h2 id="tags">TAGS</h2>
+<p>
+<a href="/_tags/keyboards">#keyboards</a>
+</p>
+    </div>
+    <div class="footer">
+      <div>
+        11.3.2023
+      </div>
+      <div>
+        Pascal Huber
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
