@@ -2,7 +2,7 @@
 title: 'Forbidden Advantage'
 description: 'My hand-wired Kinesis Advantage 2 powered by ZMK on a RP2040'
 created: '2023-03-11T18:00:00+01:00'
-updated: '2023-03-11T18:00:00+01:00'
+updated: '2023-03-11T19:10:00+01:00'
 tags: ['keyboards']
 keywords: ['keyboards', 'kinesis', 'zmk', 'Kinesis Advantage 2']
 ---
@@ -38,20 +38,28 @@ following are the major problems I was facing with my Kinesis Advantage 2.
 # SOLUTION
 
 Keep the case and some of the circuit boards and replace everything
-else ¯\\_(ツ)_/¯.
+else ¯\\_(ツ)_/¯. Damien Rajon did something very similar [[5]]. The difference
+is that he kept all the keys (except the F-key rows). An alternative solution to
+use a different controller would have been to use a custom PCB such as the *kinT
+kinesis keyboard controller* made by Michael Stapelberg [[6]]. I decided against
+this solution because I would still have had to use the original PCBs for the
+keys in the keywells.
 
-There are two major open source firmwares intended for keyboards: QMK [[5]] and
+[5]: https://25.wf/posts/2020-02-21-qinesis.html
+[6]: https://michael.stapelberg.ch/posts/2020-07-09-kint-kinesis-keyboard-controller/
+
+There are two major open source firmwares intended for keyboards: QMK [[7]] and
 ZMK [[2]]. Both of them provide all the features I require. I decided to go with
 ZMK because the configuration looks much cleaner and I like the way you can
 build the firmware in a github action (using docker).
 
-[5]: https://qmk.fm/
+[7]: https://qmk.fm/
 
 I acquired the following bits and pieces:
 
 - The *Elite-Pi* is a tiny board featuring the new RP2040 ARM microcontroller
   (ZMK does not yet officially support it but there es a pull-request from the
-  ZMK author [[6]] - Good enough)
+  ZMK author [[8]] - Good enough)
 - *Gazzew Bobagum* silent linear switches
 - *Kailh Hot-Swap sockets* (such that I can easily swap the switches if I don't
   like them)
@@ -59,16 +67,17 @@ I acquired the following bits and pieces:
 - Wires (I sacrificed an old ethernet cable).
 - A USB cable.
 
-[6]: https://github.com/zmkfirmware/zmk/pull/1499
+[8]: https://github.com/zmkfirmware/zmk/pull/1499
+
 
 # PROTOTYPE
 
 Before I started soldering the real keyboard with 40 keys, I wanted to create a
 prototype to ensure everything works as expected. So I soldered together four
-hot-swap sockets, put switches on them and configured the firmware [[7]]. Ohje,
+hot-swap sockets, put switches on them and configured the firmware [[9]]. Ohje,
 what have I signed myself up for‽
 
-[7]: https://github.com/pascal-huber/ohje
+[9]: https://github.com/pascal-huber/ohje
 
 ![ohje](/public/forbidden-advantage/ohje.jpg "ohje")
 <center>Ohje (Prototype)</center>
@@ -97,11 +106,11 @@ which row and column. The grey keys are the ones without a switch.
 # KEYMAP
 
 This is a very difficult decision. There are tons of different layouts to choose
-from. I decided to go with a colemak-dh [[8]] variant and took much inspiration
-from Callum Oakley's layout [[9]].
+from. I decided to go with a colemak-dh [[10]] variant and took much inspiration
+from Callum Oakley's layout [[11]].
 
-[8]: https://colemakmods.github.io/mod-dh/
-[9]: https://github.com/callum-oakley/keymap
+[10]: https://colemakmods.github.io/mod-dh/
+[11]: https://github.com/callum-oakley/keymap
 
 The default layer contains most letters. By pressing "w" and "f" at the same
 time produces a "q". I also have some keys for debugging on the thumb cluster.
@@ -133,6 +142,10 @@ The numbers layer is active when both the "SYM" and "NAV" keys are held down.
 # RESOURCES
 
 - [Forbidden Advantage ZMK config](https://github.com/pascal-huber/forbidden-advantage)
+- [kinT kinesis keyboard controller (by Michael
+  Stapelberg)](https://michael.stapelberg.ch/posts/2020-07-09-kint-kinesis-keyboard-controller/)
+- [Handwiring a Kinesis Advantage keyboard (by Damien
+  Rajon)](https://25.wf/posts/2020-02-21-qinesis.html)
 - [Callum's layout](https://github.com/callum-oakley/keymap)
 - [AlaaSaadAbdo's config](https://github.com/AlaaSaadAbdo/zmk-config)
 - [rafaelromao keymap](https://github.com/rafaelromao/keyboards)
