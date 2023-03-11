@@ -1,0 +1,209 @@
+<svg width="636" height="346" viewBox="0 0 636 346" xmlns="http://www.w3.org/2000/svg">
+<style>
+    svg {
+        font-family: Iosevka Nerd Font Mono,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+        font-size: 16px;
+        font-kerning: normal;
+        text-rendering: optimizeLegibility;
+        fill: #24292e;
+    }
+
+
+    rect {
+        fill: #f6f8fa;
+        stroke: #333;
+    }
+
+    .key {
+        stroke: #333;
+    }
+
+    .pressed {
+        fill: #555;
+    }
+    .pressed-text {
+        fill: #faa;
+    }
+
+    .combo {
+        // fill: #ffc;
+    }
+
+    .unoccupied {
+        fill: #888;
+        stroke: #f0009;
+    }
+
+    .deactivated {
+        fill: #f000;
+        stroke: #f000;
+    }
+
+    .sticky {
+        fill: #ccc;
+    }
+
+</style>
+<rect rx="2" ry="2" x="4" y="4" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="86.0" y="30.36363636363636" class="-text">
+;
+</text>
+<rect rx="2" ry="2" x="120" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="30.36363636363636" class="-text">
+:
+</text>
+<rect rx="2" ry="2" x="178" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="30.36363636363636" class="-text">
+q
+</text>
+<rect rx="2" ry="2" x="236" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="30.36363636363636" class="-text">
+ö
+</text>
+<rect rx="2" ry="2" x="294" y="4" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="23.545454545454543" class="-text">
+page
+</text>
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="38.54545454545455" class="-text">
+up
+</text>
+<rect rx="2" ry="2" x="410" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="30.36363636363636" class="-text">
+home
+</text>
+<rect rx="2" ry="2" x="468" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="30.36363636363636" class="-text">
+🠕
+</text>
+<rect rx="2" ry="2" x="526" y="4" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="550.0" y="30.36363636363636" class="-text">
+end
+</text>
+<rect rx="2" ry="2" x="584" y="4" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="4" y="62" width="48" height="48" class="sticky key" />
+<text text-anchor="middle" dominant-baseline="middle" x="28.0" y="88.36363636363636" class="sticky-text">
+SHFT
+</text>
+<rect rx="2" ry="2" x="62" y="62" width="48" height="48" class="sticky key" />
+<text text-anchor="middle" dominant-baseline="middle" x="86.0" y="88.36363636363636" class="sticky-text">
+CTRL
+</text>
+<rect rx="2" ry="2" x="120" y="62" width="48" height="48" class="sticky key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="88.36363636363636" class="sticky-text">
+ALT
+</text>
+<rect rx="2" ry="2" x="178" y="62" width="48" height="48" class="sticky key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="88.36363636363636" class="sticky-text">
+MOD
+</text>
+<rect rx="2" ry="2" x="236" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="88.36363636363636" class="-text">
+ä
+</text>
+<rect rx="2" ry="2" x="294" y="62" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="81.54545454545455" class="-text">
+page
+</text>
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="96.54545454545455" class="-text">
+down
+</text>
+<rect rx="2" ry="2" x="410" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="88.36363636363636" class="-text">
+🠔
+</text>
+<rect rx="2" ry="2" x="468" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="88.36363636363636" class="-text">
+🠗
+</text>
+<rect rx="2" ry="2" x="526" y="62" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="550.0" y="88.36363636363636" class="-text">
+🠖
+</text>
+<rect rx="2" ry="2" x="584" y="62" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="4" y="120" width="48" height="48" class="sticky key" />
+<text text-anchor="middle" dominant-baseline="middle" x="28.0" y="146.36363636363637" class="sticky-text">
+ALTGR
+</text>
+<rect rx="2" ry="2" x="62" y="120" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="120" y="120" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="178" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="202.0" y="146.36363636363637" class="-text">
+ESC
+</text>
+<rect rx="2" ry="2" x="236" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="260.0" y="146.36363636363637" class="-text">
+ü
+</text>
+<rect rx="2" ry="2" x="294" y="120" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="146.36363636363637" class="-text">
+DEL
+</text>
+<rect rx="2" ry="2" x="410" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="146.36363636363637" class="-text">
+INS
+</text>
+<rect rx="2" ry="2" x="468" y="120" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="146.36363636363637" class="-text">
+TAB
+</text>
+<rect rx="2" ry="2" x="526" y="120" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="584" y="120" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="4" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="120" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="178" y="178" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="236" y="178" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="294" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="178" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="197.54545454545453" class="-text">
+vol
+</text>
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="212.54545454545453" class="-text">
+up
+</text>
+<rect rx="2" ry="2" x="410" y="178" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="468" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="526" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="584" y="178" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="4" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="120" y="236" width="48" height="106" class="pressed key" />
+<text text-anchor="middle" dominant-baseline="middle" x="144.0" y="288.72727272727275" class="pressed-text">
+NAV
+</text>
+<rect rx="2" ry="2" x="178" y="236" width="48" height="106" class="unoccupied key" />
+<rect rx="2" ry="2" x="236" y="236" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="294" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="236" width="48" height="48" class=" key" />
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="255.54545454545453" class="-text">
+vol
+</text>
+<text text-anchor="middle" dominant-baseline="middle" x="376.0" y="270.5454545454545" class="-text">
+down
+</text>
+<rect rx="2" ry="2" x="410" y="236" width="48" height="106" class="key key" />
+<text text-anchor="middle" dominant-baseline="middle" x="434.0" y="288.72727272727275" class="key-text">
+RET
+</text>
+<rect rx="2" ry="2" x="468" y="236" width="48" height="106" class="key key" />
+<text text-anchor="middle" dominant-baseline="middle" x="492.0" y="288.72727272727275" class="key-text">
+SYM
+</text>
+<rect rx="2" ry="2" x="526" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="584" y="236" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="4" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="62" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="120" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="178" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="236" y="294" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="294" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="352" y="294" width="48" height="48" class="unoccupied key" />
+<rect rx="2" ry="2" x="410" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="468" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="526" y="294" width="48" height="48" class="deactivated key" />
+<rect rx="2" ry="2" x="584" y="294" width="48" height="48" class="deactivated key" />
+</svg>
