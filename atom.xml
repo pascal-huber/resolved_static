@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://resolved.ch/</id>
     <title>resolved.ch</title>
-    <updated>2023-03-11T17:01:00.000Z</updated>
+    <updated>2023-03-11T18:10:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <author>
         <name>Pascal Huber</name>
@@ -17,7 +17,7 @@
         <title type="html"><![CDATA[Forbidden Advantage]]></title>
         <id>https://resolved.ch/projects/forbidden_advantage.html</id>
         <link href="https://resolved.ch/projects/forbidden_advantage.html"/>
-        <updated>2023-03-11T17:00:00.000Z</updated>
+        <updated>2023-03-11T18:10:00.000Z</updated>
         <summary type="html"><![CDATA[My hand-wired Kinesis Advantage 2 powered by ZMK on a RP2040]]></summary>
         <content type="html"><![CDATA[<p>This is a description of my hand-wired Kinesis Advantage 2 [<a href="https://kinesis-ergo.com/shop/advantage2/">1</a>] running with
 ZMK [<a href="https://zmk.dev/">2</a>] and powered by an Elite-Pi board [<a href="https://splitkb.com/products/elite-pi">3</a>] (with a RP2040 ARM
@@ -40,8 +40,13 @@ support more than 2 layers.</li>
 <center>Kinesis Advantage 2 [<a href="https://kinesis-ergo.com/shop/advantage2/">1</a>]</center></p>
 <h2 id="solution">SOLUTION</h2>
 <p>Keep the case and some of the circuit boards and replace everything
-else ¯\<em>(ツ)</em>/¯.</p>
-<p>There are two major open source firmwares intended for keyboards: QMK [<a href="https://qmk.fm/">5</a>] and
+else ¯\<em>(ツ)</em>/¯. Damien Rajon did something very similar [<a href="https://25.wf/posts/2020-02-21-qinesis.html">5</a>]. The difference
+is that he kept all the keys (except the F-key rows). An alternative solution to
+use a different controller would have been to use a custom PCB such as the <em>kinT
+kinesis keyboard controller</em> made by Michael Stapelberg [<a href="https://michael.stapelberg.ch/posts/2020-07-09-kint-kinesis-keyboard-controller/">6</a>]. I decided against
+this solution because I would still have had to use the original PCBs for the
+keys in the keywells.</p>
+<p>There are two major open source firmwares intended for keyboards: QMK [<a href="https://qmk.fm/">7</a>] and
 ZMK [<a href="https://zmk.dev/">2</a>]. Both of them provide all the features I require. I decided to go with
 ZMK because the configuration looks much cleaner and I like the way you can
 build the firmware in a github action (using docker).</p>
@@ -49,7 +54,7 @@ build the firmware in a github action (using docker).</p>
 <ul>
 <li>The <em>Elite-Pi</em> is a tiny board featuring the new RP2040 ARM microcontroller
 (ZMK does not yet officially support it but there es a pull-request from the
-ZMK author [<a href="https://github.com/zmkfirmware/zmk/pull/1499">6</a>] - Good enough)</li>
+ZMK author [<a href="https://github.com/zmkfirmware/zmk/pull/1499">8</a>] - Good enough)</li>
 <li><em>Gazzew Bobagum</em> silent linear switches</li>
 <li><em>Kailh Hot-Swap sockets</em> (such that I can easily swap the switches if I don't
 like them)</li>
@@ -60,7 +65,7 @@ like them)</li>
 <h2 id="prototype">PROTOTYPE</h2>
 <p>Before I started soldering the real keyboard with 40 keys, I wanted to create a
 prototype to ensure everything works as expected. So I soldered together four
-hot-swap sockets, put switches on them and configured the firmware [<a href="https://github.com/pascal-huber/ohje">7</a>]. Ohje,
+hot-swap sockets, put switches on them and configured the firmware [<a href="https://github.com/pascal-huber/ohje">9</a>]. Ohje,
 what have I signed myself up for‽</p>
 <p><img src="/public/forbidden-advantage/ohje.jpg" alt="ohje" title="ohje" />
 <center>Ohje (Prototype)</center></p>
@@ -82,8 +87,8 @@ which row and column. The grey keys are the ones without a switch.</p>
 <p><img src="/public/forbidden-advantage/soldering.svg" alt="Wiring Diagram" title="Wiring Diagrm" /></p>
 <h2 id="keymap">KEYMAP</h2>
 <p>This is a very difficult decision. There are tons of different layouts to choose
-from. I decided to go with a colemak-dh [<a href="https://colemakmods.github.io/mod-dh/">8</a>] variant and took much inspiration
-from Callum Oakley's layout [<a href="https://github.com/callum-oakley/keymap">9</a>].</p>
+from. I decided to go with a colemak-dh [<a href="https://colemakmods.github.io/mod-dh/">10</a>] variant and took much inspiration
+from Callum Oakley's layout [<a href="https://github.com/callum-oakley/keymap">11</a>].</p>
 <p>The default layer contains most letters. By pressing "w" and "f" at the same
 time produces a "q". I also have some keys for debugging on the thumb cluster.
 This allows me to debug with one hand and scratch my head with the other.</p>
@@ -107,6 +112,10 @@ anything. A board with lanes would probably have easier too.</li>
 <h2 id="resources">RESOURCES</h2>
 <ul>
 <li><a href="https://github.com/pascal-huber/forbidden-advantage">Forbidden Advantage ZMK config</a></li>
+<li><a href="https://michael.stapelberg.ch/posts/2020-07-09-kint-kinesis-keyboard-controller/">kinT kinesis keyboard controller (by Michael
+Stapelberg)</a></li>
+<li><a href="https://25.wf/posts/2020-02-21-qinesis.html">Handwiring a Kinesis Advantage keyboard (by Damien
+Rajon)</a></li>
 <li><a href="https://github.com/callum-oakley/keymap">Callum's layout</a></li>
 <li><a href="https://github.com/AlaaSaadAbdo/zmk-config">AlaaSaadAbdo's config</a></li>
 <li><a href="https://github.com/rafaelromao/keyboards">rafaelromao keymap</a></li>
