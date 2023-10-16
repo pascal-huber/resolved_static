@@ -10,8 +10,7 @@ changefreq: 'daily'
 nofeed: true
 ---
 
-I like computer science, open source and mandarins. I recently finished my
-master's degree in CS at the ETH Zürich and am now looking for a new challenge.
+I like computer science, open source and gin basil smash.
 
 # PROJECTS
 
@@ -36,4 +35,3 @@ Feel free to contact me by email: <pascal.huber@resolved.ch>
 # SEE ALSO
 
  - [github.com/pascal-huber](https://github.com/pascal-huber)
- - [linkedin.com/in/pascal-huber-0x0](https://linkedin.com/in/pascal-huber-0x0)
