@@ -1,7 +1,7 @@
 import Mustache from 'mustache';
 import { readFileSync, mkdirSync, writeFileSync, existsSync, fstat } from 'fs';
 import { join, dirname } from 'path';
-import sass from 'node-sass'
+import * as sass from 'sass'
 import { FeedCreator } from './feed.js'
 import { SitemapCreator } from './sitemap.js'
 import { PageChecker } from './page-checker.js';
@@ -131,7 +131,7 @@ for (const dirJSON of dir_it) {
     const dir = JSON.parse(dirJSON);
     const indexFileRel = join(dir.full, "/index.html");
     const indexFileAbs = join(distPath, indexFileRel);
-    // NOTE: if a directory contains an index.md, there will be no 
+    // NOTE: if a directory contains an index.md, there will be no
     //       automatically created index page
     if (!existsSync(indexFileAbs)) {
         let parentDirectoriesRel = dir.parents;
@@ -180,7 +180,7 @@ const tagIndexContent = await Mustache.render(base_template, {
 await writeFileSync(tagIndexFileAbs, tagIndexContent);
 
 
-// Create a page per tag 
+// Create a page per tag
 for (var tag of tagsCollection) {
     let dirAbs = join(distPath, "_tags", tag.name);
     let fileAbs = join(dirAbs, "index.html")
