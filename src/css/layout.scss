@@ -1,0 +1,56 @@
+
+// fix horizontal "jump" when switching between page with and without scrollbar
+@media only screen and (min-width: 630px) {
+    html {
+        margin-left: calc(100vw - 100%);
+        margin-right: 0;
+    }
+}
+
+
+html, body { height: 100% }
+body {
+    margin: 0;
+}
+
+
+#wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    @media only screen and (min-width: 600px) {
+        min-height: calc(100% - 4rem);
+    }
+}
+
+.header>div {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+}
+
+#content {
+    flex: 1;
+    padding: 1rem;
+}
+
+#footer {
+    padding: 1rem;
+    /* flex for footer content (left and right*/
+    display: flex;
+    justify-content: space-between;
+    div:nth-chiuld(1) {
+        justify-content: flex-start;
+    }
+    div:nth-chiuld(2) {
+        justify-content: flex-end;
+    }
+}
+
+.spacer {
+    @media only screen and (min-width: 600px) {
+    	height: 2rem;
+    }
+}

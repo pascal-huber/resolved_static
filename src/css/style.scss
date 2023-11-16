@@ -1,9 +1,8 @@
 // TODO: configure load_path
 @import "../../node_modules/highlight.js/scss/base16/gruvbox-dark-medium.scss";
+@import "layout.scss";
 @import "colors.scss";
 @import "fonts";
-
-/* SITE LAYOUT */
 
 p {
     margin-top: 0.5rem;
@@ -20,18 +19,17 @@ h6 {
     display:block;
 }
 
-.content > *:not(h2, .header) {
+#content > *:not(h2, .header) {
     margin-left: 1rem;
 }
 
 h2 {
     font-weight: bold;
-    // left: -2rem;
     margin-top: 1.2rem;
     margin-bottom: 0.5rem;
 }
 
-.content {
+#content {
     blockquote {
         margin-left: 2rem;
         padding-left: 4px;
@@ -47,87 +45,11 @@ h2 {
     }
 }
 
-html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    height: calc(100%);
-    @media only screen and (min-width: 600px) {
-	height: calc(100% - 4rem);
-    }
-}
-
-
-.site {
-    @media only screen and (min-width: 600px) {
-        margin: 2rem auto;
-    }
-    min-height: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 0.6rem;
-    padding-right: 0.6rem;
-}
-
-.content {
-    margin: 0.5rem;
-    flex: 1;
-}
-
-.footer {
-    margin: 0.5rem;
-}
-
-/* HEADER and FOOTER */
-
-.header>div {
-    overflow-x: auto;
-    white-space: nowrap;
-    display: flex;
-    // height: 1.5rem;
-    // margin-bottom: 1rem;
-}
-
-.header,
-.footer {
-    padding: 0 0;
-}
-
-.footer {
-    display: flex;
-}
-
-.footer>div {
-    flex: 1;
-    display: flex;
-}
-
-.footer>div:nth-child(1) {
-    justify-content: flex-start;
-}
-
-.footer>div:nth-child(2) {
-    justify-content: flex-end;
-}
-
-.footer {
-    padding-top: 1rem;
-    padding-bottom: 0rem;
-}
-
-/* MISC */
-
 img {
     max-width: 100%;
 }
 
-/* LISTS */
-
+// list style
 .content > ul {
     margin-top: 0.5rem;
     padding-left: 1rem;

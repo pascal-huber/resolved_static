@@ -34,11 +34,12 @@
 }
 
 code {
-    font-size: 14px;
-    border: 1px solid #999;
-    border-radius: 0.3em;
-    padding: 0px 2px;
-    background: #555;
+    color: #fca;
+    /* font-size: 14px; */
+    /* border: 1px solid #999; */
+    /* border-radius: 0.3em; */
+    /* padding: 0px 2px; */
+    /* background: #555; */
 }
 
 .header {
