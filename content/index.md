@@ -24,14 +24,6 @@ Some private projects of mine which may or may not be of use to someone else.
  - [My personal dotfiles](https://github.com/pascal-huber/dotfiles)
  - [Rubik's Cube Cheatsheet](https://github.com/pascal-huber/rubiks)
 
-# NOTEBOOK
-
-Some notes which should not to be confused with facts or guides.
-
- - [Email Authentication](./notebook/email-authentication.html) including SPF,
-   DMARC, DKIM
- - [2FA YubiKey Encryption and Login](./notebook/yubikey.html)
-
 # TAGS ON THIS SITE
 
 <!--##tag_list_all##-->
