@@ -8,6 +8,8 @@ yarn build
 http-server -c0 ./dist/
 ```
 
+To automatically build on changes, use `./watcher.sh`.
+
 ## To get a date
 
 ```

@@ -3,9 +3,11 @@ $background-color: #323027;
 $highlight1-color: #d65d0e;
 $highlight2-color: #b8bb26;
 $highlight3-color: #83a598;
+$highlight4-color: rgb(181, 181, 181);
 $link-color: $text-color;
 $link-color-hover: $highlight2-color;
 $header-footer-color: $highlight3-color;
+$header-menu-color: $highlight4-color;
 
 body {
     background: $background-color;
@@ -15,10 +17,6 @@ body {
 #wrapper {
     background: $background-color;
     box-shadow: 0 0 100px #666;
-}
-
-h1 {
-    color: $highlight1-color;
 }
 
 h2 {
@@ -33,9 +31,34 @@ a:hover {
     color: $link-color-hover;
 }
 
-.header, #footer {
-    *:not(h1) {
-        color: $header-footer-color;
+// .header {
+//     *:not(h1) {
+//         color: $header-menu-color;
+//     }
+// }
+
+#footer {
+    color: $header-footer-color;
+}
+
+#content {
+    .menu {
+        *:not(a) {
+            // color: red;
+            color: #aaa;
+        }
+        a {
+            color: $highlight4-color;
+        }
+        a:hover {
+            color: $highlight1-color;
+        }
+        // .current_site {
+        //     color: gray;
+        // }
+    }
+    .title {
+        color: $highlight1-color;
     }
 }
 

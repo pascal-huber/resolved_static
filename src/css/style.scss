@@ -1,8 +1,9 @@
 // TODO: configure load_path
 @import "../../node_modules/highlight.js/scss/base16/gruvbox-dark-medium.scss";
+@import "../../node_modules/katex/dist/katex.min";
 @import "layout.scss";
 @import "colors.scss";
-@import "fonts";
+@import "fonts.scss";
 
 p {
     margin-top: 0.5rem;
@@ -19,7 +20,7 @@ h6 {
     display:block;
 }
 
-#content > *:not(h2, .header) {
+#content > *:not(.title, h2, .menu) {
     margin-left: 1rem;
 }
 

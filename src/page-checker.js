@@ -10,7 +10,7 @@ export class PageChecker {
         }
         let dateStr = date.toISOString();
         if (set.has(dateStr)) {
-            throw Error("Timestamps must be unique");
+            throw Error("Timestamps must be unique: " + dateStr);
         } else {
             set.add(dateStr);
         }

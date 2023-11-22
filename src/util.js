@@ -1,6 +1,7 @@
 import matter from 'gray-matter';
 import { readFileSync, readdirSync } from 'fs';
 import showdown from 'showdown';
+import showdownKatex from 'showdown-katex';
 import showdownHighlight from 'showdown-highlight';
 import { readdir } from 'fs/promises';
 import { resolve, join, dirname, relative } from 'path';
@@ -11,6 +12,11 @@ const markdownConverter = new showdown.Converter({
     tasklists: true,
     headerLevelStart: 2,
     extensions: [
+        showdownKatex({
+                    // maybe you want katex to throwOnError
+            throwOnError: true,
+            // displayMode: false,
+        }),
         showdownHighlight({
             pre: true
             , auto_detection: true
@@ -20,6 +26,14 @@ const markdownConverter = new showdown.Converter({
 
 function filename(path) {
     return path.replace(/^.*[\\\/]/, '');
+}
+
+export function getDateString(date, locale) {
+    return date.toLocaleDateString(locale, {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+    });
 }
 
 export async function md2html(mdFileAbs) {

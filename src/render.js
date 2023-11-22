@@ -8,6 +8,7 @@ import { PageChecker } from './page-checker.js';
 import {
     md2html,
     getCannonicalURL,
+    getDateString,
     getFiles,
     getDirectoriesToCreate,
     getAllPaths,
@@ -31,7 +32,7 @@ const globalMeta = {
     url: new URL("https://" + domain),
     locale: 'de-CH',
     pageDescription: "This is my personal feed!",
-    generationDate: new Date(Date.now()).toLocaleDateString('de-CH'),
+    generationDate: getDateString(new Date(Date.now()), 'de-CH'),
     lastUpdated: new Date(0),
 };
 globalMeta['faviconURL'] = getCannonicalURL(globalMeta.url, "", "favicon.ico");
@@ -53,6 +54,7 @@ var pagesOfDir = new Map();
 var pagesOfTag = new Map();
 for (var i = 0; i < files.length; i++) {
     let paths = getAllPaths(contentPath, distPath, files[i]);
+    console.log(paths);
     let directories = getDirectoriesToCreate(paths.htmlDirRel);
     let parents = directories.get(paths.htmlDirRel)?.parents;
     directories.forEach((x) => allDirectories.add(JSON.stringify(x)));
@@ -61,13 +63,15 @@ for (var i = 0; i < files.length; i++) {
         ...globalMeta, // NOTE: may be overwritten
         ...meta, // NOTE: is  overwritten
         created: new Date(meta.created),
-        createdStr: new Date(meta.created).toLocaleDateString(globalMeta.locale),
+        createdStr: getDateString(new Date(meta.created), globalMeta.created),
         updated: new Date(meta.updated),
-        updatedStr: new Date(meta.updated).toLocaleDateString(globalMeta.locale),
+        updatedStr: getDateString(new Date(meta.updated), globalMeta.locale),
         content: content,
         parentDirectories: parents,
+        paths: paths,
         url: getCannonicalURL(globalMeta.url, paths.htmlDirRel, paths.htmlFileName),
     }
+    console.log(meta.parentDirectories);
     if (meta.updated > globalMeta.lastUpdated) {
         globalMeta.lastUpdated = meta.updated;
     }
@@ -138,6 +142,7 @@ for (const dirJSON of dir_it) {
         parentDirectoriesRel[parentDirectoriesRel.length - 1].last = true;
         let filesOfDir = pagesOfDir.get(dirname(indexFileAbs));
         let subfolders = subfoldersOf(dir.full);
+        let url = getCannonicalURL(globalMeta.url, dir.full, "index.html");
         const data = {
             ...globalMeta,
             parentDirectories: parentDirectoriesRel,
@@ -145,8 +150,14 @@ for (const dirJSON of dir_it) {
             filesOfDir: filesOfDir,
             title: dir.full + ' index',
             created: globalMeta.generationDate,
-            url: getCannonicalURL(globalMeta.url, dir.full, "index.html"),
+            // TODO: merge this with content pages
+            paths: {
+                htmlFileName: 'index.html',
+                htmlFileRel: url.pathname?.substring(1),
+            },
+            url: url,
         };
+        console.log(data);
         sitemapCreator.addEntry(
             data.url,
             'daily',
@@ -160,7 +171,6 @@ for (const dirJSON of dir_it) {
     }
 }
 
-
 // Create a tag overview page
 const tagIndexData = {
     title: "tags",
@@ -168,13 +178,20 @@ const tagIndexData = {
     tags: tagsCollection,
     ...globalMeta,
 };
-const tagIndexDirAbs = join(distPath, "_tags");
+const tagIndexDirAbs = join(distPath, "tags");
 const tagIndexFileAbs = join(tagIndexDirAbs, "index.html");
 await mkdirSync(tagIndexDirAbs);
 const tagIndexBody = await Mustache.render(tag_index_template, tagIndexData);
 const tagIndexContent = await Mustache.render(base_template, {
     ...tagIndexData,
     content: tagIndexBody,
+    parentDirectories: [
+        {name: "tags", full: "tags/"},
+    ],
+    paths: {
+        htmlFileRel: "/tags/",
+        htmlFileName: "index.html",
+    },
     url: getCannonicalURL(globalMeta.url, "_tags", "index.html"),
 });
 await writeFileSync(tagIndexFileAbs, tagIndexContent);
@@ -182,20 +199,23 @@ await writeFileSync(tagIndexFileAbs, tagIndexContent);
 
 // Create a page per tag
 for (var tag of tagsCollection) {
-    let dirAbs = join(distPath, "_tags", tag.name);
-    let fileAbs = join(dirAbs, "index.html")
-    await mkdirSync(dirAbs);
+    let dirAbs = join(distPath, "tags");
+    let fileAbs = join(dirAbs, tag.name + ".html")
+    // await mkdirSync(dirAbs);
     const data = {
         title: "#" + tag.name,
-        created: new Date(Date.now()).toLocaleDateString('de-CH'),
         parentDirectories: [
-            { name: "tags", full: "_tags/" },
+            { name: "tags", full: "tags/" },
         ],
         pages: tag.pages,
+        paths: {
+            htmlFileRel: "/tags/" + tag.name + ".html",
+            htmlFileName: tag.name + ".html",
+        },
         ...globalMeta,
     };
     const body = await Mustache.render(tag_site_template, data);
-    let url = getCannonicalURL(globalMeta.url, "_tags/" + tag.name, "index.html");
+    let url = getCannonicalURL(globalMeta.url, "tags/", tag.name + ".html");
     const html = await Mustache.render(base_template, {
         ...data,
         content: body,

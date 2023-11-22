@@ -35,23 +35,23 @@
   <div class="spacer"></div>
   <div id="wrapper">
     <div id="content">
-      <div class="header">
-        <div>
-          {{#home}}
-          home
-          {{/home}}
-          {{^home}}
-          <a href="/">home</a>
-          {{/home}}
-          {{#parentDirectories}}
-          &nbsp;❱&nbsp;<a href="/{{full}}">{{name}}</a>
-          {{/parentDirectories}}
-        </div>
-        <div>
-          {{#title}}
-          <h1>{{title}}</h1>
-          {{/title}}
-        </div>
+      <div class="menu">
+        <a href="/">root</a>
+        {{#parentDirectories}}
+        <span>&nbsp;❱&nbsp;</span>
+        <a href="/{{full}}">{{name}}</a>
+        {{/parentDirectories}}
+        {{^home}}
+        <span>&nbsp;❱&nbsp;</span>
+        <a href="/{{paths.htmlFileRel}}">
+        {{paths.htmlFileName}}
+        </a>
+        {{/home}}
+      </div>
+      <div class="title">
+        {{#title}}
+        <h1>{{title}}</h1>
+        {{/title}}
       </div>
       {{{content}}}
     </div>

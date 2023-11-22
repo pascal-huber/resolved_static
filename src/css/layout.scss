@@ -25,15 +25,18 @@ body {
     }
 }
 
-.header>div {
-    overflow-x: auto;
-    white-space: nowrap;
-    display: flex;
-}
-
 #content {
     flex: 1;
+    // TODO: reduce padding for mobile
     padding: 1rem;
+
+    .menu {
+        padding-bottom: 1rem;
+        overflow: hidden;
+        white-space: nowrap;
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
 
 #footer {
