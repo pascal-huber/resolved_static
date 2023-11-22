@@ -189,7 +189,7 @@ const tagIndexContent = await Mustache.render(base_template, {
         {name: "tags", full: "tags/"},
     ],
     paths: {
-        htmlFileRel: "/tags/",
+        htmlFileRel: "tags/",
         htmlFileName: "index.html",
     },
     url: getCannonicalURL(globalMeta.url, "_tags", "index.html"),
@@ -209,7 +209,7 @@ for (var tag of tagsCollection) {
         ],
         pages: tag.pages,
         paths: {
-            htmlFileRel: "/tags/" + tag.name + ".html",
+            htmlFileRel: "tags/" + tag.name + ".html",
             htmlFileName: tag.name + ".html",
         },
         ...globalMeta,
