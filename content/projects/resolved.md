@@ -2,7 +2,7 @@
 title: 'Yet another Static Site Generator'
 description: 'My simple yet powerful static site generator using markdown.'
 created: '2023-01-28T12:00:00+01:00'
-updated: '2023-01-29T23:00:00+01:00'
+updated: '2023-11-22T22:15:00+01:00'
 tags: ['dev']
 keywords: ['static site generator', 'SSG', 'resolved.ch', 'Node.js', 'markdown']
 ---
@@ -28,10 +28,11 @@ looks as follows.
 ```yaml
 ---
 title: 'Yet another Static Site Generator'
-description: 'My simple yet powerful static site generator using markdown.'
+description: 'My simple yet powerful static...'
 created: '2023-01-28T12:00:00+01:00'
 updated: '2023-01-28T12:00:00+01:00'
 tags: ['dev']
+keywords: ['static site generator', 'SSG', ...]
 ---
 
 Creating a homepage...
@@ -43,14 +44,6 @@ Creating a homepage...
 <!--##tag_list##-->
 
 ```
-
-# TODOS
-
- - [ ] handle 404
- - [ ] markdown: target=_blank for external links
- - [ ] markdown: check out other markdown variants
- - [ ] fonts: generate fonts with all required glyphs
- - [ ] feed: decide if I want rss2.0 and/or json feeds
 
 # SOURCE CODE
 
