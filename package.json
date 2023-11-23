@@ -1,6 +1,6 @@
 {
   "name": "resolved_simple",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "author": "Pascal Huber <pascal.huber@resolved.ch>",
   "license": "MIT",
