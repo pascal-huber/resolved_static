@@ -53,11 +53,13 @@ code {
     }
 }
 
-h1 {
-    display: inline;
-    font-weight: bold;
-    font-style: normal;
-    font-size: 18px;
+.title {
+    h1 {
+        display: inline;
+        font-weight: bold;
+        font-style: normal;
+        font-size: 1.2rem;
+    }
 }
 
 h2 {
