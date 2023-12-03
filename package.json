@@ -6,17 +6,18 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "rm -rf dist && node ./src/render.js && cp -r static/* dist/ && touch dist/.nojekyll"
+    "build": "rm -rf dist && node ./src/main.js && cp -r static/* dist/ && touch dist/.nojekyll"
   },
   "devDependencies": {
     "@types/node": "^20.6.5",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.8.0",
+    "js-yaml": "^4.1.0",
     "mustache": "^4.2.0",
     "sass": "^1.69.5",
-    "showdown-katex": "^0.8.0",
     "showdown-highlight": "^3.1.0",
+    "showdown-katex": "^0.8.0",
     "sitemap": "^7.1.1",
     "svgo": "^3.0.2"
   }

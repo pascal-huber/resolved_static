@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,13 +12,13 @@
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
-    href="/public/iosevka-term-slab-regular.subset.woff2">
+    href="/public/fonts/iosevka-term-slab-regular.subset.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
-    href="/public/iosevka-term-slab-bold.subset.woff2">
+    href="/public/fonts/iosevka-term-slab-bold.subset.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
-    href="/public/iosevka-term-slab-italic.subset.woff2">
+    href="/public/fonts/iosevka-term-slab-italic.subset.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin="anonymous"
-    href="/public/iosevka-term-slab-bolditalic.subset.woff2">
+    href="/public/fonts/iosevka-term-slab-bolditalic.subset.woff2">
   <link rel="stylesheet" href="/public/style.css">
   <title>{{title}} - {{pageTitle}}</title>
   {{#description}}
@@ -30,21 +29,21 @@
   <meta name="keywords" content="{{keywords}}">
   {{/keywords.length}}
 </head>
-
 <body>
   <div class="spacer"></div>
   <div id="wrapper">
     <div id="content">
       <div class="menu">
+        <span>☰&nbsp;</span>
         <a href="/">root</a>
         {{#parentDirectories}}
         <span>&nbsp;❱&nbsp;</span>
         <a href="/{{full}}">{{name}}</a>
         {{/parentDirectories}}
-        <span>&nbsp;❱&nbsp;</span>
+        <!--<span>&nbsp;❱&nbsp;</span>
         <span>
         {{paths.htmlFileName}}
-        </span>
+        </span>-->
       </div>
       <div class="title">
         {{#title}}
@@ -55,7 +54,7 @@
     </div>
     <div id="footer">
       <div>
-        {{updatedStr}}
+        {{ createdStr }}
       </div>
       <div>
         {{author}}
@@ -64,5 +63,4 @@
   </div>
   <div class="spacer"></div>
 </body>
-
 </html>

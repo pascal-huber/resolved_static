@@ -1,25 +1,25 @@
-import matter from 'gray-matter';
-import { readFileSync, readdirSync } from 'fs';
+import * as yaml from 'js-yaml'
+import { Page } from './models/page.js';
+import * as sass from 'sass'
+import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync } from 'fs';
 import showdown from 'showdown';
 import showdownKatex from 'showdown-katex';
 import showdownHighlight from 'showdown-highlight';
 import { readdir } from 'fs/promises';
-import { resolve, join, dirname, relative } from 'path';
+import { resolve, join, dirname, relative, extname } from 'path';
 
-const markdownConverter = new showdown.Converter({
+export const markdownConverter = new showdown.Converter({
     strikethrough: true,
     tables: true,
     tasklists: true,
     headerLevelStart: 2,
     extensions: [
         showdownKatex({
-                    // maybe you want katex to throwOnError
             throwOnError: true,
-            // displayMode: false,
         }),
         showdownHighlight({
-            pre: true
-            , auto_detection: true
+            pre: true,
+            auto_detection: true,
         }),
     ]
 });
@@ -36,20 +36,17 @@ export function getDateString(date, locale) {
     });
 }
 
-export async function md2html(mdFileAbs) {
-    const markdown = readFileSync(mdFileAbs, { encoding: 'utf8', flag: 'r' });
-    let { content, data } = await matter(markdown);
-    return {
-        meta: data,
-        content: markdownConverter.makeHtml(content)
-    };
-}
-
 export async function getFiles(dir) {
     const dirents = await readdir(dir, { withFileTypes: true });
     const files = await Promise.all(dirents.map((dirent) => {
         const res = resolve(dir, dirent.name);
-        return dirent.isDirectory() ? getFiles(res) : res;
+        if(dirent.isDirectory()){
+            return getFiles(res);
+        } else if(extname(res) == ".md"){
+            return res; 
+        } else {
+            return [];
+        }
     }));
     return Array.prototype.concat(...files);
 }
@@ -89,7 +86,7 @@ export function getCannonicalURL(baseURL, htmlDirRel, htmlFileName) {
     }
 }
 
-export function getAllPaths(contentPath, distPath, mdFileAbs) {
+export function getPathsOfFile(contentPath, distPath, mdFileAbs) {
     let paths = {};
     paths['mdFileAbs'] = mdFileAbs;
     paths['mdFileRel'] = relative(contentPath, mdFileAbs);
@@ -115,4 +112,113 @@ export function addToMapCollection(map, value, keys) {
             map.set(keys[i], [value]);
         }
     }
+}
+
+export async function processMarkdownFiles(
+    allDirectories,
+    pagesOfDir,
+    pagesOfTag,
+    feedCreator,
+    sitemapCreator,
+    siteSettings,
+){
+    var files = await getFiles(siteSettings.contentPath);
+    for (var i = 0; i < files.length; i++) {
+        let paths = getPathsOfFile(siteSettings.contentPath, siteSettings.distPath, files[i]);
+        let directories = getDirectoriesToCreate(paths.htmlDirRel);
+        let parents = directories.get(paths.htmlDirRel)?.parents;
+        directories.forEach((dir) => allDirectories.add(JSON.stringify(dir)));
+        let page = new Page(siteSettings);
+        await page.createFromMdFile(
+            paths, 
+            parents, 
+        );
+        feedCreator.addPostToFeed(page);
+        sitemapCreator.addEntry(page);
+        addToMapCollection(pagesOfTag, page, page.tags);
+        addToMapCollection(pagesOfDir, page, [paths.htmlDirAbs]);
+    }
+}
+
+export function readSiteSettings(projectPath){
+    let contentPath = join(projectPath, "content");
+    let distPath = join(projectPath, "dist");
+    const siteSettingsFile = readFileSync(
+        join(contentPath, "site.yml"),
+        { encoding: 'utf8', flag: 'r' }
+    );
+    let siteSettings = yaml.load(siteSettingsFile);
+    return {
+        ...siteSettings,
+        contentPath: contentPath,
+        distPath: distPath,
+        faviconURL: getCannonicalURL(siteSettings.siteUrl, "", "favicon.ico"),
+        atomURL: getCannonicalURL(siteSettings.siteUrl, "", "atom.xml"),
+        sitemapPath: join(distPath, "sitemap.xml"),
+        atomPath: join(distPath, "atom.xml"),
+    };
+}
+
+export function readTags(pagesOfTag){
+    let tagsCollection = [];
+    const tag_it = pagesOfTag[Symbol.iterator]();
+    for (const tag of tag_it) {
+        tagsCollection.push({
+            name: tag[0],
+            pages: tag[1],
+        });
+    }
+    if(tagsCollection.length > 0){
+        tagsCollection.sort((a, b) => a.name < b.name ? -1 : 1);
+        tagsCollection[tagsCollection.length - 1].last = true;
+    }
+    return tagsCollection;
+}
+
+export async function writePages(pagesOfDir, tagsCollection, distPath){
+    const pages_it = pagesOfDir[Symbol.iterator]();
+    for (const pages of pages_it) {
+        for (var i = 0; i < pages[1].length; i++) {
+            await pages[1][i].write(
+                distPath,
+                pagesOfDir,
+                tagsCollection,
+            );
+        }
+    }
+}
+
+export async function writeTagPages(tagsCollection, pagesOfDir, siteSettings){
+    for (var tag of tagsCollection) {
+        let fileAbsMd = join(siteSettings.contentPath, "tags", tag.name + ".md")
+        let page = new Page(siteSettings);
+        let paths = getPathsOfFile(siteSettings.contentPath, siteSettings.distPath, fileAbsMd);
+        await page.createFromTag(tag, paths, siteSettings);
+        await page.write(siteSettings.distPath, pagesOfDir, tagsCollection);
+        addToMapCollection(pagesOfDir, page, [page.paths.htmlDirAbs]);
+    }
+}
+
+export async function writeMissingIndexPages(allDirectories, pagesOfDir, sitemapCreator, siteSettings){
+    const dir_it = allDirectories[Symbol.iterator]();
+    for (const dirJSON of dir_it) {
+        const dir = JSON.parse(dirJSON);
+        const indexFileRel = join(dir.full, "/index.html");
+        const indexFileAbs = join(siteSettings.distPath, indexFileRel);
+        if (!existsSync(indexFileAbs)) {
+            let filesOfDir = pagesOfDir.get(dirname(indexFileAbs));
+            let page = new Page(siteSettings);
+            await page.createFromDir(dir, filesOfDir, siteSettings.distPath);
+            await page.write(siteSettings.distPath, pagesOfDir);
+            sitemapCreator.addEntry(page);
+        }
+    }
+}
+
+export function writeStyleSheet(siteSettings){
+    let sassResult = sass.compile("./src/css/style.scss") ;
+    const cssDirAbs = join(siteSettings.distPath, "public");
+    mkdirSync(cssDirAbs);
+    const cssFileAbs = join(cssDirAbs, "style.css");
+    writeFileSync(cssFileAbs, sassResult.css);
 }

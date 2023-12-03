@@ -6,7 +6,7 @@ export class PageChecker {
 
     #checkTimestamp(set, date) {
         if (!(date instanceof Date) || isNaN(date)) {
-            throw Error("invalid date");
+            throw Error("invalid date: " + date);
         }
         let dateStr = date.toISOString();
         if (set.has(dateStr)) {
@@ -24,9 +24,9 @@ export class PageChecker {
 
     check(page) {
         try {
-            this.#checkTimestamp(this.uniqueTimestampsCreated, page.meta.created);
-            this.#checkTimestamp(this.uniqueTimestampsUpdated, page.meta.updated);
-            this.#checkIsOlder(page.meta.created, page.meta.updated);
+            this.#checkTimestamp(this.uniqueTimestampsCreated, page.created);
+            this.#checkTimestamp(this.uniqueTimestampsUpdated, page.updated);
+            this.#checkIsOlder(page.created, page.updated);
         } catch (error) {
             console.error("failed to validate page " + page.paths.mdFileAbs);
             console.error(error);

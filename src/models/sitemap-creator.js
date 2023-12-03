@@ -9,16 +9,14 @@ export class SitemapCreator {
         this.hostname = url.href;
     }
 
-    addEntry(
-        url,
-        changefreq = 'monthly',
-        priority = 0.5,
-    ) {
-        this.entries.push({
-            url: url.href,
-            priority: priority,
-            changefreq: changefreq,
-        });
+    addEntry(page){
+        if(!page.noindex) {
+            this.entries.push({
+                url: page.url.href,
+                changefreq: page.changefreq,
+                priority: page.priority || 0.5,
+            });
+        }
     }
 
     async writeSitemap(file) {

@@ -1,0 +1,1392 @@
+---
+created: '2023-01-28T13:30:35+01:00'
+updated: '2023-04-21T14:28:00+01:00'
+home: true
+siteMapPriority: 1.0
+title: 'Pascal Huber'
+description: "I like computer science, open source and mandarins."
+keywords: ["Computer Science", "IT", "Linux", "Open Source", "VoteLog", "svlog", "Zurich"]
+changefreq: 'daily'
+nofeed: true
+---
+
+I like computer science, open source and mandarins. I recently finished my
+master's degree in CS at the ETH Zürich and am now looking for a new challenge.
+
+# PROJECTS
+
+Some private projects of mine which may (or may not) be of use to someone else.
+
+ - [svlog](./projects/svlog.html) to query socklog log files on Void Linux
+ - [VoteLog](./projects/votelog.html) to keep track on my votes on referendums and initiatives
+ - [Typst Letter Template](https://github.com/pascal-huber/typst-letter-template) for Swiss and DIN 5008 letters
+ - [Forbidden Advantage](./projects/forbidden_advantage.html)
+ - [Yet another Static Site Generator ](./projects/resolved.html)
+ - [My personal dotfiles](https://github.com/pascal-huber/dotfiles)
+ - [Rubik's Cube Cheatsheet](https://github.com/pascal-huber/rubiks)
+
+# TAGS ON THIS SITE
+
+<!--##tag_list_all##-->
+
+# CONTACT
+
+Feel free to contact me by email: <pascal.huber@resolved.ch>
+
+# SEE ALSO
+
+ - [github.com/pascal-huber](https://github.com/pascal-huber)
+ - [linkedin.com/in/pascal-huber-0x0](https://linkedin.com/in/pascal-huber-0x0)
+---
+title: Email Authentication with SPF, DKIM, DMARC and ARC
+created: '2023-05-22T19:00:00+01:00'
+updated: '2023-05-22T19:00:01+01:00'
+tags: ['email']
+---
+
+<!-- Motivation -->
+
+SPF, DKIM, DMARC and ARC are tools to help mail servers decide whether a email
+is legitimate and take appropriate measures if not.
+
+<!-- Problem -->
+While they seem simple to understand, they often cause confusion about what they
+actually check.
+
+<!-- Approach -->
+
+To understand the topic, I wrote down the problems they solve, how they work in
+isolation and together and what their limiations are.
+
+<!-- Result -->
+<!-- Conclusion -->
+
+<!-- good illustration -->
+https://www.youtube.com/watch?v=V9kajr5dESs
+
+# DISCLAIMER
+
+This document are the notes I made when trying to understand the topic myself.
+This is not a guide on how to configure them.
+
+The descriptions of the protocols are reduced to the mandatory steps.
+
+SPF, DKIM and DMARC all require information obtained from DNS servers. DNS
+secruity and verifying the integrity of the DNS answers is another rather
+complex topic. Therefore we assume integrity of all queries.
+
+# PROBLEM 1: SENDER AUTHENTICITY (SPOOFING)
+
+Assume we have none of aforementioned protocols and Bob, who has an email
+account `bob@b.org` hosted at `mail.com`, sends an email to Alice's gmail
+account `alice@gmail.com`. The email may look as follows:
+
+```text
+┌─────────────────────────┐
+│ HELO mail.com           │
+│ MAIL FROM: <bob@b.org>  │
+│ RCPT TO: <a@gmail.com>  │
+│┌───────────────────────┐│
+││ From: bob@b.org       ││
+││ To:   alice@gmail.com ││
+││ Subject: hi           ││
+││                       ││
+││ I like you!           ││
+│└───────────────────────┘│
+└─────────────────────────┘
+```
+
+Eve, who does not approve of Bob's liking of Alice, can send the following email
+to Gmail. 
+
+```text
+┌─────────────────────────┐
+│ HELO mail.com           │ <-- SMTP accepts any name
+│ MAIL FROM: <bob@b.org>  │
+│ RCPT TO: <a@gmail.com>  │
+│┌───────────────────────┐│
+││ From: bob@b.org       ││
+││ To:   alice@gmail.com ││
+││ Subject: hi           ││
+││                       ││
+││ I hate you!           ││
+│└───────────────────────┘│
+└─────────────────────────┘
+```
+
+Gmail has no way of telling if this message is legitimate or not.
+
+# SPF (SENDER POLICY FRAMEWORK)
+
+SPF solves this problem. The domain owner can define which IP addresses are
+allowed to send emails by adding an SPF record in the DNS zone. The receiving
+mail server queries the SPF record of the domain of the sender's email address
+and verifies that the IP address the email was received from is allowed to send
+emails for this domain.
+
+```text
+          ┌────────────────────SMTP─┐
+          │ HELO mail.com           │
+          │ MAIL FROM: <bob@b.org>  │ <- SPF checks if
+          │ RCPT TO: <a@gmail.com>  │    b.org allows
+          │┌──────────────────DATA─┐│    1.2.3.4 to
+          ││ From: bob@b.org       ││    send emails
+          ││ To:   alice@gmail.com ││
+          ││ Subject: hi           ││
+          ││                       ││
+          ││ I like you!           ││
+          │└───────────────────────┘│
+          └─────────────────────────┘
+mail.com -------------------------------> gmail.com
+IP: 1.2.3.4                               IP: 5.6.7.8
+```
+
+In the SPF record we can mark IP addresses or IP adress ranges as `Pass` (e.g.
+`+ip4:1.2.3.4`) or `Fail` (e.g. `-ip4:1.2.3.4`). Furthermore, there is a
+`Neutral` qualifier (e.g. `?ip4:1.2.3.4`) which (explicity) says nothing about
+the IP and a `SoftFail` (e.g. `~ip4:1.2.3.4`) which tells the receiver that
+mails received from those IP addresses should be marked as spam.
+
+
+Bob's SPF record looks as follows. It allowes only IP address `1.2.3.4`, the IP
+of `mail.org`, to send emails originating from `b.org`. When Gmail now receives
+an email addressed to `bob@b.org`, it can query the SPF record from Bob's DNS
+server. Because Eve's email was not send from this IP address, SPF validation
+fails.
+
+```shell
+$ dig +short TXT b.org
+"v=spf1 ip4:1.2.3.4 -all"
+```
+
+# PROBLEM 2: AUTOMATIC FORWARDING
+
+Unfortunately, this does not always work. Assume Alice does no longer wants to
+use Gmail so she created a hotmail account `alice@hotmail.com`. In case someone
+still writes an email to her Gmail account, she set up an automatic forwarding
+from `alice@gmail.com` to `alice@hotmail.com`. If Bob now sends a (legitimate)
+email to `alice@gmail.com`, SPF validation at Hotmail will fail as Gmail's IP
+addresses are not in Bob's SPF record.
+
+# PROBLEM 3: EMAIL INTEGRITY
+
+Furthermore, Hotmail has to trust all intermediate mail servers (Gmail in the
+example) because they could have (maliciously) changed some email headers or
+even the content of the email. Hotmail has no way of verifying the integrity of
+the email.
+
+# DKIM (DOMAINKEYS IDENTFIED MAIL)
+
+DKIM attempts to solve both of those problems using public key cryptography. The
+idea is that the sending mail server owns a key pair and the domain owner puts
+the public key into his DNS zone. The sending mail server signs the email
+(including the important header fields) and adds the signature to it email
+together with the information how to query the public key. The receiver can then
+query the correct public key and verify the signature.
+
+The steps of the sending mail server:
+
+1. Compute the canonicalized version of the message which is the original
+   message without the header fields which are subject to change before the
+   email reaches its final destination (e.g. `Return-Path`).
+1. Compute the hash `bh` of the cononicalized message.
+1. Compute the signature `b` of the hash `bh` using the private key.
+1. Insert the `DKIM-Signature` header field to the original message.
+
+In our example, Bob's email provider will add a `DKIM-Signature` header field as
+shown below.
+
+
+<!-- 1. Bobs provider, mail.com, owns a key pair consisting of private key `pk` and -->
+<!--    public key `p`. The message (including the header fields `from`, `to` and -->
+<!--    `subject`) is signed using the private key `pk` and all necessary information -->
+<!--    for the receiver to verify the signature is added to the email. -->
+
+
+```text
+From: bob@b.org
+To: alice@gmail.com
+Subject: hi
+DKIM-Signature:
+  v=1;                // version
+  a=rsa-sha256;       // signing algorithm
+  d=b.org;            // signing domain identifier (SDID)
+  s=ids;              // selector
+  h=from:to:subject;  // header fields
+  bh=xfB4...          // body hash
+  b=r3Ay...;          // signature of headers and body
+
+I like you!
+```
+
+The receiver performs the following steps to verify that the relevant parts of
+the email have not changed after the signatre was added.
+
+<!-- rfc 6376, chapter 6.1.3.  -->
+
+1. Compute the canonicalized version of the message which includes only the
+   header fields defined in `h`.
+1. Computes the body hash of the canoicalized version and verify if it is
+   identical to the one in the `bh` value in the `DKIM-Signature`. If it doens't
+   match, DKIM verification fails.
+1. Query the public key using the `d` and `s` values in the `DKIM-Signature`.
+
+    ```shell
+    $ dig +short TXT ids._domainkey.b.org
+    "v=DKIM1; k=rsa; p=bfX7... ;"
+    ```
+1. Validate the signature `b` in the `DKIM-Signature`. 
+
+# PROBLEM 4: DKIM ALIGNMENT
+
+You have probably noticed this one. The DKIM signature contains instructions how
+the receiver should query the public key which makes the entire exercise
+useless. DKIM does not specify how the receiver should validate the authenticity
+of the public key. In other words, DKIM only checks if the email has been
+tampered with after it was signed.
+
+Eve could simply generate an RSA key pair, upload the public key to her DNS zone
+`eve.org`, sign the message with the private key and send it to Gmail. The
+following email would successfully pass DKIM although it is (obviously)
+illegitimate.
+
+```text
+From: bob@b.org
+To: alice@gmail.com
+Subject: hi
+DKIM-Signature:
+  v=1;                // version
+  a=rsa-sha256;       // signing algorithm
+  d=eve.org;          // signing domain identifier (SDID)
+  s=id_eve;           // selector
+  h=from:to:subject;  // header fields
+  bh=xA84...          // body hash
+  b=faS9...;          // signature of headers and body
+
+I hate you!
+```
+
+# PROBLEM 5: SPF ALIGNMENT
+
+There is a similar issue with SPF. When a mail server receives an email, it adds
+a `Return-Path` header field containing an address to which an error message
+should be sent if something goes wrong and the email can't be delivered
+(bouncing).
+
+???
+
+# PROBLEM 6: REPORTING
+
+The domain owner so far has no way of determining if someone is trying to
+maliciously send emails in his name. It would be nice if Bob is notified when
+DKIM and/or SPF fails.
+
+# DMARC (DOMAIN MESSAGE AUTHENTICATION REPORTING)
+
+DMARC solves all those problems. The domain owner can put a DMARC record in the
+DNS zone to define how strict a receiver should verify DKIM and SPF alignment,
+what should happen when the validation fails and how the domain owner should be
+informed about the result. For a message to pass DMARC, either SPF or DKIM must
+pass including alignment.
+
+Bob's DMARC record looks as follows. When DMARC fails, the email should be
+rejected (`p=reject`). DKIM alignment should be checked strictly (`adkim=s`),
+i.e. the domain `b` found in the `DKIM-Signature` header has to match the domain
+of the sender in the `From` header *exactly*. SPF alignment is set to relaxed
+(`aspf=r`), i.e. the domain in the `From` header may be a subdomain of the
+domain in the `Return-Path` or vice versa. Furthermore, Bob wants to be notified
+when DMARC fails (`ruf=...`). Also note that there are more options one can set
+in DMARC.
+
+```shell
+$ dig +short TXT _dmarc.b.org
+"v=DMARC1;                // version
+ p=reject;                // policy
+ adkim=s;                 // alignment mode for DKIM
+ aspf=r;                  // alignment mode for SPF
+ ruf=mailto:dmarc@b.org;  // reporting URI for forensic reports
+```
+
+# DO WE STILL NEED SPF?
+
+DKIM without DMARC's DKIM alignment verifies only the integrity of the email.
+With the alignment check, however, we know that the public key queried by the
+receiver is legitimate as the DNS zone is under the control of the domain owner
+and only legitimate mail servers (the ones which are in the SPF record) have the
+corresponding private key. We therefore also have authenticity.
+
+Technically, we could drop SPF. A reasons to still add an SPF record is that a
+mail server may not (yet) support DKIM or has limited computing power and wants
+to skip the computationally more expensive signature verification. Moreover,
+setting up SPF is easy and doesn't hurt.
+
+# PROBLEM 7: MAILING LISTS
+
+Unfortunately, there are legitimate cases where the DMARC, SPF, DKIM combo
+fails. Alice is subscribed to the mailing list `list@l.org` with her old Gmail
+address. When sending an email to this list, the mailing list software
+automatically adds a prefix to the subject line and appends a link to
+unsubscribe from the mailing list at the end of the message body.
+
+SPF will of course fail because the email is forwarded (twice). But now DKIM
+also fails because both the subject and the message body were included in the
+DKIM signature. Therefore DMARC fails and the messages will not land in Alice's
+inbox.
+
+<!-- https://www.rfc-editor.org/rfc/rfc6377 -->
+
+# ARC (AUTHENTICATED RECEIVED CHAIN)
+
+
+ARC attempts to solve this problem. The idea of ARC is that every server which
+validates and forwards the email adds their result and to the email. 
+
+If DMARC fails at the receiving mail server, those email headers can be used to
+...
+
+Before the sealer modifies the message content or headers, it creates the new
+ARC Set consisting of three header fields.
+
+
+
+       A.  Generate and attach an ARC-Authentication-Results header
+           field as defined in Section 4.1.1.
+
+       B.  Generate and attach an ARC-Message-Signature header field as
+           defined in Section 4.1.2.
+
+       C.  Generate and attach an ARC-Seal header field using the AS
+           definition found in Section 4.1.3, the prescribed headers
+           defined in Section 5.1.1, and the Chain Validation Status as
+           determined during ARC validation.
+
+Intermediate mail servers add their
+authentication results in a *ARC-Authentication-Results* header field together
+with an *ARC-Message-Signature* header (a DKIM-like signature of the message and
+headers except the ARC headers) and an *ARC-Seal* header (a DKIM-like signature
+of the previous *ARC-Seal* headers).
+           
+The receiver:
+1. Checks that no ARC-Message-Signature reports "failed". Furthermore, they must
+   be complete and the instance number may not contain gaps.
+1. Validate the ARC-Message-Signature with the highest instance number. If it
+   fails, then ARC fails.
+1. Validate each ARC-Seal beginning with the greatest instance value in
+   decreasing order. If one of them fails, then ARC fails.
+
+
+When Hotmail now receives a mail from the mailing list, it can verify the ARC
+headers and maybe come to the conclusion that the mail is legititmate, even
+though DMARC failed.
+   
+```text
+ARC-Authentication-Results: 
+  i=1; mx.microsoft.com 1; 
+  spf=pass smtp.mailfrom=company.com; 
+  dmarc=pass action=none 
+  header.from=company.com;
+  dkim=pass header.d=company.com; 
+  arc=none
+
+ARC-Seal: 
+  i=1; 
+  a=rsa-sha256; 
+  s=arcselector1; 
+  d=l.org; 
+  cv=none;
+  b=aFxe...;
+ 
+ARC-Message-Signature: 
+  i=1; 
+  a=rsa-sha256; 
+  c=relaxed/relaxed; 
+  d=l.org;
+  s=arcselector1;
+  h=from:to:subject;
+  bh=4VFa;
+  b=F3w8..;
+```
+
+ https://powerdmarc.com/what-is-arc/
+
+
+https://www.validity.com/blog/how-to-explain-authenticated-received-chain-arc-in-plain-english/
+
+# DKIM ATPS (AUTHORIZED THIRD-PARTY SIGNATURES)
+
+When inpsecting some of the emails in my inbox I noticed that some emails don't
+have DKIM alignment where the domain in the DKIM-Signature is of the form
+`d=company.onmicrosoft.com` while the sender domain is `company.com`.
+Furthermore, the `Authentication-Result` contained `dkim-atps=neutral`.
+
+There is an exception here, namely ATPS which 
+
+
+
+# RESOURCES
+
+ - [RFC 6541: DomainKeys Identified Mail (DKIM) Authorized Third-Party
+   Signatures](https://www.rfc-editor.org/rfc/rfc6541.html)
+ - [RFC 8617: The Authenticated Received Chain (ARC)
+   Protocol](https://www.rfc-editor.org/rfc/rfc8617.html)
+ - [RFC 7208: Sender Policy Framework
+   (SPF)](https://www.rfc-editor.org/rfc/rfc7208)
+ - [RFC 7489: Domain-based Message Authentication, Reporting, and Conformance
+ (DMARC) ](https://www.rfc-editor.org/rfc/rfc7489.html)
+
+ATPS instructions
+https://serverfault.com/questions/1082302/create-a-dkim-key-to-provide-to-a-3rd-party-so-we-can-send-as-them
+
+Microsoft guid on ATPS
+https://learn.microsoft.com/en-us/microsoft-365/security/office-365-security/email-authentication-dkim-configure?view=o365-worldwide
+
+
+# OPEN  QUESTIONS
+
+ - Why SPF Alignment (when does SPF succeed but alignment doesn't?)
+ - How does ARC work exactly?
+ 
+# TODOS
+ - add info about authetnication-results header field
+---
+title: 'Markdown Sample'
+noindex: true
+nofeed: true
+created: '2023-01-29T15:00:00+01:00'
+updated: '2023-01-29T15:00:00+01:00'
+tags: ['hidden']
+---
+
+this is a modified version of
+[this](https://gist.github.com/allysonsilva/85fff14a22bbdf55485be947566cc09e).
+
+# Headers
+
+```
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------
+```	
+
+# h1 Heading
+## h2 Heading
+### h3 Heading
+#### h4 Heading
+##### h5 Heading
+###### h6 Heading
+
+Alternatively, for H1 and H2, an underline-ish style:
+
+Alt-H1
+======
+
+Alt-H2
+------
+
+------
+
+# Emphasis
+
+```
+Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Strikethrough~~
+```
+
+Emphasis, aka italics, with *asterisks* or _underscores_.
+
+Strong emphasis, aka bold, with **asterisks** or __underscores__.
+
+Combined emphasis with **asterisks and _underscores_**.
+
+Strikethrough uses two tildes. ~~Scratch this.~~
+
+**This is bold text**
+
+__This is bold text__
+
+*This is italic text*
+
+_This is italic text_
+
+~~Strikethrough~~
+
+------
+
+# Lists
+
+```
+1. First ordered list item
+2. Another item
+⋅⋅* Unordered sub-list.
+1. Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list
+4. And another item.
+
+⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+
+⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+
+1. Make my changes
+    1. Fix bug
+    2. Improve formatting
+        - Make the headings bigger
+2. Push my commits to GitHub
+3. Open a pull request
+    * Describe my changes
+    * Mention all the members of my team
+        * Ask for feedback
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+```
+
+1. First ordered list item
+2. Another item
+⋅⋅* Unordered sub-list.
+1. Actual numbers don't matter, just that it's a number
+⋅⋅1. Ordered sub-list
+4. And another item.
+
+⋅⋅⋅You can have properly indented paragraphs within list items. Notice the blank line above, and the leading spaces (at least one, but we'll use three here to also align the raw Markdown).
+
+⋅⋅⋅To have a line break without a paragraph, you will need to use two trailing spaces.⋅⋅
+⋅⋅⋅Note that this line is separate, but within the same paragraph.⋅⋅
+⋅⋅⋅(This is contrary to the typical GFM line break behaviour, where trailing spaces are not required.)
+
+* Unordered list can use asterisks
+- Or minuses
++ Or pluses
+
+1. Make my changes
+    1. Fix bug
+    2. Improve formatting
+        - Make the headings bigger
+2. Push my commits to GitHub
+3. Open a pull request
+    * Describe my changes
+    * Mention all the members of my team
+        * Ask for feedback
+
++ Create a list by starting a line with `+`, `-`, or `*`
++ Sub-lists are made by indenting 2 spaces:
+  - Marker character change forces new list start:
+    * Ac tristique libero volutpat at
+    + Facilisis in pretium nisl aliquet
+    - Nulla volutpat aliquam velit
++ Very easy!
+
+------
+
+# Task lists
+
+```
+- [x] Finish my changes
+- [ ] Push my commits to GitHub
+- [ ] Open a pull request
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [x] this is a complete item
+- [ ] this is an incomplete item
+```
+
+- [x] Finish my changes
+- [ ] Push my commits to GitHub
+- [ ] Open a pull request
+- [x] @mentions, #refs, [links](), **formatting**, and <del>tags</del> supported
+- [x] list syntax required (any unordered or ordered list supported)
+- [ ] this is a complete item
+- [ ] this is an incomplete item
+
+------
+
+# Ignoring Markdown formatting
+
+You can tell GitHub to ignore (or escape) Markdown formatting by using \ before the Markdown character.
+
+```
+Let's rename \*our-new-project\* to \*our-old-project\*.
+```
+
+Let's rename \*our-new-project\* to \*our-old-project\*.
+
+------
+
+# Links
+
+```
+[I'm an inline-style link](https://www.kernel.org)
+
+[I'm an inline-style link with title](https://www.kernel.org "Linux")
+
+[I'm a reference-style link][Arbitrary case-insensitive reference text]
+
+[I'm a relative reference to a file](../public/man.jpg)
+
+[You can use numbers for reference-style link definitions][1]
+
+Or leave it empty and use the [link text itself].
+
+URLs and URLs in angle brackets will automatically get turned into links.
+http://www.kernel.org or <http://kernel.org> and sometimes
+example.com (but not on Github, for example).
+
+Some text to show that the reference links can follow later.
+
+[arbitrary case-insensitive reference text]: https://www.kernel.org
+[1]: http://kernel.org
+[link text itself]: http://www.kernel.org.
+```
+
+[I'm an inline-style link](https://www.kernel.org)
+
+[I'm an inline-style link with title](https://www.kernel.org "Linux")
+
+[I'm a reference-style link][Arbitrary case-insensitive reference text]
+
+[I'm a relative reference to a file](../public/man.jpg)
+
+[You can use numbers for reference-style link definitions][1]
+
+Or leave it empty and use the [link text itself].
+
+URLs and URLs in angle brackets will automatically get turned into links.
+http://www.kernel.org or <http://kernel.org> and sometimes
+example.com (but not on Github, for example).
+
+Some text to show that the reference links can follow later.
+
+[arbitrary case-insensitive reference text]: https://www.kernel.org
+[1]: http://kernel.org
+[link text itself]: http://www.kernel.org.
+
+------
+
+# Images
+
+```
+Here's our logo (hover to see the title text):
+
+Inline-style:
+![alt text](/public/man.jpg "A man 1")
+
+Reference-style:
+![alt text][logo]
+
+[logo]: /public/man.jpg "A man 2"
+
+![Minion](/public/man.jpg "A man 3")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: /public/man.jpg  "A man 4"
+```
+
+Here's our logo (hover to see the title text):
+
+Inline-style:
+![alt text](/public/man.jpg "A man 1")
+
+Reference-style:
+![alt text][logo]
+
+[logo]: /public/man.jpg "A man 2"
+
+![Minion](/public/man.jpg "A man 3")
+
+Like links, Images also have a footnote style syntax
+
+![Alt text][id]
+
+With a reference later in the document defining the URL location:
+
+[id]: /public/man.jpg  "A man 4"
+
+
+------
+
+# [Footnotes](https://github.com/markdown-it/markdown-it-footnote)
+
+```
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+```
+
+Footnote 1 link[^first].
+
+Footnote 2 link[^second].
+
+Inline footnote^[Text of inline footnote] definition.
+
+Duplicated footnote reference[^second].
+
+[^first]: Footnote **can have markup**
+
+    and multiple paragraphs.
+
+[^second]: Footnote text.
+
+------
+
+# Code and Syntax Highlighting
+
+```
+Inline `code` has `back-ticks around` it.
+```
+
+Inline `code` has `back-ticks around` it.
+
+```c#
+using System.IO.Compression;
+
+#pragma warning disable 414, 3021
+
+namespace MyApplication
+{
+    [Obsolete("...")]
+    class Program : IInterface
+    {
+        public static List<int> JustDoIt(int count)
+        {
+            Console.WriteLine($"Hello {Name}!");
+            return new List<int>(new int[] { 1, 2, 3 })
+        }
+    }
+}
+```
+
+```css
+@font-face {
+  font-family: Chunkfive; src: url('Chunkfive.otf');
+}
+
+body, .usertext {
+  color: #F0F0F0; background: #600;
+  font-family: Chunkfive, sans;
+}
+
+@import url(print.css);
+@media print {
+  a[href^=http]::after {
+    content: attr(href)
+  }
+}
+```
+
+```javascript
+function $initHighlight(block, cls) {
+  try {
+    if (cls.search(/\bno\-highlight\b/) != -1)
+      return process(block, true, 0x0F) +
+             ` class="${cls}"`;
+  } catch (e) {
+    /* handle exception */
+  }
+  for (var i = 0 / 2; i < classes.length; i++) {
+    if (checkCondition(classes[i]) === undefined)
+      console.log('undefined');
+  }
+}
+
+export  $initHighlight;
+```
+
+```php
+require_once 'Zend/Uri/Http.php';
+
+namespace Location\Web;
+
+interface Factory
+{
+    static function _factory();
+}
+
+abstract class URI extends BaseURI implements Factory
+{
+    abstract function test();
+
+    public static $st1 = 1;
+    const ME = "Yo";
+    var $list = NULL;
+    private $var;
+
+    /**
+     * Returns a URI
+     *
+     * @return URI
+     */
+    static public function _factory($stats = array(), $uri = 'http')
+    {
+        echo __METHOD__;
+        $uri = explode(':', $uri, 0b10);
+        $schemeSpecific = isset($uri[1]) ? $uri[1] : '';
+        $desc = 'Multi
+line description';
+
+        // Security check
+        if (!ctype_alnum($scheme)) {
+            throw new Zend_Uri_Exception('Illegal scheme');
+        }
+
+        $this->var = 0 - self::$st;
+        $this->list = list(Array("1"=> 2, 2=>self::ME, 3 => \Location\Web\URI::class));
+
+        return [
+            'uri'   => $uri,
+            'value' => null,
+        ];
+    }
+}
+
+echo URI::ME . URI::$st1;
+
+__halt_compiler () ; datahere
+datahere
+datahere */
+datahere
+```
+
+------
+
+# Tables
+
+```
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the
+raw Markdown line up prettily. You can also use inline Markdown.
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
+
+| Command | Description |
+| --- | --- |
+| `git status` | List all *new or modified* files |
+| `git diff` | Show file differences that **haven't been** staged |
+
+| Left-aligned | Center-aligned | Right-aligned |
+| :---         |     :---:      |          ---: |
+| git status   | git status     | git status    |
+| git diff     | git diff       | git diff      |
+
+| Name     | Character |
+| ---      | ---       |
+| Backtick | `         |
+| Pipe     | \|        |
+```
+
+Colons can be used to align columns.
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
+There must be at least 3 dashes separating each header cell.
+The outer pipes (|) are optional, and you don't need to make the
+raw Markdown line up prettily. You can also use inline Markdown.
+
+Markdown | Less | Pretty
+--- | --- | ---
+*Still* | `renders` | **nicely**
+1 | 2 | 3
+
+| First Header  | Second Header |
+| ------------- | ------------- |
+| Content Cell  | Content Cell  |
+| Content Cell  | Content Cell  |
+
+| Command | Description |
+| --- | --- |
+| git status | List all new or modified files |
+| git diff | Show file differences that haven't been staged |
+
+| Command | Description |
+| --- | --- |
+| `git status` | List all *new or modified* files |
+| `git diff` | Show file differences that **haven't been** staged |
+
+| Left-aligned | Center-aligned | Right-aligned |
+| :---         |     :---:      |          ---: |
+| git status   | git status     | git status    |
+| git diff     | git diff       | git diff      |
+
+| Name     | Character |
+| ---      | ---       |
+| Backtick | `         |
+| Pipe     | \|        |
+
+------
+
+# Blockquotes
+
+```
+> Blockquotes are very handy in email to emulate reply text.
+> This line is part of the same quote.
+
+Quote break.
+
+> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote.
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+```
+
+> Blockquotes are very handy in email to emulate reply text.
+> This line is part of the same quote.
+
+Quote break.
+
+> This is a very long line that will still be quoted properly when it wraps. Oh boy let's keep writing to make sure this is long enough to actually wrap for everyone. Oh, you can *put* **Markdown** into a blockquote.
+
+> Blockquotes can also be nested...
+>> ...by using additional greater-than signs right next to each other...
+> > > ...or with spaces between arrows.
+
+------
+
+# Inline HTML
+
+```
+<dl>
+  <dt>Definition list</dt>
+  <dd>Is something people use sometimes.</dd>
+
+  <dt>Markdown in HTML</dt>
+  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>
+```
+
+<dl>
+  <dt>Definition list</dt>
+  <dd>Is something people use sometimes.</dd>
+
+  <dt>Markdown in HTML</dt>
+  <dd>Does *not* work **very** well. Use HTML <em>tags</em>.</dd>
+</dl>
+
+------
+
+# Horizontal Rules
+
+```
+Three or more...
+
+---
+
+Hyphens
+
+***
+
+Asterisks
+
+___
+
+Underscores
+```
+
+Three or more...
+
+---
+
+Hyphens
+
+***
+
+Asterisks
+
+___
+
+Underscores
+
+---------
+title: 'Forbidden Advantage'
+description: 'My hand-wired Kinesis Advantage 2 powered by ZMK on a RP2040'
+created: '2023-03-11T18:00:00+01:00'
+updated: '2023-03-11T19:10:00+01:00'
+tags: ['keyboards']
+keywords: ['keyboards', 'kinesis', 'zmk', 'Kinesis Advantage 2']
+---
+
+This is a description of my hand-wired Kinesis Advantage 2 [[1]] running with
+ZMK [[2]] and powered by an Elite-Pi board [[3]] (with a RP2040 ARM
+microprocessor [[4]]). I call the result the "Forbidden Advantage".
+
+[1]: https://kinesis-ergo.com/shop/advantage2/
+[2]: https://zmk.dev/
+[3]: https://splitkb.com/products/elite-pi
+[4]: https://www.raspberrypi.com/products/rp2040/
+
+![Forbidden Advantage](/public/forbidden-advantage/forbidden-advantage.jpg "Forbidden Advantage")
+<center>Forbidden Advantage</center>
+
+# BUT WHY‽
+
+A couple of years ago, I bought the Kinesis Advantage 2 keyboard. However, I
+never really got used to it and it landed in a box. What a waste of money! The
+following are the major problems I was facing with my Kinesis Advantage 2.
+
+- The spring-ping of the Cherry MX Brown switches was unbearable. The big,
+  hollow plastic case makes this even worse as it resonates.
+- Although the keys are positioned better than on a traditional keyboard, I
+  still had to move my hands to reach some of them.
+- The proprietary firmware is rather limiting and (to my knowledge) doesn't
+  support more than 2 layers.
+
+![Kinesis Advantage 2](/public/forbidden-advantage/kinesis-advantage.jpg "Kinesis Advantage 2")
+<center>Kinesis Advantage 2 [[1]]</center>
+
+# SOLUTION
+
+Keep the case and some of the circuit boards and replace everything
+else ¯\\_(ツ)_/¯. Damien Rajon did something very similar [[5]]. The difference
+is that he kept all the keys (except the F-key rows). An alternative solution to
+use a different controller would have been to use a custom PCB such as the *kinT
+kinesis keyboard controller* made by Michael Stapelberg [[6]]. I decided against
+this solution because I would still have had to use the original PCBs for the
+keys in the keywells.
+
+[5]: https://25.wf/posts/2020-02-21-qinesis.html
+[6]: https://michael.stapelberg.ch/posts/2020-07-09-kint-kinesis-keyboard-controller/
+
+There are two major open source firmwares intended for keyboards: QMK [[7]] and
+ZMK [[2]]. Both of them provide all the features I require. I decided to go with
+ZMK because the configuration looks much cleaner and I like the way you can
+build the firmware in a github action (using docker).
+
+[7]: https://qmk.fm/
+
+I acquired the following bits and pieces:
+
+- The *Elite-Pi* is a tiny board featuring the new RP2040 ARM microcontroller
+  (ZMK does not yet officially support it but there es a pull-request from the
+  ZMK author [[8]] - Good enough)
+- *Gazzew Bobagum* silent linear switches
+- *Kailh Hot-Swap sockets* (such that I can easily swap the switches if I don't
+  like them)
+- *1N4148 THT Diodes*.
+- Wires (I sacrificed an old ethernet cable).
+- A USB cable.
+
+[8]: https://github.com/zmkfirmware/zmk/pull/1499
+
+
+# PROTOTYPE
+
+Before I started soldering the real keyboard with 40 keys, I wanted to create a
+prototype to ensure everything works as expected. So I soldered together four
+hot-swap sockets, put switches on them and configured the firmware [[9]]. Ohje,
+what have I signed myself up for‽
+
+[9]: https://github.com/pascal-huber/ohje
+
+![ohje](/public/forbidden-advantage/ohje.jpg "ohje")
+<center>Ohje (Prototype)</center>
+
+# LET'S GO
+
+I will not lie. Soldering all the hot-swap sockets and diodes took way longer
+than I expcected. As you can see in the following image of the left-hand side of
+the keyboard, I added some additional sockets at places where there are no
+switches just in case I later decide I need more keys. I didn't bother
+reverse-engineering the PCBs for the thumbclusters and just destroyed the lanes
+and rewired them. And yes, I totally forgot to buy Mill-Max sockets to make them
+hot-swappable. I removed the PCBs for the keys in the concave keywells as it was
+thin and flexible and I don't think putting the Kailh hot-swap sockets on them
+would have been wise.
+
+![Wiring](/public/forbidden-advantage/forbidden-advantage-soldering.jpg "Wiring")
+<center>Wiring of the left-hand side</center>
+
+The switches are organized in a grid with 5 rows and 12 columns which are
+connected to the microcontroller. The following image shows which key is in
+which row and column. The grey keys are the ones without a switch.
+
+![Wiring Diagram](/public/forbidden-advantage/soldering.svg "Wiring Diagrm")
+
+# KEYMAP
+
+This is a very difficult decision. There are tons of different layouts to choose
+from. I decided to go with a colemak-dh [[10]] variant and took much inspiration
+from Callum Oakley's layout [[11]].
+
+[10]: https://colemakmods.github.io/mod-dh/
+[11]: https://github.com/callum-oakley/keymap
+
+The default layer contains most letters. By pressing "w" and "f" at the same
+time produces a "q". I also have some keys for debugging on the thumb cluster.
+This allows me to debug with one hand and scratch my head with the other.
+
+![Base Layer](/public/forbidden-advantage/layer1.svg "Base Layer")
+
+The symbols layer is active when the "SYM" key is held down. The grey keys on
+the right home row are "sticky", meaning they can be released to type
+combinations such as "Ctrl-C".
+
+![SYM Layer](/public/forbidden-advantage/layer2.svg "SYM Layer")
+
+The navigation layer is active when the "NAV" key is held down.
+
+![NAV Layer](/public/forbidden-advantage/layer3.svg "NAV Layer")
+
+The numbers layer is active when both the "SYM" and "NAV" keys are held down.
+![SYM_NAV Layer](/public/forbidden-advantage/layer4.svg "SYM_NAV Layer")
+
+# REGRETS 
+
+- I forgot to buy Mill-Max sockets for the thumbclusters. The switches are
+  soldered directly onto the PCB and are therefore not hot-swappable.
+- Using the prototype board instead of ditectly soldering the cables onto the
+  controller was a mistake. It cost me a lot of nerves and I didn't really gain
+  anything. A board with lanes would probably have easier too.
+
+# RESOURCES
+
+- [Forbidden Advantage ZMK config](https://github.com/pascal-huber/forbidden-advantage)
+- [kinT kinesis keyboard controller (by Michael
+  Stapelberg)](https://michael.stapelberg.ch/posts/2020-07-09-kint-kinesis-keyboard-controller/)
+- [Handwiring a Kinesis Advantage keyboard (by Damien
+  Rajon)](https://25.wf/posts/2020-02-21-qinesis.html)
+- [Callum's layout](https://github.com/callum-oakley/keymap)
+- [AlaaSaadAbdo's config](https://github.com/AlaaSaadAbdo/zmk-config)
+- [rafaelromao keymap](https://github.com/rafaelromao/keyboards)
+
+# TAGS
+
+<!--##tag_list##-->
+
+---
+title: 'Yet another Static Site Generator'
+description: 'My simple yet powerful static site generator using markdown.'
+created: '2023-01-28T12:00:00+01:00'
+updated: '2023-01-29T23:00:00+01:00'
+tags: ['dev']
+keywords: ['static site generator', 'SSG', 'resolved.ch', 'Node.js', 'markdown']
+---
+
+Creating a homepage which contains more than just my name and e-mail address has
+been on my todo list for years. There are many neat frameworks out there to
+build static websites and I have tried out some of them but always felt either
+limited or totally knocked out by the complexity of the frameworks. I therefore
+decided to build a static site generator from scratch to read markdown files and
+create a static website from them.
+
+# DESCRIPTION
+
+Built with Node.js[[1]] it creates pages for all markdown files in the
+`./content/` folder before it generates index pages for all directories. It lets
+you add tags to pages and automatically creates tag lists and index pages for
+them. Furthermore, it creates sitemap.xml and atom.xml.
+
+The markdown files contain a yaml header with the information necessary for
+rendering. For example, the one for this page (`./content/projects/resolved.md`)
+looks as follows.
+
+```yaml
+---
+title: 'Yet another Static Site Generator'
+description: 'My simple yet powerful static site generator using markdown.'
+created: '2023-01-28T12:00:00+01:00'
+updated: '2023-01-28T12:00:00+01:00'
+tags: ['dev']
+---
+
+Creating a homepage...
+
+...
+
+# TAGS
+
+<!--##tag_list##-->
+
+```
+
+# TODOS
+
+ - [ ] handle 404
+ - [ ] markdown: target=_blank for external links
+ - [ ] markdown: check out other markdown variants
+ - [ ] fonts: generate fonts with all required glyphs
+ - [ ] feed: decide if I want rss2.0 and/or json feeds
+
+# SOURCE CODE
+
+[github.com/pascal-huber/resolved_static](https://github.com/pascal-huber/resolved_static)
+
+# TAGS
+
+<!--##tag_list##-->
+
+[1]: https://nodejs.org/en/---
+title: 'svlog - Query Socklog Log Files'
+description: 'A tool to query, filter and watch socklog log files on Void Linux'
+created: '2023-01-30T17:00:00+01:00'
+updated: '2023-01-30T17:00:00+01:00'
+tags: ['dev', 'linux']
+keywords: ['syslog', 'socklog', 'Linux', 'Void Linux']
+---
+
+`svlog` can query, filter and follow socklog log files on Void Linux.
+
+# DESCRIPTION
+
+Efficiently displaying and filtering log files can help identify problems
+quickly. Most logging daemons provide mechanisms to dispatch and store the logs
+in a user-defined way. However, attempting to create dedicated files for all
+kinds of queries seems like the wrong approach, especially as we do not know
+what information we need to look up in future. Systemd provides journalctl to
+tackle this issue; on non-systemd systems, we are left with `grep`, `sed`,
+`awk`, `sort` etc., which can be cumbersome and slow, especially when writing
+more complex queries. I wrote `svlog`, a tool to conveniently query and follow
+changes of socklog log files on Void providing various display options and
+allowing filtering by service, priority, time and content. 
+
+# EXAMPLES
+
+Show all logs which match the regular expression `[A-Za-z]lue.ooth` (case
+insensitive) since the last boot and display timestamps in UTC.
+
+``` sh
+svlog -m "[A-Za-z]lue.ooth" -i -b --utc
+```
+
+Show all kernel logs from the previous boot with priority error or lower (`-o`
+is currently only support on systems using the *GNU C Library* [[1]] as *musl
+libc* [[2]] does not support *wtmp*).
+
+``` sh
+svlog -o 1 -p ..err kernel
+```
+
+Show all kernel and daemon logs as of a certain timestamp until yesterday.
+
+``` sh
+svlog -s "2022-08-14 13:45" -u yesterday kernel daemon
+```
+
+Show the last 10 lines and all upcoming kernel logs (like `svlogtail`).
+
+``` sh
+svlog -f kernel
+```
+
+# SOURCE CODE
+
+[github.com/pascal-huber/svlog](https://github.com/pascal-huber/svlog)
+
+# TAGS
+
+<!--##tag_list##-->
+
+[1]: https://www.gnu.org/software/libc/ 
+[2]: https://musl.libc.org/---
+title: 'VoteLog'
+description: 'A web application to analyze your decisions on national votes.'
+created: '2023-03-01T15:00:00+01:00'
+updated: '2023-03-02T12:30:00+01:00'
+tags: ['swiss', 'politics', 'dev']
+keywords: ['votelog', 'swiss', 'politics']
+---
+
+VoteLog is a web application to keep track of my decisions on national
+referendums and initiatives and compare the results with the major parties.
+
+![VoteLog Screenshot](/public/votelog.png "VoteLog Categories")
+
+# DESCRIPTION
+
+At the end of a legislative term, I want to see which parties let me down and
+which didn't. It also helps me remember what I voted on issues long ago. While
+there are more sophisticated ways to measure and compare ones political
+orientation such as *Smart Spiders* [[1]], VoteLog is simpler as you only have
+to enter your answers on national initiatives and referendums.
+
+# TECHNICAL
+
+VoteLog is written with Vue.js. It comes without a backend but rather lets you
+load and store your data on the WebDAV server of your choice (given that it sets
+permissive CORS [[2]] headers).
+
+# SEE ALSO
+
+- [https://votelog.resolved.ch](https://votelog.resolved.ch)
+- [github.com/pascal-huber/votelog](https://github.com/pascal-huber/votelog)
+
+# TAGS
+
+<!--##tag_list##-->
+
+[1]: https://www.smartvote.ch/de/group/2/election/19_ch_nr/matching/results/my-smartspider?rid=ace38364-7ee2-441d-9f3d-552560b62851
+[2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS

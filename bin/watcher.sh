@@ -1,4 +1,6 @@
 #!/bin/bash
+project_dir="$(dirname "$(readlink -f "$0")")/../"
+cd $project_dir
 
 build_project(){
   echo "building project"

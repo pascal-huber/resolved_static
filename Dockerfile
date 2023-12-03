@@ -1,10 +1,13 @@
 
 # build stage
 FROM node:lts-alpine as build-stage
+RUN apk update
+RUN apk add py3-fonttools py3-brotli
 WORKDIR /app
 COPY package*.json ./
-RUN yarn install
 COPY . .
+RUN sh ./bin/generate-fonts.sh
+RUN yarn install
 RUN yarn build
 
 # production stage
