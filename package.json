@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "rm -rf dist && node ./src/main.js && cp -r static/* dist/ && touch dist/.nojekyll"
+    "build": "rm -rf dist && node ./src/main.js && cp -r static/* dist/"
   },
   "devDependencies": {
     "@types/node": "^20.6.5",
