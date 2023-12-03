@@ -40,6 +40,7 @@ export class Page {
         const markdown = readFileSync(paths.mdFileAbs, { encoding: 'utf8', flag: 'r' });
         let { content, data } = matter(markdown);
         this.title = data.title;
+        this.nofeed = data.nofeed;
         this.tags = data.tags;
         this.created = new Date(data.created);
         this.updated = new Date(data.updated);
@@ -61,6 +62,7 @@ export class Page {
         this.subfolders = subfolders;
         this.filesOfDir = filesOfDir;
         this.title = dir.name + ' index';
+        this.nofeed = true;
         // TODO: use the paths method in utils, refactorign with others.
         this.paths = {
             htmlDirAbs: join(distPath, dir.full),
@@ -75,6 +77,7 @@ export class Page {
     
     async createFromTag(tag, paths) {
         this.title = "#" + tag.name;
+        this.nofeed = true;
         this.parentDirectories = [
             { name: "tags", full: "tags/" },
         ];
