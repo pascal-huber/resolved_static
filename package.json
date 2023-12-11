@@ -19,6 +19,6 @@
     "showdown-highlight": "^3.1.0",
     "showdown-katex": "^0.8.0",
     "sitemap": "^7.1.1",
-    "svgo": "^3.0.5"
+    "svgo": "^3.1.0"
   }
 }
