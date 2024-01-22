@@ -9,7 +9,7 @@
     "build": "rm -rf dist && node ./src/main.js && cp -r static/* dist/"
   },
   "devDependencies": {
-    "@types/node": "^20.10.2",
+    "@types/node": "^20.11.5",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",
