@@ -30,7 +30,9 @@ Some private projects of mine which may or may not be of use to someone else.
 
 # CONTACT
 
-<pascal.huber@resolved.ch>
+<!-- <a class="plaintext-to-encrypt" href="mailto:me@example.com">me@example.com</a> -->
+
+<a class="encrypted" href="XVEHCbQPR-geE8Lk_7AukG53dPg3cLwZ0ZR-QmrKAbIv9g">I_QdPan0ntufIekRzoH3vjYGNDrSxi2N6XgM</a>
 
 # SEE ALSO
 
